@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
+import { Link } from 'react-router-dom';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import FlatButton from 'material-ui/FlatButton';
@@ -9,6 +10,7 @@ import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import IconMenu from 'material-ui/IconMenu';
 import IconButton from 'material-ui/IconButton';
 import MenuItem from 'material-ui/MenuItem';
+import FontIcon from 'material-ui/FontIcon';
 
 class Navbar extends Component {
 
@@ -22,7 +24,9 @@ class Navbar extends Component {
 	        <ToolbarGroup>
 	        	<ToolbarTitle text="Something" />
 						<ToolbarSeparator />
-	          <FlatButton label="Button" primary={true} />
+	          <FlatButton label="Trails"
+	          	href="/trails"
+	          	icon={<FontIcon className="material-icons">directions_bike</FontIcon>} />
 	          <IconMenu
 	            iconButtonElement={
 	              <IconButton touch={true}>
