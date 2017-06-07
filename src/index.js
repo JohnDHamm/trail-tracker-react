@@ -1,19 +1,35 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import Navbar from './components/navbar'
-import SecondComponentTest from './components/second_component';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-class App extends Component {
+import Home from './components/home';
+import Trails from './components/trails';
+import Trail from './components/trail';
+// import Navbar from './components/navbar'
+// import SecondComponentTest from './components/second_component';
 
-	render() {
-		return (
-			<div>
-				<Navbar />
-				<h2 className="title-test">App-tastic!!</h2>
-				<SecondComponentTest />
-			</div>
-		)
-	}
-}
+// class App extends Component {
 
-ReactDOM.render(<App />, document.querySelector('.container'));
+// 	render() {
+// 		return (
+// 			<div>
+// 				<Navbar />
+// 				<h2 className="title-test">App-tastic!!</h2>
+// 				<SecondComponentTest />
+// 			</div>
+// 		)
+// 	}
+// }
+
+ReactDOM.render(
+	<BrowserRouter>
+		<div>
+			<Switch>
+				<Route path="/trails" component={Trails} />
+				<Route path="/trail/:id" component={Trail} />
+				<Route path="/" component={Home} />
+			</Switch>
+		</div>
+	</BrowserRouter>
+	, document.querySelector('.container')
+);
