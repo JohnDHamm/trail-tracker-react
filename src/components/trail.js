@@ -14,7 +14,6 @@ class Trail extends Component {
 
 	render() {
 		const trail = this.props.trail;
-		console.log("trail", trail);
 
 		if (!trail) {
 			return <div>Loading...</div>;
@@ -25,6 +24,7 @@ class Trail extends Component {
 				<div>
 					<Navbar />
 					<h2 className="title-test">{trail.name}</h2>
+					<h4 className="title-test">{trail.location}</h4>
 				</div>
 			</MuiThemeProvider>
 		);
