@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import RaisedButton from 'material-ui/RaisedButton';
+import Navbar from './components/navbar'
+import SecondComponentTest from './components/second_component';
 
 class App extends Component {
 
 	render() {
 		return (
-			<MuiThemeProvider>
-				<div>
-					<h2 className="title-test">App-tastic!!</h2>
-					<RaisedButton label="RaisedButton" />
-				</div>
-			</MuiThemeProvider>
+			<div>
+				<Navbar />
+				<h2 className="title-test">App-tastic!!</h2>
+				<SecondComponentTest />
+			</div>
 		)
 	}
 }
