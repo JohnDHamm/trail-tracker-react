@@ -19,6 +19,7 @@
   "homepage": "https://github.com/JohnDHamm/trail-tracker-react#readme",
   "dependencies": {
     "babel-preset-stage-1": "^6.1.18",
+    "lodash": "^4.17.4",
     "material-ui": "^0.18.2",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
