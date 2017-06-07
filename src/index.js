@@ -1,19 +1,27 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import Navbar from './components/navbar'
-import SecondComponentTest from './components/second_component';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import reducers from './reducers';
 
-class App extends Component {
+import Home from './components/home';
+import Trails from './components/trails';
+import Trail from './components/trail';
 
-	render() {
-		return (
+const createStoreWithMiddleware = applyMiddleware()(createStore);
+
+ReactDOM.render(
+	<Provider store={createStoreWithMiddleware(reducers)}>
+		<BrowserRouter>
 			<div>
-				<Navbar />
-				<h2 className="title-test">App-tastic!!</h2>
-				<SecondComponentTest />
+				<Switch>
+					<Route path="/trails" component={Trails} />
+					<Route path="/trail/:id" component={Trail} />
+					<Route path="/" component={Home} />
+				</Switch>
 			</div>
-		)
-	}
-}
-
-ReactDOM.render(<App />, document.querySelector('.container'));
+		</BrowserRouter>
+  </Provider>
+	, document.querySelector('.container')
+);
