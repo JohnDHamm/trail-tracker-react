@@ -4,7 +4,6 @@ import Navbar from './navbar'
 import SecondComponentTest from './second_component';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-// import Navbar from 'material-ui/NavBar';
 
 class Trail extends Component {
 

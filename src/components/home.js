@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import Navbar from './navbar'
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-// import AppBar from 'material-ui/NavBar';
 
 class Home extends Component {
 

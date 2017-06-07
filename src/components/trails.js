@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import Navbar from './navbar'
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-// import Navbar from 'material-ui/NavBar';
 
 class Trails extends Component {
 
