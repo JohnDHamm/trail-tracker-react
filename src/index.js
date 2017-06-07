@@ -5,7 +5,6 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import reducers from './reducers';
 
-
 import Home from './components/home';
 import Trails from './components/trails';
 import Trail from './components/trail';

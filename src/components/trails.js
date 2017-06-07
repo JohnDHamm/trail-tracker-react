@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
@@ -10,7 +11,7 @@ import {List, ListItem} from 'material-ui/List';
 class Trails extends Component {
 
 	renderTrails() {
-		return this.props.trails.map(trail => {
+		return _.map(this.props.trails, trail => {
 			const trailURL = `/trail/${trail.id}`;
 			return (
 				<ListItem primaryText={trail.name} href={trailURL} key={trail.id} />
