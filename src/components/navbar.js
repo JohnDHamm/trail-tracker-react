@@ -18,29 +18,30 @@ class Navbar extends Component {
 		return (
 			<MuiThemeProvider>
 				<Toolbar>
-	        <ToolbarGroup firstChild={true}>
-	        	<ToolbarTitle text="Trail Tracker" />
-	        </ToolbarGroup>
-	        <ToolbarGroup>
-	        	<ToolbarTitle text="Something" />
+					<ToolbarGroup firstChild={true}>
+						<FlatButton label="Trail Tracker"
+							href="/" />
+					</ToolbarGroup>
+					<ToolbarGroup>
+						<ToolbarTitle text="Something" />
 						<ToolbarSeparator />
-	          <FlatButton label="Trails"
-	          	href="/trails"
-	          	icon={<FontIcon className="material-icons">directions_bike</FontIcon>} />
-	          <IconMenu
-	            iconButtonElement={
-	              <IconButton touch={true}>
-		              <MoreVertIcon />
-	              </IconButton>
-	            }
-	            targetOrigin={{horizontal: 'right', vertical: 'top'}}
-					    anchorOrigin={{horizontal: 'right', vertical: 'top'}}
-            >
-	            <MenuItem primaryText="Menu 1" />
-	            <MenuItem primaryText="Menu 2" />
-	          </IconMenu>
-	        </ToolbarGroup>
-        </Toolbar>
+						<FlatButton label="Trails"
+							href="/trails"
+							icon={<FontIcon className="material-icons">directions_bike</FontIcon>} />
+						<IconMenu
+							iconButtonElement={
+								<IconButton touch={true}>
+									<MoreVertIcon />
+								</IconButton>
+							}
+							targetOrigin={{horizontal: 'right', vertical: 'top'}}
+							anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+						>
+							<MenuItem primaryText="Menu 1" />
+							<MenuItem primaryText="Menu 2" />
+						</IconMenu>
+					</ToolbarGroup>
+				</Toolbar>
 			</MuiThemeProvider>
 		);
 	}
