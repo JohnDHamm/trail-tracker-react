@@ -11,7 +11,9 @@ class Home extends Component {
 			<MuiThemeProvider>
 				<div>
 					<Navbar />
-					<h2 className="title-test">Home</h2>
+					<div className="container">
+						<h2 className="title-test">Home</h2>
+					</div>
 				</div>
 			</MuiThemeProvider>
 		);

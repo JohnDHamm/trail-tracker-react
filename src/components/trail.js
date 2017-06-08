@@ -25,6 +25,7 @@ class Trail extends Component {
 					<Navbar />
 					<h2 className="title-test">{trail.name}</h2>
 					<h4 className="title-test">{trail.location}</h4>
+					<h6>{trail.description}</h6>
 				</div>
 			</MuiThemeProvider>
 		);
