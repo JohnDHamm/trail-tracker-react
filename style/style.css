@@ -8,7 +8,24 @@ body {
 }
 
 .test-div-fill {
-	/*background-color: #eee;*/
 	border: 1px solid #eee;
-	border-radius: 4px;
+	border-radius: 2px;
+}
+
+.post-style-meetup {
+	/*border: 1px solid #555;*/
+	border-left: 3px solid blue;
+	/*border-radius: 2px;*/
+	margin: 4px 0;
+}
+
+.post-style-ride-report {
+	border-left: 3px solid green;
+	margin: 4px 0;
+}
+
+.post-style-open-ticket {
+	border-left: 3px solid red;
+	/*border-right: 3px solid red;*/
+	margin: 4px 0;
 }

@@ -2,22 +2,38 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import TrailTitleCard from './trail_title_card';
-
 import Navbar from './navbar'
+import TrailTitleCard from './trail_title_card';
+import TrailPostCard from './trail_post_card';
+
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import {List, ListItem} from 'material-ui/List';
+import Divider from 'material-ui/Divider';
+
 
 class Trail extends Component {
 	componentDidMount() {
 		const { id } = this.props.match.params; //get from url
 		// this.props.fetchPost(id);
+
+	}
+
+	renderPosts () {
+		return this.props.posts.map(post => {
+			const postStyle = `post-style-${post.postTypeString}`;
+			return (
+				<div className={postStyle} key={post.id}>
+					<TrailPostCard
+						postUserName={post.userName}
+						date={post.postFormatDate}
+						message={post.description} />
+				</div>
+			)
+		})
 	}
 
 	render() {
 		const { trail, posts } = this.props;
-		console.log("posts", posts);
-
-
 
 		if (!trail) {
 			return <div>Loading...</div>;
@@ -33,7 +49,10 @@ class Trail extends Component {
 							<div className="col-lg-6 test-div-fill">
 								<TrailTitleCard title={trail.name} subheader={trail.location} />
 								<div className="test-div-fill">
-									<p>then the posts</p>
+									<p>posts:</p>
+									<List>
+										{this.renderPosts()}
+									</List>
 								</div>
 							</div>
 							<div className="col-lg-2 test-div-fill">Right side</div>
