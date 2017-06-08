@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import Navbar from './navbar'
-import SecondComponentTest from './second_component';
+import TrailTitleCard from './trail_title_card';
 
+import Navbar from './navbar'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 class Trail extends Component {
@@ -23,9 +23,15 @@ class Trail extends Component {
 			<MuiThemeProvider>
 				<div>
 					<Navbar />
-					<h2 className="title-test">{trail.name}</h2>
-					<h4 className="title-test">{trail.location}</h4>
-					<h6>{trail.description}</h6>
+					<div className="container">
+						<div className="row">
+							<div className="col-lg-4 test-div-fill">Left side</div>
+							<div className="col-lg-6 test-div-fill">
+								<TrailTitleCard title={trail.name} subheader={trail.location} />
+							</div>
+							<div className="col-lg-2 test-div-fill">Right side</div>
+						</div>
+					</div>
 				</div>
 			</MuiThemeProvider>
 		);

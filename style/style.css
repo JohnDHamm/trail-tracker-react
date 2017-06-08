@@ -6,3 +6,9 @@ body {
 .title-test {
 	color: #666;
 }
+
+.test-div-fill {
+	/*background-color: #eee;*/
+	border: 1px solid #eee;
+	border-radius: 4px;
+}
