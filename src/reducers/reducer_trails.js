@@ -10,7 +10,7 @@ export default function() {
 			longitude: -86.628356,
 			mapZoom: 15,
 			numOpenTickets: 1,
-			imgUrl: '/img/hamiltonCreek.jpg'
+			imgUrl: '/src/img/hamiltonCreek.jpg'
 		},
 		2:
 		{ id: 2,
@@ -21,7 +21,7 @@ export default function() {
 			longitude: -86.878638,
 			mapZoom: 15,
 			numOpenTickets: 0,
-			imgUrl: '/img/percyWarner.jpg'
+			imgUrl: '/src/img/percyWarner.jpg'
 		},
 		3:
 		{ id: 3,
@@ -32,7 +32,29 @@ export default function() {
 			longitude: -86.470342,
 			mapZoom: 15,
 			numOpenTickets: 0,
-			imgUrl: '/img/lock4.jpg'
+			imgUrl: '/src/img/lock4.jpg'
+		},
+		4:
+		{ id: 4,
+			name: "Montgomery Bell",
+			location: "Dickson, TN",
+			description: "With over 20 miles of trails, Montgomery Bell has everything from easy meanders through the pines to long, steady climbs and fast downhills. \"The Bell\" is known for it's resiliency after rains.",
+			latitude: 36.107776,
+			longitude: -87.270412,
+			mapZoom: 15,
+			numOpenTickets: 0,
+			imgUrl: '/src/img/montgomeryBell.jpg'
+		},
+		5:
+		{ id: 5,
+			name: "Chickasaw Trace",
+			location: "Columbia, TN",
+			description: "Located outside of Columbia, TN, Chickasaw has 10 miles of great singletrack for all levels and includes a section for those who love to bust their lungs called the \"trail of tears\".",
+			latitude: 35.667752,
+			longitude: -87.087615,
+			mapZoom: 15,
+			numOpenTickets: 1,
+			imgUrl: '/src/img/chickasaw.jpg'
 		}
 	};
 
