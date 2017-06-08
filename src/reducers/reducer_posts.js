@@ -38,10 +38,10 @@ export default function() {
 			postTypeString: "open-ticket",
 			ticketopen: true,
 			userId: 3,
-			userName: "biker girl"
+			userName: "Biker Girl"
 		},
 		{ id: 4,
-			description: "hello.",
+			description: "Bacon ipsum dolor amet brisket shankle pancetta andouille frankfurter pork alcatra kielbasa. Sausage beef cow meatball jerky pork belly. Picanha pork loin jerky, meatball meatloaf kevin bacon bresaola biltong ham alcatra tail. Ground round andouille shank tri-tip t-bone beef ribs, capicola ham hock.",
 			hasPhoto: false,
 			imageUrl: '',
 			postDate: "2016-07-05T15:46:30.338Z",

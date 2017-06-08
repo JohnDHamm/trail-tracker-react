@@ -20,7 +20,7 @@ class Trail extends Component {
 
 	renderPosts () {
 		return this.props.posts.map(post => {
-			const postStyle = `post-style-${post.postTypeString}`;
+			const postStyle = `post-card post-style-${post.postTypeString}`;
 			return (
 				<div className={postStyle} key={post.id}>
 					<TrailPostCard
@@ -48,11 +48,9 @@ class Trail extends Component {
 							<div className="col-lg-4 test-div-fill">Left side</div>
 							<div className="col-lg-6 test-div-fill">
 								<TrailTitleCard title={trail.name} subheader={trail.location} />
-								<div className="test-div-fill">
+								<div>
 									<p>posts:</p>
-									<List>
 										{this.renderPosts()}
-									</List>
 								</div>
 							</div>
 							<div className="col-lg-2 test-div-fill">Right side</div>

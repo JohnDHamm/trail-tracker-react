@@ -1,5 +1,6 @@
 body {
 	font-family: 'Roboto', sans-serif;
+	background-color: #ffca28;
 }
 
 
@@ -9,23 +10,24 @@ body {
 
 .test-div-fill {
 	border: 1px solid #eee;
-	border-radius: 2px;
+}
+.post-card {
+	background-color: #fff;
+	border-radius: 4px;
 }
 
 .post-style-meetup {
-	/*border: 1px solid #555;*/
-	border-left: 3px solid blue;
-	/*border-radius: 2px;*/
+	border-left: 4px solid blue;
 	margin: 4px 0;
 }
 
 .post-style-ride-report {
-	border-left: 3px solid green;
+	border-left: 4px solid green;
 	margin: 4px 0;
 }
 
 .post-style-open-ticket {
-	border-left: 3px solid red;
-	/*border-right: 3px solid red;*/
+	border: 2px solid red;
+	border-left: 4px solid red;
 	margin: 4px 0;
 }
