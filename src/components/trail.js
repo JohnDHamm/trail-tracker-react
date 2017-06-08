@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
@@ -13,7 +14,10 @@ class Trail extends Component {
 	}
 
 	render() {
-		const trail = this.props.trail;
+		const { trail, posts } = this.props;
+		console.log("posts", posts);
+
+
 
 		if (!trail) {
 			return <div>Loading...</div>;
@@ -28,6 +32,9 @@ class Trail extends Component {
 							<div className="col-lg-4 test-div-fill">Left side</div>
 							<div className="col-lg-6 test-div-fill">
 								<TrailTitleCard title={trail.name} subheader={trail.location} />
+								<div className="test-div-fill">
+									<p>then the posts</p>
+								</div>
 							</div>
 							<div className="col-lg-2 test-div-fill">Right side</div>
 						</div>
@@ -38,8 +45,8 @@ class Trail extends Component {
 	}
 }
 
-function mapStateToProps({ trails }, ownProps) {
-	return { trail: trails[ownProps.match.params.id] };
+function mapStateToProps({ trails, posts }, ownProps) {
+	return { trail: trails[ownProps.match.params.id], posts: posts };
 }
 
 export default connect(mapStateToProps)(Trail);
