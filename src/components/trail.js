@@ -24,6 +24,7 @@ class Trail extends Component {
 			return (
 				<div className={postStyle} key={post.id}>
 					<TrailPostCard
+						userImgUrl={post.userImgUrl}
 						postUserName={post.userName}
 						date={post.postFormatDate}
 						message={post.description} />

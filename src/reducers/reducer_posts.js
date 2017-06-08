@@ -12,7 +12,8 @@ export default function() {
 			postTypeString: "meetup",
 			ticketopen: false,
 			userId: 1,
-			userName: "crash dummy"
+			userName: "crash dummy",
+			userImgUrl: '/src/img/user_avatars/crash_dummy.jpg'
 		},
 		{ id: 2,
 			description: "Trail in great shape. Go get you some!",
@@ -25,7 +26,8 @@ export default function() {
 			postTypeString: "ride-report",
 			ticketopen: false,
 			userId: 2,
-			userName: "fat tire fred"
+			userName: "fat tire fred",
+			userImgUrl: '/src/img/user_avatars/fat_tire_fred.jpg'
 		},
 		{ id: 3,
 			description: "Trees down on the yellow loop near the creek.",
@@ -38,7 +40,8 @@ export default function() {
 			postTypeString: "open-ticket",
 			ticketopen: true,
 			userId: 3,
-			userName: "Biker Girl"
+			userName: "Biker Girl",
+			userImgUrl: '/src/img/user_avatars/Biker_Girl.jpg'
 		},
 		{ id: 4,
 			description: "Bacon ipsum dolor amet brisket shankle pancetta andouille frankfurter pork alcatra kielbasa. Sausage beef cow meatball jerky pork belly. Picanha pork loin jerky, meatball meatloaf kevin bacon bresaola biltong ham alcatra tail. Ground round andouille shank tri-tip t-bone beef ribs, capicola ham hock.",
@@ -51,7 +54,8 @@ export default function() {
 			postTypeString: "meetup",
 			ticketopen: false,
 			userId: 1,
-			userName: "crash dummy"
+			userName: "crash dummy",
+			userImgUrl: '/src/img/user_avatars/crash_dummy.jpg'
 		}
 
 	]
