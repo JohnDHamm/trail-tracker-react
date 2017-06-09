@@ -16,7 +16,8 @@ function getStyles(props, context) {
 			display: 'flex',
 			alignItems: 'center',
 			cursor: 'pointer',
-			color: '#666'
+			color: '#666',
+			marginTop: 10
 		},
 		text: {
 			fontSize: 15,

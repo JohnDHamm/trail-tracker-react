@@ -15,7 +15,8 @@ function getStyles(props, context) {
 			fontFamily: `${values.tertiary.font}`,
 			fontSize: 45,
 			color: `${values.primary.color}`,
-			textShadow: `2px 2px 0 ${values.tertiary.color}`
+			textShadow: `2px 2px 0 ${values.tertiary.color}`,
+			lineHeight: 0.9
 		},
 		subheader: {
 			fontFamily: `${values.tertiary.font}`,

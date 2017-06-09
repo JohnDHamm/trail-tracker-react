@@ -65,11 +65,13 @@ class Trail extends Component {
 					<Navbar />
 					<div className="container">
 						<div className="row">
-							<div id="leftSide" className="col-lg-4 test-div-fill">
-								Left side
-							</div>
-							<div id="center" className="col-lg-6 test-div-fill">
+							<div id="leftSide" className="col-lg-4 col-md-4 hidden-sm-down test-div-fill">
 								<div>
+									<TrailTitleCard title={trail.name} />
+								</div>
+							</div>
+							<div id="center" className="col-lg-6 col-md-8">
+								<div className="hidden-md-up">
 									<TrailTitleCard title={trail.name} />
 								</div>
 								<div onClick={() => this.addPost()}>
@@ -79,7 +81,7 @@ class Trail extends Component {
 									{this.renderPosts()}
 								</div>
 							</div>
-							<div id="rightSide" className="col-lg-2 test-div-fill">
+							<div id="rightSide" className="col-lg-2 hidden-md-down test-div-fill">
 								Right side
 							</div>
 						</div>
