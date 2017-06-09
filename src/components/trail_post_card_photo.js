@@ -12,7 +12,9 @@ import {
 
 
 function getStyles(props, context) {
-	const {TrailPostCard} = context.muiTheme;
+	const {TrailPostCardPhoto} = context.muiTheme;
+
+	const userNameColor = '#9e9d24';
 
 	return {
 		root: {
@@ -39,20 +41,25 @@ function getStyles(props, context) {
 			fontSize: 15,
 			fontWeight: '400',
 			lineHeight: 1.3
+		},
+		photo: {
+			width: '100%',
+			paddingTop: 5
 		}
 	};
 }
 
 
-class TrailPostCard extends Component {
-	static muiName = 'TrailPostCard';
+class TrailPostCardPhoto extends Component {
+	static muiName = 'TrailPostCardPhoto';
 
 	static propTypes = {
 		postUserName: PropTypes.node,
 		date: PropTypes.node,
 		message: PropTypes.node,
 		style: PropTypes.object,
-		userImgUrl: PropTypes.string
+		userImgUrl: PropTypes.string,
+		photoUrl: PropTypes.string
 	};
 
 	static contextTypes = {
@@ -61,12 +68,10 @@ class TrailPostCard extends Component {
 
 	render () {
 
-		const { postUserName, date, message, style, userImgUrl } = this.props;
+		const { postUserName, date, message, style, userImgUrl, photoUrl, src } = this.props;
 
 		const {prepareStyles} = this.context.muiTheme;
 		const styles = getStyles(this.props, this.context);
-
-
 
 		return (
 			<div style={prepareStyles(Object.assign(styles.root, style))}>
@@ -85,6 +90,9 @@ class TrailPostCard extends Component {
 				<div style={prepareStyles(Object.assign(styles.message, style))}>
 					{message}
 				</div>
+				<img
+					style={prepareStyles(Object.assign(styles.photo, style))}
+					src={photoUrl} />
 			</div>
 		);
 
@@ -92,4 +100,4 @@ class TrailPostCard extends Component {
 }
 
 
-export default TrailPostCard;
+export default TrailPostCardPhoto;
