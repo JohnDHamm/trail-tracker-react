@@ -10,13 +10,14 @@ function getStyles(props, context) {
 	return {
 		root: {
 			padding: 10,
-			borderRadius: 4,
+			borderRadius: 2,
 			backgroundColor: 'white',
 			borderLeft: '4px solid #ddd',
 			display: 'flex',
 			alignItems: 'center',
 			cursor: 'pointer',
-			color: '#666'
+			color: '#666',
+			marginTop: 10
 		},
 		text: {
 			fontSize: 15,

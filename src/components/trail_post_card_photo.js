@@ -1,20 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
-import MapsDirectionsBike from 'material-ui/svg-icons/maps/directions-bike';
+import { connect } from 'react-redux';
 import Avatar from 'material-ui/Avatar';
-import FontIcon from 'material-ui/FontIcon';
-import {
-	amber400,
-	lime800,
-	lime900
-} from 'material-ui/styles/colors';
-
 
 function getStyles(props, context) {
 	const {TrailPostCardPhoto} = context.muiTheme;
-
-	const userNameColor = '#9e9d24';
+	const {values} = props;
 
 	return {
 		root: {
@@ -26,12 +17,14 @@ function getStyles(props, context) {
 			alignItems: 'center'
 		},
 		userName: {
-			color: `${lime900}`,
-			fontSize: 14,
+			color: `${values.primary.color}`,
+			fontFamily: `${values.tertiary.font}`,
+			fontSize: 20,
 			paddingLeft: 5,
 			fontWeight: '300'
 		},
 		date: {
+			color: `${values.primary.color}`,
 			fontSize: 12,
 			fontWeight: '300',
 			marginLeft: 'auto'
@@ -48,7 +41,6 @@ function getStyles(props, context) {
 		}
 	};
 }
-
 
 class TrailPostCardPhoto extends Component {
 	static muiName = 'TrailPostCardPhoto';
@@ -67,9 +59,7 @@ class TrailPostCardPhoto extends Component {
 	};
 
 	render () {
-
-		const { postUserName, date, message, style, userImgUrl, photoUrl, src } = this.props;
-
+		const { postUserName, date, message, style, userImgUrl, photoUrl } = this.props;
 		const {prepareStyles} = this.context.muiTheme;
 		const styles = getStyles(this.props, this.context);
 
@@ -95,9 +85,11 @@ class TrailPostCardPhoto extends Component {
 					src={photoUrl} />
 			</div>
 		);
-
 	}
 }
 
+function mapStateToProps(state) {
+	return { values: state.values };
+}
 
-export default TrailPostCardPhoto;
+export default connect(mapStateToProps)(TrailPostCardPhoto);
