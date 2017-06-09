@@ -7,11 +7,13 @@ import TrailTitleCard from './trail_title_card';
 import TrailAddPostCard from './trail_add_post_card';
 import TrailPostCard from './trail_post_card';
 import TrailPostCardPhoto from './trail_post_card_photo';
-import DialogExampleSimple from './test_photo_dialog';
+// import DialogExampleSimple from './test_photo_dialog';
+import TrailCloseTicketCard from './trail_close_ticket_card';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
+import IconButton from 'material-ui/IconButton';
 
 
 class Trail extends Component {
@@ -25,20 +27,51 @@ class Trail extends Component {
 		console.log("clicked on add new post");
 	}
 
+	closeTicket (id) {
+		console.log("close ticket id:", id);
+	}
+
 	renderPosts () {
 		return this.props.posts.map(post => {
 			const postStyle = `post-card post-style-${post.postTypeString}`;
 			if (post.hasPhoto) {
-				return (
-					<div className={postStyle} key={post.id}>
-						<TrailPostCardPhoto
-							userImgUrl={post.userImgUrl}
-							postUserName={post.userName}
-							date={post.postFormatDate}
-							message={post.description}
-							photoUrl={post.photoUrl} />
-					</div>
-				)
+
+				if (post.ticketopen) {
+					return (
+						<div className={postStyle} key={post.id}>
+							<TrailPostCardPhoto
+								userImgUrl={post.userImgUrl}
+								postUserName={post.userName}
+								date={post.postFormatDate}
+								message={post.description}
+								photoUrl={post.photoUrl} />
+							<div className="closeTicketDiv">
+								<span>Close ticket
+									<IconButton
+										onTouchTap={() => this.closeTicket(post.id)}
+										style={{paddingTop: 0, paddingBottom: 8, height: 'auto'}}
+										iconClassName="material-icons"
+										tooltip="Close ticket"
+		   							tooltipPosition="top-center"
+		   							iconStyle={{color: '#666'}}>build
+									</IconButton>
+								</span>
+							</div>
+						</div>
+					)
+				} else {
+					return (
+						<div className={postStyle} key={post.id}>
+							<TrailPostCardPhoto
+								userImgUrl={post.userImgUrl}
+								postUserName={post.userName}
+								date={post.postFormatDate}
+								message={post.description}
+								photoUrl={post.photoUrl} />
+						</div>
+					)
+				}
+
 			} else {
 				return (
 					<div className={postStyle} key={post.id}>
