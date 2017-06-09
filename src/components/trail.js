@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import Navbar from './navbar'
 import TrailTitleCard from './trail_title_card';
+import TrailAddPostCard from './trail_add_post_card';
 import TrailPostCard from './trail_post_card';
 import TrailPostCardPhoto from './trail_post_card_photo';
 
@@ -17,6 +18,10 @@ class Trail extends Component {
 		const { id } = this.props.match.params; //get from url
 		// this.props.fetchPost(id);
 
+	}
+
+	addPost() {
+		console.log("clicked on add new post");
 	}
 
 	renderPosts () {
@@ -67,8 +72,8 @@ class Trail extends Component {
 								<div>
 									<TrailTitleCard title={trail.name} />
 								</div>
-								<div>
-									add post component goes here
+								<div onClick={() => this.addPost()}>
+									<TrailAddPostCard />
 								</div>
 								<div className="postsDiv">
 									{this.renderPosts()}

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 import MapsDirectionsBike from 'material-ui/svg-icons/maps/directions-bike';
 import Avatar from 'material-ui/Avatar';
-import FontIcon from 'material-ui/FontIcon';
 import {
 	amber400,
 	lime800,
@@ -16,8 +15,7 @@ function getStyles(props, context) {
 
 	return {
 		root: {
-			padding: 10,
-			borderRadius: 2
+			padding: 10
 		},
 		top: {
 			display: 'flex',
