@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
-import {
-	amber400,
-	lime800,
-	brown900
-} from 'material-ui/styles/colors';
+import { connect } from 'react-redux';
 
 function getStyles(props, context) {
 	const {TrailTitleCard} = context.muiTheme;
+	const {values} = props;
 
 	return {
 		root: {
@@ -16,20 +12,21 @@ function getStyles(props, context) {
 			textAlign: 'center'
 		},
 		title: {
-			fontFamily: 'Rancho',
+			fontFamily: `${values.tertiary.font}`,
 			fontSize: 45,
-			color: `${lime800}`,
-			textShadow: `2px 2px 0 ${brown900}`
+			color: `${values.primary.color}`,
+			textShadow: `2px 2px 0 ${values.tertiary.color}`
 		},
 		subheader: {
-			fontFamily: 'Rancho',
+			fontFamily: `${values.tertiary.font}`,
 			fontSize: 20,
-			color: `${lime800}`
+			color: `${values.primary.color}`
 		}
 	};
 }
 
 class TrailTitleCard extends Component {
+
 	static muiName = 'TrailTitleCard';
 
 	static propTypes = {
@@ -41,11 +38,8 @@ class TrailTitleCard extends Component {
 		muiTheme: PropTypes.object.isRequired,
 	};
 
-
 	render () {
-
 		const { title, subheader, style } = this.props;
-
 		const {prepareStyles} = this.context.muiTheme;
 		const styles = getStyles(this.props, this.context);
 
@@ -62,9 +56,8 @@ class TrailTitleCard extends Component {
 	}
 }
 
+function mapStateToProps(state) {
+	return { values: state.values };
+}
 
-export default TrailTitleCard;
-
-
-
-
+export default connect(mapStateToProps)(TrailTitleCard);
