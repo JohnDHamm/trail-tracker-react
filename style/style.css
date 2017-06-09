@@ -1,14 +1,36 @@
 body {
 	font-family: 'Roboto', sans-serif;
+	background-color: #ffca28;
 }
 
-
-.title-test {
-	color: #666;
-}
 
 .test-div-fill {
-	/*background-color: #eee;*/
 	border: 1px solid #eee;
+}
+
+.postsDiv {
+	padding-bottom: 10px;
+}
+
+.post-card {
+	background-color: #fff;
 	border-radius: 4px;
+	margin-top: 8px;
+}
+
+.post-style-meetup {
+	border-left: 4px solid blue;
+}
+
+.post-style-ride-report {
+	border-left: 4px solid green;
+}
+
+.post-style-open-ticket {
+	border: 2px solid red;
+	border-left: 4px solid red;
+}
+
+.post-style-closed-ticket {
+	border-left: 4px solid #aaa;
 }

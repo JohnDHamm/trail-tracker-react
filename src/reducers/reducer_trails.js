@@ -10,7 +10,7 @@ export default function() {
 			longitude: -86.628356,
 			mapZoom: 15,
 			numOpenTickets: 1,
-			imgUrl: '/src/img/hamiltonCreek.jpg'
+			imgUrl: '/src/img/trails/hamiltonCreek.jpg'
 		},
 		2:
 		{ id: 2,
@@ -21,7 +21,7 @@ export default function() {
 			longitude: -86.878638,
 			mapZoom: 15,
 			numOpenTickets: 0,
-			imgUrl: '/src/img/percyWarner.jpg'
+			imgUrl: '/src/img/trails/percyWarner.jpg'
 		},
 		3:
 		{ id: 3,
@@ -32,7 +32,7 @@ export default function() {
 			longitude: -86.470342,
 			mapZoom: 15,
 			numOpenTickets: 0,
-			imgUrl: '/src/img/lock4.jpg'
+			imgUrl: '/src/img/trails/lock4.jpg'
 		},
 		4:
 		{ id: 4,
@@ -43,7 +43,7 @@ export default function() {
 			longitude: -87.270412,
 			mapZoom: 15,
 			numOpenTickets: 0,
-			imgUrl: '/src/img/montgomeryBell.jpg'
+			imgUrl: '/src/img/trails/montgomeryBell.jpg'
 		},
 		5:
 		{ id: 5,
@@ -54,7 +54,7 @@ export default function() {
 			longitude: -87.087615,
 			mapZoom: 15,
 			numOpenTickets: 1,
-			imgUrl: '/src/img/chickasaw.jpg'
+			imgUrl: '/src/img/trails/chickasaw.jpg'
 		}
 	};
 
