@@ -7,6 +7,7 @@ import TrailTitleCard from './trail_title_card';
 import TrailAddPostCard from './trail_add_post_card';
 import TrailPostCard from './trail_post_card';
 import TrailPostCardPhoto from './trail_post_card_photo';
+import DialogExampleSimple from './test_photo_dialog';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {List, ListItem} from 'material-ui/List';

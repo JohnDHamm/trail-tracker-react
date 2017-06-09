@@ -80,9 +80,11 @@ class TrailPostCardPhoto extends Component {
 				<div style={prepareStyles(Object.assign(styles.message, style))}>
 					{message}
 				</div>
-				<img
-					style={prepareStyles(Object.assign(styles.photo, style))}
-					src={photoUrl} />
+				<a target="_blank" href={photoUrl}>
+					<img
+						style={prepareStyles(Object.assign(styles.photo, style))}
+						src={photoUrl} />
+				</a>
 			</div>
 		);
 	}

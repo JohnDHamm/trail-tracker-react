@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-// import MapsDirectionsBike from 'material-ui/svg-icons/maps/directions-bike';
 import FontIcon from 'material-ui/FontIcon';
 
 function getStyles(props, context) {
