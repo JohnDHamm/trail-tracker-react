@@ -34,3 +34,9 @@ body {
 .post-style-closed-ticket {
 	border-left: 4px solid #aaa;
 }
+
+.closeTicketDiv {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
