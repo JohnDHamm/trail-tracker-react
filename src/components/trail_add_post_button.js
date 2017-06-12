@@ -4,28 +4,24 @@ import PropTypes from 'prop-types';
 import FontIcon from 'material-ui/FontIcon';
 
 function getStyles(props, context) {
-	const {TrailCloseTicketCard} = context.muiTheme;
+	const {TrailAddPostButton} = context.muiTheme;
 
 	return {
 		root: {
-			paddingLeft: 10,
-			paddingBottom: 10,
-			borderRadius: 2,
 			display: 'flex',
 			alignItems: 'center',
-			color: '#666',
-			justifyContent: 'flex-end'
+			cursor: 'pointer',
+			color: '#666'
 		},
 		text: {
-			cursor: 'pointer',
-			fontSize: 12,
+			fontSize: 15,
 			paddingLeft: 5
 		}
 	}
 }
 
-class TrailCloseTicketCard extends Component {
-	static muiName = 'TrailCloseTicketCard';
+class TrailAddPostButton extends Component {
+	static muiName = 'TrailAddPostButton';
 
 	static propTypes = {
 		style: PropTypes.object
@@ -37,23 +33,21 @@ class TrailCloseTicketCard extends Component {
 
 	render () {
 
-		const { style } = this.props;
+		const { postUserName, style } = this.props;
 
 		const {prepareStyles} = this.context.muiTheme;
 		const styles = getStyles(this.props, this.context);
 
 		return (
 			<div style={prepareStyles(Object.assign(styles.root, style))}>
-				<div style={prepareStyles(Object.assign(styles.text, style))}>
-					<FontIcon className="material-icons" color="#666">build</FontIcon>
-					<div>
-						Close ticket
+					<FontIcon className="material-icons" color="#666">add_circle</FontIcon>
+					<div style={prepareStyles(Object.assign(styles.text, style))}>
+						Add a new post
 					</div>
-				</div>
 			</div>
 		);
 
 	}
 }
 
-export default TrailCloseTicketCard;
+export default TrailAddPostButton;

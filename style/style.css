@@ -35,8 +35,20 @@ body {
 	border-left: 4px solid #aaa;
 }
 
+.addPostDiv {
+	display: flex;
+	justify-content: flex-start;
+	padding: 10px;
+	border-radius: 2px;
+	background-color: white;
+	border-left: 4px solid #ddd;
+	margin-top: 10px;
+}
+
 .closeTicketDiv {
 	display: flex;
 	justify-content: flex-end;
-	align-items: center;
+	padding-left: 10px;
+	padding-bottom: 10px;
 }
+
