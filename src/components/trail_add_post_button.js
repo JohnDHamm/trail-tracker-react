@@ -4,19 +4,14 @@ import PropTypes from 'prop-types';
 import FontIcon from 'material-ui/FontIcon';
 
 function getStyles(props, context) {
-	const {TrailAddPostCard} = context.muiTheme;
+	const {TrailAddPostButton} = context.muiTheme;
 
 	return {
 		root: {
-			padding: 10,
-			borderRadius: 2,
-			backgroundColor: 'white',
-			borderLeft: '4px solid #ddd',
 			display: 'flex',
 			alignItems: 'center',
 			cursor: 'pointer',
-			color: '#666',
-			marginTop: 10
+			color: '#666'
 		},
 		text: {
 			fontSize: 15,
@@ -25,8 +20,8 @@ function getStyles(props, context) {
 	}
 }
 
-class TrailAddPostCard extends Component {
-	static muiName = 'TrailAddPostCard';
+class TrailAddPostButton extends Component {
+	static muiName = 'TrailAddPostButton';
 
 	static propTypes = {
 		style: PropTypes.object
@@ -55,4 +50,4 @@ class TrailAddPostCard extends Component {
 	}
 }
 
-export default TrailAddPostCard;
+export default TrailAddPostButton;

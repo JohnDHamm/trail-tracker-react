@@ -14,12 +14,13 @@ function getStyles(props, context) {
 			display: 'flex',
 			alignItems: 'center',
 			color: '#666',
-			justifyContent: 'flex-end'
+			// justifyContent: 'flex-end',
+			paddingRight: 10
 		},
 		text: {
-			cursor: 'pointer',
+			// cursor: 'pointer',
 			fontSize: 12,
-			paddingLeft: 5
+			paddingRight: 5
 		}
 	}
 }
@@ -43,12 +44,12 @@ class TrailCloseTicketCard extends Component {
 		const styles = getStyles(this.props, this.context);
 
 		return (
-			<div style={prepareStyles(Object.assign(styles.root, style))}>
-				<div style={prepareStyles(Object.assign(styles.text, style))}>
-					<FontIcon className="material-icons" color="#666">build</FontIcon>
-					<div>
+			<div>
+				<div style={prepareStyles(Object.assign(styles.root, style))}>
+					<div style={prepareStyles(Object.assign(styles.text, style))}>
 						Close ticket
 					</div>
+					<FontIcon className="material-icons" color="#666">build</FontIcon>
 				</div>
 			</div>
 		);
