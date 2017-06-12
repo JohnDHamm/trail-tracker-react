@@ -42,14 +42,13 @@ body {
 	border-radius: 2px;
 	background-color: white;
 	border-left: 4px solid #ddd;
-	align-items: center;
-	/*cursor: pointer,*/
-	/*color: #666,*/
 	margin-top: 10px;
 }
 
 .closeTicketDiv {
 	display: flex;
 	justify-content: flex-end;
-	align-items: center;
+	padding-left: 10px;
+	padding-bottom: 10px;
 }
+

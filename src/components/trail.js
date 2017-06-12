@@ -8,7 +8,7 @@ import TrailAddPostButton from './trail_add_post_button';
 import TrailPostCard from './trail_post_card';
 import TrailPostCardPhoto from './trail_post_card_photo';
 // import DialogExampleSimple from './test_photo_dialog';
-import TrailCloseTicketCard from './trail_close_ticket_card';
+import TrailCloseTicketButton from './trail_close_ticket_button';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {List, ListItem} from 'material-ui/List';
@@ -45,8 +45,10 @@ class Trail extends Component {
 								date={post.postFormatDate}
 								message={post.description}
 								photoUrl={post.photoUrl} />
-							<div onClick={() => this.closeTicket(post.id)}>
-								<TrailCloseTicketCard />
+							<div className="closeTicketDiv">
+								<div className="closeTicketBtn" onClick={() => this.closeTicket(post.id)}>
+									<TrailCloseTicketButton />
+								</div>
 							</div>
 						</div>
 					)
@@ -125,15 +127,3 @@ function mapStateToProps({ trails, posts }, ownProps) {
 
 export default connect(mapStateToProps)(Trail);
 
-							// <div className="closeTicketDiv">
-							// 	<span>Close ticket
-							// 		<IconButton
-							// 			onTouchTap={() => this.closeTicket(post.id)}
-							// 			style={{paddingTop: 0, paddingBottom: 8, height: 'auto'}}
-							// 			iconClassName="material-icons"
-							// 			tooltip="Close ticket"
-		   		// 					tooltipPosition="top-center"
-		   		// 					iconStyle={{color: '#666'}}>build
-							// 		</IconButton>
-							// 	</span>
-							// </div>

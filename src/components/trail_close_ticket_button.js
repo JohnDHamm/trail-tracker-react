@@ -4,29 +4,25 @@ import PropTypes from 'prop-types';
 import FontIcon from 'material-ui/FontIcon';
 
 function getStyles(props, context) {
-	const {TrailCloseTicketCard} = context.muiTheme;
+	const {TrailCloseTicketButton} = context.muiTheme;
 
 	return {
 		root: {
-			paddingLeft: 10,
-			paddingBottom: 10,
-			borderRadius: 2,
 			display: 'flex',
 			alignItems: 'center',
 			color: '#666',
-			// justifyContent: 'flex-end',
+			cursor: 'pointer',
 			paddingRight: 10
 		},
 		text: {
-			// cursor: 'pointer',
 			fontSize: 12,
 			paddingRight: 5
 		}
 	}
 }
 
-class TrailCloseTicketCard extends Component {
-	static muiName = 'TrailCloseTicketCard';
+class TrailCloseTicketButton extends Component {
+	static muiName = 'TrailCloseTicketButton';
 
 	static propTypes = {
 		style: PropTypes.object
@@ -57,4 +53,4 @@ class TrailCloseTicketCard extends Component {
 	}
 }
 
-export default TrailCloseTicketCard;
+export default TrailCloseTicketButton;
