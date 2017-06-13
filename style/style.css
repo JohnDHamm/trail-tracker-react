@@ -8,6 +8,12 @@ body {
 	border: 1px solid #eee;
 }
 
+.mapDiv {
+	margin-top: 10px;
+	height: 100%;
+	width: 100%;
+}
+
 .postsDiv {
 	padding-bottom: 10px;
 }
