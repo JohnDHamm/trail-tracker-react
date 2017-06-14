@@ -10,6 +10,7 @@ import TrailPostCardPhoto from './trail_post_card_photo';
 // import DialogExampleSimple from './test_photo_dialog';
 import TrailCloseTicketButton from './trail_close_ticket_button';
 import TrailOpenTicketPostTop from './trail_open_ticket_post_top';
+import WeatherCurrentConditionsCard from './weather_current_conditions_card'
 import GoogleMap from './google_map';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -83,8 +84,9 @@ class Trail extends Component {
 	}
 
 	render() {
-		const { trail, posts } = this.props;
+		const { trail, posts, weather } = this.props;
 		// console.log("trail", trail);
+		console.log("weather", weather);
 
 		if (!trail) {
 			return <div>Loading...</div>;
@@ -118,7 +120,13 @@ class Trail extends Component {
 								</div>
 							</div>
 							<div id="rightSide" className="col-lg-2 hidden-md-down test-div-fill">
-								Right side
+								<WeatherCurrentConditionsCard
+									conditions={weather.weather}
+									iconUrl={weather.icon_url}
+									temp={weather.temp_f}
+									feelsLikeTemp={weather.feelslike_f}
+									precip={weather.precip_today_in}
+								/>
 							</div>
 						</div>
 					</div>
@@ -128,8 +136,8 @@ class Trail extends Component {
 	}
 }
 
-function mapStateToProps({ trails, posts }, ownProps) {
-	return { trail: trails[ownProps.match.params.id], posts: posts };
+function mapStateToProps({ trails, posts, weather }, ownProps) {
+	return { trail: trails[ownProps.match.params.id], posts: posts, weather: weather };
 }
 
 export default connect(mapStateToProps)(Trail);
