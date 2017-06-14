@@ -137,6 +137,9 @@ class Trail extends Component {
 										radarUrl={weather.radarUrl}
 									/>
 								</div>
+								<div className="row hidden-lg-up weatherForecastDiv">
+									{this.renderWeatherForecast()}
+								</div>
 							</div>
 
 							<div id="center" className="col-lg-6 col-md-8">
