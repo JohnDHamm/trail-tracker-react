@@ -17,10 +17,10 @@ function getStyles(props, context) {
 			fontSize: 20,
 			display: 'flex',
 			justifyContent: 'space-between',
-			alignItems: 'center'
+			alignItems: 'flex-end'
 		},
 		conditions: {
-			fontSize: 16,
+			fontSize: 14,
 			fontFamily: `${values.primary.font}`,
 			color: `${values.tertiary.color}`,
 			marginBottom: 5,
@@ -28,15 +28,15 @@ function getStyles(props, context) {
 		},
 		temps: {
 			fontSize: 14,
-			lineHeight: 1.2
+			lineHeight: 1.3
 		},
 		precip: {
 			fontSize: 12,
-			lineHeight: 1.1
+			lineHeight: 1.2
 		},
 		humidity: {
 			fontSize: 12,
-			lineHeight: 1.1
+			lineHeight: 1.2
 		}
 	};
 }
@@ -70,7 +70,7 @@ class WeatherForecast extends Component {
 					<span>
 						{weekday}
 					</span>
-					<img src={iconUrl}></img>
+					<img src={iconUrl} width="35"></img>
 				</div>
 				<div style={prepareStyles(Object.assign(styles.conditions, style))}>
 						{conditions}
@@ -82,7 +82,7 @@ class WeatherForecast extends Component {
 					Humidity {humidity}%
 				</div>
 				<div style={prepareStyles(Object.assign(styles.precip, style))}>
-					Precip. {precip}in
+					Precip. {precip}"
 				</div>
 			</div>
 		);

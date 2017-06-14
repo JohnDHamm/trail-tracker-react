@@ -28,6 +28,7 @@ function getStyles(props, context) {
 			fontFamily: `${values.tertiary.font}`,
 			fontSize: 24,
 			color: `${values.primary.color}`,
+			lineHeight: 1
 		},
 		tempText: {
 			fontSize: 16,
@@ -41,6 +42,7 @@ function getStyles(props, context) {
 			fontSize: 20,
 			fontFamily: `${values.tertiary.font}`,
 			color: `${values.primary.color}`,
+			lineHeight: 1
 		}
 	};
 }
