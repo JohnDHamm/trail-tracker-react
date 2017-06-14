@@ -11,7 +11,7 @@ function getStyles(props, context) {
 
 	return {
 		root: {
-			padding: '5px 10px 2px 10px',
+			padding: 2,
 			backgroundColor: `${values.openTicket.color}`,
 			display: 'flex',
 			alignItems: 'center'

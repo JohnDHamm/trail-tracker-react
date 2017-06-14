@@ -9,23 +9,43 @@ function getStyles(props, context) {
 
 	return {
 		root: {
-			// padding: '5px 10px 2px 10px',
-			backgroundColor: 'white',
-			// display: 'flex',
-			// alignItems: 'center'
-			paddingLeft: 5,
-			width: '100%'
+			backgroundColor: 'rgba(255,255,255,0.5)',
+			padding: '0 10px',
+			width: '100%',
+			marginTop: 10,
+			borderRadius: 2,
+			fontFamily: `${values.secondary.font}`
 		},
 		title: {
-			// color: 'white',
 			fontSize: 16,
 			fontFamily: `${values.primary.font}`,
+			color: `${values.tertiary.color}`,
+			display: 'flex',
+			justifyContent: 'space-between',
+			alignItems: 'center'
 		},
-		temp: {
-
+		tempNumber: {
+			fontFamily: `${values.tertiary.font}`,
+			fontSize: 24,
+			color: `${values.primary.color}`,
+			// color: 'white'
 		},
-		rain: {
-
+		tempText: {
+			fontSize: 16,
+			color: `${values.tertiary.color}`,
+			// color: 'green'
+		},
+		precipText: {
+			fontSize: 16,
+			color: `${values.tertiary.color}`,
+			// color: 'blue'
+		},
+		precipNumber: {
+			fontSize: 20,
+			fontFamily: `${values.tertiary.font}`,
+			color: `${values.primary.color}`,
+			// color: `${values.primary.color}`,
+			// color: 'red'
 		}
 	};
 }
@@ -54,18 +74,19 @@ class WeatherCurrentConditionsCard extends Component {
 		return (
 			<div style={prepareStyles(Object.assign(styles.root, style))}>
 				<div style={prepareStyles(Object.assign(styles.title, style))}>
-					<div>
+					<span>
 						{conditions}
-					</div>
-					<div>
-						<img src={iconUrl}></img>
-					</div>
+					</span>
+					<img src={iconUrl}></img>
 				</div>
-				<div style={prepareStyles(Object.assign(styles.temp, style))}>
-					{temp} feels like {feelsLikeTemp}
+				<div>
+					<span style={prepareStyles(Object.assign(styles.tempNumber, style))}>{temp}&deg;</span>
+					<span style={prepareStyles(Object.assign(styles.tempText, style))}> feels like </span>
+					<span style={styles.tempNumber}> {feelsLikeTemp}&deg;</span>
 				</div>
-				<div style={prepareStyles(Object.assign(styles.rain, style))}>
-					rain chance: {precip} in
+				<div>
+					<span style={prepareStyles(Object.assign(styles.precipText, style))}>precip amount: </span>
+					<span style={prepareStyles(Object.assign(styles.precipNumber, style))}>{precip}"</span>
 				</div>
 			</div>
 		);

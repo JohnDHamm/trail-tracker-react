@@ -119,7 +119,7 @@ class Trail extends Component {
 									{this.renderPosts()}
 								</div>
 							</div>
-							<div id="rightSide" className="col-lg-2 hidden-md-down test-div-fill">
+							<div id="rightSide" className="col-lg-2 hidden-md-down">
 								<div className="row">
 									<WeatherCurrentConditionsCard
 										conditions={weather.weather}
