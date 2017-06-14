@@ -9,36 +9,34 @@ function getStyles(props, context) {
 
 	return {
 		root: {
-			// backgroundColor: 'rgba(255,255,255,0.5)',
-			border: '1px solid grey',
-			// padding: '0 10px',
 			width: '100%',
-			// marginTop: 10,
-			// borderRadius: 2,
-			fontFamily: `${values.secondary.font}`
 		},
 		weekday: {
-			color: 'red'
+			color: `${values.primary.color}`,
+			fontFamily: `${values.tertiary.font}`,
+			fontSize: 20,
+			display: 'flex',
+			justifyContent: 'space-between',
+			alignItems: 'center'
 		},
 		conditions: {
 			fontSize: 16,
 			fontFamily: `${values.primary.font}`,
 			color: `${values.tertiary.color}`,
-			display: 'flex',
-			justifyContent: 'space-between',
-			alignItems: 'center'
+			marginBottom: 5,
+			lineHeight: 1
 		},
 		temps: {
-			fontSize: 16,
-
+			fontSize: 14,
+			lineHeight: 1.2
 		},
 		precip: {
-			fontSize: 16,
-
+			fontSize: 12,
+			lineHeight: 1.1
 		},
 		humidity: {
-			fontSize: 16,
-
+			fontSize: 12,
+			lineHeight: 1.1
 		}
 	};
 }
@@ -69,15 +67,14 @@ class WeatherForecast extends Component {
 		return (
 			<div style={prepareStyles(Object.assign(styles.root, style))}>
 				<div style={prepareStyles(Object.assign(styles.weekday, style))}>
-					{weekday}
-				</div>
-				<div style={prepareStyles(Object.assign(styles.conditions, style))}>
 					<span>
-						{conditions}
+						{weekday}
 					</span>
 					<img src={iconUrl}></img>
 				</div>
-
+				<div style={prepareStyles(Object.assign(styles.conditions, style))}>
+						{conditions}
+				</div>
 				<div style={prepareStyles(Object.assign(styles.temps, style))}>
 					High {tempHigh}&deg; / Low {tempLow}&deg;
 				</div>
@@ -85,7 +82,7 @@ class WeatherForecast extends Component {
 					Humidity {humidity}%
 				</div>
 				<div style={prepareStyles(Object.assign(styles.precip, style))}>
-					Precip.: {precip}in
+					Precip. {precip}in
 				</div>
 			</div>
 		);

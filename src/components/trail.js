@@ -87,9 +87,8 @@ class Trail extends Component {
 
 	renderWeatherForecast() {
 		return this.props.weather.forecastday.map(forecast => {
-			console.log("forecast for", forecast.qpf_allday.in);
 			return (
-				<div key={forecast.date.weekday}>
+				<div className="weatherForecastDay" key={forecast.date.weekday}>
 					<WeatherForecast
 						weekday={forecast.date.weekday}
 						conditions={forecast.conditions}
@@ -105,8 +104,6 @@ class Trail extends Component {
 
 	render() {
 		const { trail, posts, weather } = this.props;
-		// console.log("trail", trail);
-		console.log("weather", weather);
 
 		if (!trail) {
 			return <div>Loading...</div>;
