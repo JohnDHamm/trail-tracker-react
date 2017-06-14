@@ -9,6 +9,7 @@ import TrailPostCard from './trail_post_card';
 import TrailPostCardPhoto from './trail_post_card_photo';
 // import DialogExampleSimple from './test_photo_dialog';
 import TrailCloseTicketButton from './trail_close_ticket_button';
+import GoogleMap from './google_map';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {List, ListItem} from 'material-ui/List';
@@ -81,6 +82,7 @@ class Trail extends Component {
 
 	render() {
 		const { trail, posts } = this.props;
+		// console.log("trail", trail);
 
 		if (!trail) {
 			return <div>Loading...</div>;
@@ -92,9 +94,12 @@ class Trail extends Component {
 					<Navbar />
 					<div className="container">
 						<div className="row">
-							<div id="leftSide" className="col-lg-4 col-md-4 hidden-sm-down test-div-fill">
+							<div id="leftSide" className="col-lg-4 col-md-4 hidden-sm-down">
 								<div>
 									<TrailTitleCard title={trail.name} />
+								</div>
+								<div className="mapDiv">
+									<GoogleMap lon={trail.longitude} lat={trail.latitude} zoom={trail.mapZoom} />
 								</div>
 							</div>
 							<div id="center" className="col-lg-6 col-md-8">

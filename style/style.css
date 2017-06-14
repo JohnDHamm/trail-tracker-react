@@ -3,9 +3,15 @@ body {
 	background-color: #ffca28;
 }
 
-
+/*POSTS*/
 .test-div-fill {
 	border: 1px solid #eee;
+}
+
+.mapDiv {
+	margin-top: 10px;
+	height: 100%;
+	width: 100%;
 }
 
 .postsDiv {
@@ -51,4 +57,26 @@ body {
 	padding-left: 10px;
 	padding-bottom: 10px;
 }
+
+/*TRAILS*/
+.trailWithTicketDiv {
+	position: relative;
+}
+
+.ticketBadge {
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background-color: #c62828;
+	color: white;
+	position: absolute;
+	top: -10px;
+	right: -10px;
+	z-index: 10;
+	text-align: center;
+	font-size: 15px;
+	font-family: 'Harmattan', sans-serif;
+}
+
+
 
