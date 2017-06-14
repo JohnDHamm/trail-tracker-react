@@ -28,24 +28,19 @@ function getStyles(props, context) {
 			fontFamily: `${values.tertiary.font}`,
 			fontSize: 24,
 			color: `${values.primary.color}`,
-			// color: 'white'
 		},
 		tempText: {
 			fontSize: 16,
 			color: `${values.tertiary.color}`,
-			// color: 'green'
 		},
 		precipText: {
 			fontSize: 16,
 			color: `${values.tertiary.color}`,
-			// color: 'blue'
 		},
 		precipNumber: {
 			fontSize: 20,
 			fontFamily: `${values.tertiary.font}`,
 			color: `${values.primary.color}`,
-			// color: `${values.primary.color}`,
-			// color: 'red'
 		}
 	};
 }

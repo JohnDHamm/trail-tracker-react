@@ -98,6 +98,7 @@ class Trail extends Component {
 					<Navbar />
 					<div className="container">
 						<div className="row">
+
 							<div id="leftSide" className="col-lg-4 col-md-4 hidden-sm-down">
 								<div className="row justify-content-center">
 									<TrailTitleCard title={trail.name} />
@@ -105,7 +106,17 @@ class Trail extends Component {
 								<div className="mapDiv row">
 									<GoogleMap lon={trail.longitude} lat={trail.latitude} zoom={trail.mapZoom} />
 								</div>
+								<div className="row hidden-lg-up">
+									<WeatherCurrentConditionsCard
+										conditions={weather.weather}
+										iconUrl={weather.icon_url}
+										temp={weather.temp_f}
+										feelsLikeTemp={weather.feelslike_f}
+										precip={weather.precip_today_in}
+									/>
+								</div>
 							</div>
+
 							<div id="center" className="col-lg-6 col-md-8">
 								<div className="hidden-md-up">
 									<TrailTitleCard title={trail.name} />
@@ -119,6 +130,7 @@ class Trail extends Component {
 									{this.renderPosts()}
 								</div>
 							</div>
+
 							<div id="rightSide" className="col-lg-2 hidden-md-down">
 								<div className="row">
 									<WeatherCurrentConditionsCard
@@ -130,6 +142,7 @@ class Trail extends Component {
 									/>
 								</div>
 							</div>
+
 						</div>
 					</div>
 				</div>
