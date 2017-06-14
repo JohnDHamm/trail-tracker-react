@@ -11,6 +11,7 @@ import TrailPostCardPhoto from './trail_post_card_photo';
 import TrailCloseTicketButton from './trail_close_ticket_button';
 import TrailOpenTicketPostTop from './trail_open_ticket_post_top';
 import WeatherCurrentConditionsCard from './weather_current_conditions_card'
+import WeatherRadar from './weather_radar'
 import GoogleMap from './google_map';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -115,6 +116,11 @@ class Trail extends Component {
 										precip={weather.precip_today_in}
 									/>
 								</div>
+								<div className="row hidden-lg-up">
+									<WeatherRadar
+										radarUrl={weather.radarUrl}
+									/>
+								</div>
 							</div>
 
 							<div id="center" className="col-lg-6 col-md-8">
@@ -139,6 +145,11 @@ class Trail extends Component {
 										temp={weather.temp_f}
 										feelsLikeTemp={weather.feelslike_f}
 										precip={weather.precip_today_in}
+									/>
+								</div>
+								<div className="row">
+									<WeatherRadar
+										radarUrl={weather.radarUrl}
 									/>
 								</div>
 							</div>
