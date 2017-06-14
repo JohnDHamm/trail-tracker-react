@@ -12,6 +12,7 @@ import TrailCloseTicketButton from './trail_close_ticket_button';
 import TrailOpenTicketPostTop from './trail_open_ticket_post_top';
 import WeatherCurrentConditionsCard from './weather_current_conditions_card'
 import WeatherRadar from './weather_radar'
+import WeatherForecast from './weather_forecast'
 import GoogleMap from './google_map';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -84,6 +85,24 @@ class Trail extends Component {
 		})
 	}
 
+	renderWeatherForecast() {
+		return this.props.weather.forecastday.map(forecast => {
+			console.log("forecast for", forecast.qpf_allday.in);
+			return (
+				<div key={forecast.date.weekday}>
+					<WeatherForecast
+						weekday={forecast.date.weekday}
+						conditions={forecast.conditions}
+						iconUrl={forecast.icon_url}
+						tempHigh={forecast.high.fahrenheit}
+						tempLow={forecast.low.fahrenheit}
+						humidity={forecast.avehumidity}
+						precip={forecast.qpf_allday.in} />
+				</div>
+			)
+		})
+	}
+
 	render() {
 		const { trail, posts, weather } = this.props;
 		// console.log("trail", trail);
@@ -151,6 +170,9 @@ class Trail extends Component {
 									<WeatherRadar
 										radarUrl={weather.radarUrl}
 									/>
+								</div>
+								<div className="row weatherForecastDiv">
+									{this.renderWeatherForecast()}
 								</div>
 							</div>
 
