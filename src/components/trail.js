@@ -99,10 +99,10 @@ class Trail extends Component {
 					<div className="container">
 						<div className="row">
 							<div id="leftSide" className="col-lg-4 col-md-4 hidden-sm-down">
-								<div>
+								<div className="row justify-content-center">
 									<TrailTitleCard title={trail.name} />
 								</div>
-								<div className="mapDiv">
+								<div className="mapDiv row">
 									<GoogleMap lon={trail.longitude} lat={trail.latitude} zoom={trail.mapZoom} />
 								</div>
 							</div>
@@ -120,13 +120,15 @@ class Trail extends Component {
 								</div>
 							</div>
 							<div id="rightSide" className="col-lg-2 hidden-md-down test-div-fill">
-								<WeatherCurrentConditionsCard
-									conditions={weather.weather}
-									iconUrl={weather.icon_url}
-									temp={weather.temp_f}
-									feelsLikeTemp={weather.feelslike_f}
-									precip={weather.precip_today_in}
-								/>
+								<div className="row">
+									<WeatherCurrentConditionsCard
+										conditions={weather.weather}
+										iconUrl={weather.icon_url}
+										temp={weather.temp_f}
+										feelsLikeTemp={weather.feelslike_f}
+										precip={weather.precip_today_in}
+									/>
+								</div>
 							</div>
 						</div>
 					</div>

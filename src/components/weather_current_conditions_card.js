@@ -13,12 +13,13 @@ function getStyles(props, context) {
 			backgroundColor: 'white',
 			// display: 'flex',
 			// alignItems: 'center'
+			paddingLeft: 5,
+			width: '100%'
 		},
 		title: {
 			// color: 'white',
-			fontSize: 18,
+			fontSize: 16,
 			fontFamily: `${values.primary.font}`,
-			paddingLeft: 5
 		},
 		temp: {
 
