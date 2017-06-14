@@ -9,6 +9,7 @@ import TrailPostCard from './trail_post_card';
 import TrailPostCardPhoto from './trail_post_card_photo';
 // import DialogExampleSimple from './test_photo_dialog';
 import TrailCloseTicketButton from './trail_close_ticket_button';
+import TrailOpenTicketPostTop from './trail_open_ticket_post_top';
 import GoogleMap from './google_map';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -40,6 +41,7 @@ class Trail extends Component {
 				if (post.ticketopen) {
 					return (
 						<div className={postStyle} key={post.id}>
+							<TrailOpenTicketPostTop />
 							<TrailPostCardPhoto
 								userImgUrl={post.userImgUrl}
 								postUserName={post.userName}

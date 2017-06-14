@@ -15,6 +15,10 @@ export default function() {
 			{
 				color: '#3e2723',
 				font: 'Rancho'
+			},
+		openTicket:
+			{
+				color: '#c62828'
 			}
 	}
 }
