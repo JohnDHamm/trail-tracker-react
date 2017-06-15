@@ -2,12 +2,13 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { fetchPosts } from '../actions';
+
 import Navbar from './navbar'
 import TrailTitleCard from './trail_title_card';
 import TrailAddPostButton from './trail_add_post_button';
 import TrailPostCard from './trail_post_card';
 import TrailPostCardPhoto from './trail_post_card_photo';
-// import DialogExampleSimple from './test_photo_dialog';
 import TrailCloseTicketButton from './trail_close_ticket_button';
 import TrailOpenTicketPostTop from './trail_open_ticket_post_top';
 import WeatherCurrentConditionsCard from './weather_current_conditions_card'
@@ -24,8 +25,7 @@ import IconButton from 'material-ui/IconButton';
 class Trail extends Component {
 	componentDidMount() {
 		const { id } = this.props.match.params; //get from url
-		// this.props.fetchPost(id);
-
+		this.props.fetchPosts(id);
 	}
 
 	addPost() {
@@ -37,13 +37,14 @@ class Trail extends Component {
 	}
 
 	renderPosts () {
-		return this.props.posts.map(post => {
+
+		return _.map(this.props.posts, post => {
 			const postStyle = `post-card post-style-${post.postTypeString}`;
 			if (post.hasPhoto) {
 
 				if (post.ticketopen) {
 					return (
-						<div className={postStyle} key={post.id}>
+						<div className={postStyle} key={post._id}>
 							<TrailOpenTicketPostTop />
 							<TrailPostCardPhoto
 								userImgUrl={post.userImgUrl}
@@ -52,7 +53,7 @@ class Trail extends Component {
 								message={post.description}
 								photoUrl={post.photoUrl} />
 							<div className="closeTicketDiv">
-								<div className="closeTicketBtn" onClick={() => this.closeTicket(post.id)}>
+								<div className="closeTicketBtn" onClick={() => this.closeTicket(post._id)}>
 									<TrailCloseTicketButton />
 								</div>
 							</div>
@@ -60,7 +61,7 @@ class Trail extends Component {
 					)
 				} else {
 					return (
-						<div className={postStyle} key={post.id}>
+						<div className={postStyle} key={post._id}>
 							<TrailPostCardPhoto
 								userImgUrl={post.userImgUrl}
 								postUserName={post.userName}
@@ -104,9 +105,10 @@ class Trail extends Component {
 
 	render() {
 		const { trail, posts, weather } = this.props;
+		// console.log("this.props.posts", this.props.posts);
 
 		if (!trail) {
-			return <div>Loading...</div>;
+			return <div>Loading trail...</div>;
 		}
 
 		return (
@@ -188,5 +190,5 @@ function mapStateToProps({ trails, posts, weather }, ownProps) {
 	return { trail: trails[ownProps.match.params.id], posts: posts, weather: weather };
 }
 
-export default connect(mapStateToProps)(Trail);
+export default connect(mapStateToProps, { fetchPosts } )(Trail);
 

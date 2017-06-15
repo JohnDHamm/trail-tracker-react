@@ -1,62 +1,11 @@
-export default function() {
+import { FETCH_POSTS } from '../actions';
+import _ from 'lodash';
 
-	return [
-		{ id: 1,
-			description: "Trees down on the yellow loop near the creek.",
-			hasPhoto: true,
-			photoUrl: '/src/img/open_tickets/open_ticket_3.jpg',
-			postDate: "2016-07-05T15:46:30.338Z",
-			postFormatDate: "9/5/2016 2:31:15 PM",
-			postTrailId: 1,
-			postType: 2,
-			postTypeString: "open-ticket",
-			ticketopen: true,
-			userId: 3,
-			userName: "Biker Girl",
-			userImgUrl: '/src/img/user_avatars/Biker_Girl.jpg'
-		},
-		{ id: 2,
-			description: "Gonna ride this Saturday at 9:00ish. Meet in parking lot around 8:30.",
-			hasPhoto: false,
-			photoUrl: '',
-			postDate: "2016-07-05T15:46:30.338Z",
-			postFormatDate: "8/16/2016 2:31:15 PM",
-			postTrailId: 1,
-			postType: 3,
-			postTypeString: "meetup",
-			ticketopen: false,
-			userId: 1,
-			userName: "crash dummy",
-			userImgUrl: '/src/img/user_avatars/crash_dummy.jpg'
-		},
-		{ id: 3,
-			description: "Trail in great shape. Go get you some!",
-			hasPhoto: true,
-			photoUrl: '/src/img/ride_reports/ride_report_2.jpg',
-			postDate: "2016-08-01T15:46:30.338Z",
-			postFormatDate: "8/13/2016 5:06:46 PM",
-			postTrailId: 1,
-			postType: 1,
-			postTypeString: "ride-report",
-			ticketopen: false,
-			userId: 2,
-			userName: "fat tire fred",
-			userImgUrl: '/src/img/user_avatars/fat_tire_fred.jpg'
-		},
-		{ id: 4,
-			description: 'original issue: "tree leaning across trail - duck!"" by fat tire fred on 6/31/2016 5:23:06 PM has been closed by crash dummy - "cleared with a chainsaw, all good to go now!" - Beers for all!',
-			hasPhoto: false,
-			photoUrl: '',
-			postDate: "2016-07-05T15:46:30.338Z",
-			postFormatDate: "7/5/2016 2:31:15 PM",
-			postTrailId: 1,
-			postType: 4,
-			postTypeString: "closed-ticket",
-			ticketopen: false,
-			userId: 1,
-			userName: "crash dummy",
-			userImgUrl: '/src/img/user_avatars/crash_dummy.jpg'
-		}
-
-	]
+export default function (state={}, action) {
+	switch (action.type) {
+		case FETCH_POSTS:
+			return _.mapKeys(action.payload.data, '_id');
+		default:
+			return state;
+	}
 }
