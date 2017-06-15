@@ -9,7 +9,7 @@ export default function() {
 			latitude: 36.101153,
 			longitude: -86.628356,
 			mapZoom: 15,
-			numOpenTickets: 9,
+			numOpenTickets: 1,
 			imgUrl: '/src/img/trails/hamiltonCreek.jpg'
 		},
 		2:
