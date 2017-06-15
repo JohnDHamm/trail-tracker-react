@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { fetchTrails } from '../actions';
+import { getTrails } from '../actions';
 
 import Navbar from './navbar'
 import TrailsSelectCard from './trails_select_card';
@@ -14,7 +14,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 class Trails extends Component {
 
 	componentDidMount() {
-		this.props.fetchTrails();
+		this.props.getTrails();
 	}
 
 	renderTrails() {
@@ -73,5 +73,5 @@ function mapStateToProps (state) {
 	return { trails: state.trails };
 }
 
-export default connect (mapStateToProps, { fetchTrails })(Trails);
+export default connect (mapStateToProps, { getTrails })(Trails);
 

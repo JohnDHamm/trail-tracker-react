@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { fetchPosts } from '../actions';
+import { getPosts } from '../actions';
 
 import Navbar from './navbar'
 import TrailTitleCard from './trail_title_card';
@@ -17,15 +17,12 @@ import WeatherForecast from './weather_forecast'
 import GoogleMap from './google_map';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import {List, ListItem} from 'material-ui/List';
-import Divider from 'material-ui/Divider';
-import IconButton from 'material-ui/IconButton';
 
 
 class Trail extends Component {
 	componentDidMount() {
 		const { id } = this.props.match.params; //get from url
-		this.props.fetchPosts(id);
+		this.props.getPosts(id);
 	}
 
 	addPost() {
@@ -190,5 +187,5 @@ function mapStateToProps({ trails, posts, weather }, ownProps) {
 	return { trail: trails[ownProps.match.params.id], posts: posts, weather: weather };
 }
 
-export default connect(mapStateToProps, { fetchPosts } )(Trail);
+export default connect(mapStateToProps, { getPosts } )(Trail);
 
