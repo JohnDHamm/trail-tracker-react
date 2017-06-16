@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import { getPosts } from '../actions';
 import { getCurrentWeather } from '../actions';
+import { getWeatherForecast } from '../actions';
 
 import Navbar from './navbar'
 import TrailTitleCard from './trail_title_card';
@@ -27,6 +28,7 @@ class Trail extends Component {
 		const { latitude, longitude } = this.props.trail;
 		const coords = latitude.toString() + ',' + longitude.toString();
 		this.props.getCurrentWeather(coords);
+		this.props.getWeatherForecast(coords);
 	}
 
 	addPost() {
@@ -88,7 +90,7 @@ class Trail extends Component {
 	}
 
 	renderWeatherForecast() {
-		return this.props.weather.forecastday.map(forecast => {
+		return this.props.weatherForecast.map(forecast => {
 			return (
 				<div className="weatherForecastDay" key={forecast.date.weekday}>
 					<WeatherForecast
@@ -105,8 +107,7 @@ class Trail extends Component {
 	}
 
 	render() {
-		const { trail, posts, weather, currentWeather } = this.props;
-		// console.log("this.props.currentWeather", this.props.currentWeather);
+		const { trail, posts, weather, currentWeather, weatherForecast } = this.props;
 
 		if (!trail) {
 			return <div>Loading trail...</div>;
@@ -187,9 +188,9 @@ class Trail extends Component {
 	}
 }
 
-function mapStateToProps({ trails, posts, weather, currentWeather }, ownProps) {
-	return { trail: trails[ownProps.match.params.id], posts: posts, weather: weather, currentWeather: currentWeather };
+function mapStateToProps({ trails, posts, weather, currentWeather, weatherForecast }, ownProps) {
+	return { trail: trails[ownProps.match.params.id], posts: posts, weather: weather, currentWeather: currentWeather, weatherForecast: weatherForecast };
 }
 
-export default connect(mapStateToProps, { getPosts, getCurrentWeather } )(Trail);
+export default connect(mapStateToProps, { getPosts, getCurrentWeather, getWeatherForecast } )(Trail);
 
