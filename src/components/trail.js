@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { getPosts } from '../actions';
+import { getCurrentWeather } from '../actions';
 
 import Navbar from './navbar'
 import TrailTitleCard from './trail_title_card';
@@ -23,6 +24,9 @@ class Trail extends Component {
 	componentDidMount() {
 		const { id } = this.props.match.params; //get from url
 		this.props.getPosts(id);
+		const { latitude, longitude } = this.props.trail;
+		const coords = latitude.toString() + ',' + longitude.toString();
+		this.props.getCurrentWeather(coords);
 	}
 
 	addPost() {
@@ -101,8 +105,8 @@ class Trail extends Component {
 	}
 
 	render() {
-		const { trail, posts, weather } = this.props;
-		// console.log("this.props.posts", this.props.posts);
+		const { trail, posts, weather, currentWeather } = this.props;
+		// console.log("this.props.currentWeather", this.props.currentWeather);
 
 		if (!trail) {
 			return <div>Loading trail...</div>;
@@ -158,11 +162,11 @@ class Trail extends Component {
 							<div id="rightSide" className="col-lg-2 hidden-md-down">
 								<div className="row">
 									<WeatherCurrentConditionsCard
-										conditions={weather.weather}
-										iconUrl={weather.icon_url}
-										temp={weather.temp_f}
-										feelsLikeTemp={weather.feelslike_f}
-										precip={weather.precip_today_in}
+										conditions={currentWeather.weather}
+										iconUrl={currentWeather.icon_url}
+										temp={currentWeather.temp_f}
+										feelsLikeTemp={currentWeather.feelslike_f}
+										precip={currentWeather.precip_today_in}
 									/>
 								</div>
 								<div className="row">
@@ -183,9 +187,9 @@ class Trail extends Component {
 	}
 }
 
-function mapStateToProps({ trails, posts, weather }, ownProps) {
-	return { trail: trails[ownProps.match.params.id], posts: posts, weather: weather };
+function mapStateToProps({ trails, posts, weather, currentWeather }, ownProps) {
+	return { trail: trails[ownProps.match.params.id], posts: posts, weather: weather, currentWeather: currentWeather };
 }
 
-export default connect(mapStateToProps, { getPosts } )(Trail);
+export default connect(mapStateToProps, { getPosts, getCurrentWeather } )(Trail);
 
