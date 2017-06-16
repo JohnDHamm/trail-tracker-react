@@ -91,12 +91,13 @@ class Trail extends Component {
 
 	renderWeatherForecast() {
 		return this.props.weatherForecast.map(forecast => {
+			const newIconUrl = forecast.icon_url.replace('/k/', '/f/');
 			return (
 				<div className="weatherForecastDay" key={forecast.date.weekday}>
 					<WeatherForecast
 						weekday={forecast.date.weekday}
 						conditions={forecast.conditions}
-						iconUrl={forecast.icon_url}
+						iconUrl={newIconUrl}
 						tempHigh={forecast.high.fahrenheit}
 						tempLow={forecast.low.fahrenheit}
 						humidity={forecast.avehumidity}
