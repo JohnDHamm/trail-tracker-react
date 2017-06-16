@@ -77,7 +77,7 @@ class Trail extends Component {
 
 			} else {
 				return (
-					<div className={postStyle} key={post.id}>
+					<div className={postStyle} key={post._id}>
 						<TrailPostCard
 							userImgUrl={post.userImgUrl}
 							postUserName={post.userName}
