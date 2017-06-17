@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 // import { Link } from 'react-router-dom';
@@ -6,6 +7,7 @@ injectTapEventPlugin();
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import FlatButton from 'material-ui/FlatButton';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
+import Avatar from 'material-ui/Avatar';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import IconMenu from 'material-ui/IconMenu';
 import IconButton from 'material-ui/IconButton';
@@ -19,6 +21,8 @@ import {
 class Navbar extends Component {
 
 	render() {
+		const { user } = this.props.user;
+
 		return (
 			<MuiThemeProvider>
 				<Toolbar style={{backgroundColor: lime800}}>
@@ -30,14 +34,18 @@ class Navbar extends Component {
 							href="/" />
 					</ToolbarGroup>
 					<ToolbarGroup>
-						<ToolbarTitle text="Something" style={{color: 'white'}} />
-						<ToolbarSeparator />
 						<FlatButton
 							label="Trails"
 							style={{color: 'white'}}
 							hoverColor={lime900}
 							href="/trails"
 							icon={<FontIcon className="material-icons">directions_bike</FontIcon>} />
+
+						<ToolbarTitle text={user.name} style={{color: 'white'}} />
+						<Avatar
+							size={30}
+							src={user.iconUrl}
+							/>
 						<IconMenu
 							iconStyle={{color: 'white'}}
 							iconButtonElement={
@@ -59,4 +67,8 @@ class Navbar extends Component {
 	}
 }
 
-export default Navbar;
+function mapStateToProps({ user }) {
+	return { user: user };
+}
+
+export default connect(mapStateToProps)(Navbar);

@@ -2,6 +2,7 @@ export const GET_TRAILS = 'get_trails';
 export const GET_POSTS = 'get_posts';
 export const GET_CURRENT_WEATHER = 'get_current_weather';
 export const GET_WEATHER_FORECAST = 'get_weather_forecast';
+export const GET_WEATHER_RADAR = 'get_weather_radar';
 import axios from 'axios';
 
 const ROOT_URL = 'https://trailtracker-api.herokuapp.com/api';
@@ -43,6 +44,15 @@ export function getWeatherForecast(coords) {
 
 	return {
 		type: GET_WEATHER_FORECAST,
+		payload: request
+	}
+}
+
+export function getWeatherRadarUrl(coords) {
+	const request = axios.get(`${WEATHER_ROOT_URL}/radar/${coords}`);
+
+	return {
+		type: GET_WEATHER_RADAR,
 		payload: request
 	}
 }

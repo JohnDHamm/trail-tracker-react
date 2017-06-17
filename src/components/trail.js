@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { getPosts } from '../actions';
 import { getCurrentWeather } from '../actions';
 import { getWeatherForecast } from '../actions';
+import { getWeatherRadarUrl } from '../actions';
 
 import Navbar from './navbar'
 import TrailTitleCard from './trail_title_card';
@@ -29,14 +30,17 @@ class Trail extends Component {
 		const coords = latitude.toString() + ',' + longitude.toString();
 		this.props.getCurrentWeather(coords);
 		this.props.getWeatherForecast(coords);
+		this.props.getWeatherRadarUrl(coords);
 	}
 
 	addPost() {
-		console.log("clicked on add new post");
+		const { user } = this.props.user;
+		console.log("clicked on add new post by:", user.name);
 	}
 
 	closeTicket (id) {
-		console.log("close ticket id:", id);
+		const { user } = this.props.user;
+		console.log("close ticket id:", id, "by ", user.name);
 	}
 
 	renderPosts () {
@@ -77,7 +81,7 @@ class Trail extends Component {
 
 			} else {
 				return (
-					<div className={postStyle} key={post.id}>
+					<div className={postStyle} key={post._id}>
 						<TrailPostCard
 							userImgUrl={post.userImgUrl}
 							postUserName={post.userName}
@@ -91,12 +95,13 @@ class Trail extends Component {
 
 	renderWeatherForecast() {
 		return this.props.weatherForecast.map(forecast => {
+			const newIconUrl = forecast.icon_url.replace('/k/', '/f/');
 			return (
 				<div className="weatherForecastDay" key={forecast.date.weekday}>
 					<WeatherForecast
 						weekday={forecast.date.weekday}
 						conditions={forecast.conditions}
-						iconUrl={forecast.icon_url}
+						iconUrl={newIconUrl}
 						tempHigh={forecast.high.fahrenheit}
 						tempLow={forecast.low.fahrenheit}
 						humidity={forecast.avehumidity}
@@ -107,7 +112,8 @@ class Trail extends Component {
 	}
 
 	render() {
-		const { trail, posts, weather, currentWeather, weatherForecast } = this.props;
+		// console.log("this.props.weatherRadarUrl", this.props.weatherRadarUrl);
+		const { trail, posts, currentWeather, weatherForecast, weatherRadarUrl, user } = this.props;
 
 		if (!trail) {
 			return <div>Loading trail...</div>;
@@ -129,16 +135,16 @@ class Trail extends Component {
 								</div>
 								<div className="row hidden-lg-up">
 									<WeatherCurrentConditionsCard
-										conditions={weather.weather}
-										iconUrl={weather.icon_url}
-										temp={weather.temp_f}
-										feelsLikeTemp={weather.feelslike_f}
-										precip={weather.precip_today_in}
+										conditions={currentWeather.weather}
+										iconUrl={currentWeather.icon_url}
+										temp={currentWeather.temp_f}
+										feelsLikeTemp={currentWeather.feelslike_f}
+										precip={currentWeather.precip_today_in}
 									/>
 								</div>
 								<div className="row hidden-lg-up">
 									<WeatherRadar
-										radarUrl={weather.radarUrl}
+										radarUrl={weatherRadarUrl}
 									/>
 								</div>
 								<div className="row hidden-lg-up weatherForecastDiv">
@@ -172,7 +178,7 @@ class Trail extends Component {
 								</div>
 								<div className="row">
 									<WeatherRadar
-										radarUrl={weather.radarUrl}
+										radarUrl={weatherRadarUrl}
 									/>
 								</div>
 								<div className="row weatherForecastDiv">
@@ -188,9 +194,9 @@ class Trail extends Component {
 	}
 }
 
-function mapStateToProps({ trails, posts, weather, currentWeather, weatherForecast }, ownProps) {
-	return { trail: trails[ownProps.match.params.id], posts: posts, weather: weather, currentWeather: currentWeather, weatherForecast: weatherForecast };
+function mapStateToProps({ user, trails, posts, currentWeather, weatherForecast, weatherRadarUrl }, ownProps) {
+	return { trail: trails[ownProps.match.params.id], posts: posts, currentWeather: currentWeather, weatherForecast: weatherForecast, user: user, weatherRadarUrl: weatherRadarUrl };
 }
 
-export default connect(mapStateToProps, { getPosts, getCurrentWeather, getWeatherForecast } )(Trail);
+export default connect(mapStateToProps, { getPosts, getCurrentWeather, getWeatherForecast, getWeatherRadarUrl } )(Trail);
 
