@@ -18,6 +18,7 @@ import WeatherCurrentConditionsCard from './weather_current_conditions_card'
 import WeatherRadar from './weather_radar'
 import WeatherForecast from './weather_forecast'
 import GoogleMap from './google_map';
+import AddPostDialog from './trail_add_post_dialog';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
@@ -112,7 +113,6 @@ class Trail extends Component {
 	}
 
 	render() {
-		// console.log("this.props.weatherRadarUrl", this.props.weatherRadarUrl);
 		const { trail, posts, currentWeather, weatherForecast, weatherRadarUrl, user } = this.props;
 
 		if (!trail) {
@@ -160,6 +160,7 @@ class Trail extends Component {
 									<div onClick={() => this.addPost()}>
 										<TrailAddPostButton  />
 									</div>
+									<AddPostDialog />
 								</div>
 								<div className="postsDiv">
 									{this.renderPosts()}
