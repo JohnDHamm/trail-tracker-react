@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { addPost } from '../actions';
 
 import TrailAddPostButton from './trail_add_post_button';
 import Dialog from 'material-ui/Dialog';
@@ -34,12 +35,12 @@ class AddPostDialog extends Component {
 	handlePost = () => {
 		const newPost = {
 			description: this.state.msg,
-			postType: this.state.postType
+			postTypeString: this.state.postType
 		};
 		console.log("newPost:", newPost);
 
-		//api call to POST to mongoDB (descr, postTypeString, user, trailId)
-			//.then(() => "reload"?)
+		this.props.addPost(newPost)
+			.then(() => console.log("new post saved"));
 		this.clearState();
 	}
 
@@ -125,4 +126,4 @@ function mapStateToProps(state) {
 	return { values: state.values };
 }
 
-export default connect(mapStateToProps)(AddPostDialog);
+export default connect(mapStateToProps, {addPost})(AddPostDialog);
