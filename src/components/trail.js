@@ -157,9 +157,7 @@ class Trail extends Component {
 									<TrailTitleCard title={trail.name} />
 								</div>
 								<div className="addPostDiv">
-									<div>
-										<AddPostDialog />
-									</div>
+									<AddPostDialog />
 								</div>
 								<div className="postsDiv">
 									{this.renderPosts()}

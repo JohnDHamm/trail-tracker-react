@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
 import TrailAddPostButton from './trail_add_post_button';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
-import FontIcon from 'material-ui/FontIcon';
-// import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 
 
-export default class AddPostDialog extends React.Component {
+class AddPostDialog extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -27,9 +27,29 @@ export default class AddPostDialog extends React.Component {
 	};
 
 	handleClose = () => {
-		this.setState({open: false});
-		console.log("state", this.state);
+		this.clearState();
+		console.log("cancelled! state:", this.state);
 	};
+
+	handlePost = () => {
+		const newPost = {
+			description: this.state.msg,
+			postType: this.state.postType
+		};
+		console.log("newPost:", newPost);
+
+		//api call to POST to mongoDB (descr, postTypeString, user, trailId)
+			//.then(() => "reload"?)
+		this.clearState();
+	}
+
+	clearState = () => {
+		this.setState({
+			open: false,
+			msg: '',
+			postType: ''
+		});
+	}
 
 	handleChange(event, value) {
 		this.setState({
@@ -45,28 +65,29 @@ export default class AddPostDialog extends React.Component {
 	}
 
 	render() {
+		const {values} = this.props;
+
 		const actions = [
 			<FlatButton
 				label="Cancel"
 				primary={true}
 				onTouchTap={this.handleClose}
+				labelStyle={{color: `${values.openTicket.color}`}}
 			/>,
 			<FlatButton
-				label="Ok"
+				label="Post"
 				primary={true}
 				// keyboardFocused={true}
-				onTouchTap={this.handleClose}
+				labelStyle={{color: `${values.primary.color}`}}
+				onTouchTap={this.handlePost}
 			/>
 		];
 
 		return (
 			<div>
-				<FlatButton
-					label="Add a new post"
-					style={{color: '#666', flatButton: {textTransform: 'lowercase'}}}
-					icon={<FontIcon className="material-icons" color="#666" style={{fontSize: 35, marginLeft: 0}}>add_circle</FontIcon>}
-					onTouchTap={this.handleOpen}
-				/>
+				<div onClick={this.handleOpen}>
+					<TrailAddPostButton />
+				</div>
 				<Dialog
 					title="Add a message and select the type of post"
 					actions={actions}
@@ -99,3 +120,9 @@ export default class AddPostDialog extends React.Component {
 		);
 	}
 }
+
+function mapStateToProps(state) {
+	return { values: state.values };
+}
+
+export default connect(mapStateToProps)(AddPostDialog);

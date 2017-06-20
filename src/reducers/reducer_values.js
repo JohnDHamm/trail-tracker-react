@@ -19,6 +19,10 @@ export default function() {
 		openTicket:
 			{
 				color: '#c62828'
+			},
+		actionButton:
+			{
+				color: '#666'
 			}
 	}
 }
