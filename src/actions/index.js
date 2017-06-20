@@ -1,5 +1,6 @@
 export const GET_TRAILS = 'get_trails';
 export const GET_POSTS = 'get_posts';
+export const ADD_POST = 'add_post';
 export const GET_CURRENT_WEATHER = 'get_current_weather';
 export const GET_WEATHER_FORECAST = 'get_weather_forecast';
 export const GET_WEATHER_RADAR = 'get_weather_radar';
@@ -29,6 +30,17 @@ export function getPosts(id) {
 		payload: request
 	}
 }
+
+export function addPost(newPost, callback) {
+	const request = axios.post(`${ROOT_URL}/post`, newPost)
+		.then(() => callback());
+
+	return {
+		type: ADD_POST,
+		payload: request
+	}
+}
+
 
 export function getCurrentWeather(coords) {
 	const request = axios.get(`${WEATHER_ROOT_URL}/current/${coords}`);

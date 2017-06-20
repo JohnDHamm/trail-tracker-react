@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { addPost } from '../actions';
 
 import TrailAddPostButton from './trail_add_post_button';
 import Dialog from 'material-ui/Dialog';
@@ -22,6 +23,11 @@ class AddPostDialog extends Component {
 		this.handleSelectChange = this.handleSelectChange.bind(this);
 	}
 
+	componentDidMount() {
+		const currentUser = this.props.user.user;
+		this.setState({userName: currentUser.name, userImgUrl: currentUser.iconUrl, userId: currentUser._id})
+	}
+
 	handleOpen = () => {
 		this.setState({open: true});
 	};
@@ -32,16 +38,27 @@ class AddPostDialog extends Component {
 	};
 
 	handlePost = () => {
+		const timeStamp = new Date();
 		const newPost = {
 			description: this.state.msg,
-			postType: this.state.postType
+			postTypeString: this.state.postType,
+			userName: this.state.userName,
+			userImgUrl: this.state.userImgUrl,
+			userId: this.state.userId,
+			// postTrailId: '',
+			// hasPhoto: false,
+			// photoUrl: '',
+			postDate: timeStamp,
 		};
+
+		newPost.postFormatDate = this.formatDate(timeStamp);
+		newPost.ticketopen = this.state.postType === 'open-ticket' ? true : false;
 		console.log("newPost:", newPost);
 
-		//api call to POST to mongoDB (descr, postTypeString, user, trailId)
-			//.then(() => "reload"?)
+		this.props.addPost(newPost)
+			.then(() => console.log("new post saved"));
 		this.clearState();
-	}
+	};
 
 	clearState = () => {
 		this.setState({
@@ -50,6 +67,21 @@ class AddPostDialog extends Component {
 			postType: ''
 		});
 	}
+
+	formatDate (newDate) {
+		var now = newDate;
+		var date = [ now.getMonth() + 1, now.getDate(), now.getFullYear() ];
+		var time = [ now.getHours(), now.getMinutes(), now.getSeconds() ];
+		var suffix = ( time[0] < 12 ) ? "AM" : "PM";
+		time[0] = ( time[0] < 12 ) ? time[0] : time[0] - 12;
+		time[0] = time[0] || 12;
+		for ( var i = 1; i < 3; i++ ) {
+			if ( time[i] < 10 ) {
+				time[i] = "0" + time[i];
+			}
+		}
+		return date.join("/") + " " + time.join(":") + " " + suffix;
+	};
 
 	handleChange(event, value) {
 		this.setState({
@@ -77,7 +109,6 @@ class AddPostDialog extends Component {
 			<FlatButton
 				label="Post"
 				primary={true}
-				// keyboardFocused={true}
 				labelStyle={{color: `${values.primary.color}`}}
 				onTouchTap={this.handlePost}
 			/>
@@ -110,10 +141,10 @@ class AddPostDialog extends Component {
 						value={this.state.postType}
 						onChange={this.handleSelectChange}
 					>
-	          <MenuItem value={"meetup"} primaryText="Meetup - organize a group ride" />
-	          <MenuItem value={"ride-report"} primaryText="Ride Report - trail conditions (non-critical)" />
-	          <MenuItem value={"open-ticket"} primaryText="Open Ticket - for issues that need repair" />
-	        </SelectField>
+						<MenuItem value={"meetup"} primaryText="Meetup - organize a group ride" />
+						<MenuItem value={"ride-report"} primaryText="Ride Report - trail conditions (non-critical)" />
+						<MenuItem value={"open-ticket"} primaryText="Open Ticket - for issues that need repair" />
+					</SelectField>
 
 				</Dialog>
 			</div>
@@ -121,8 +152,8 @@ class AddPostDialog extends Component {
 	}
 }
 
-function mapStateToProps(state) {
-	return { values: state.values };
+function mapStateToProps({values, user}) {
+	return { values: values, user: user};
 }
 
-export default connect(mapStateToProps)(AddPostDialog);
+export default connect(mapStateToProps, {addPost})(AddPostDialog);

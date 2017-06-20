@@ -34,11 +34,6 @@ class Trail extends Component {
 		this.props.getWeatherRadarUrl(coords);
 	}
 
-	addPost() {
-		const { user } = this.props.user;
-		console.log("clicked on add new post by:", user.name);
-	}
-
 	closeTicket (id) {
 		const { user } = this.props.user;
 		console.log("close ticket id:", id, "by ", user.name);
