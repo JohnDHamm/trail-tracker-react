@@ -5,12 +5,12 @@ export const GET_WEATHER_FORECAST = 'get_weather_forecast';
 export const GET_WEATHER_RADAR = 'get_weather_radar';
 import axios from 'axios';
 
-const ROOT_URL = 'https://trailtracker-api.herokuapp.com/api';
-const WEATHER_ROOT_URL = 'https://trailtracker-api.herokuapp.com/api/weather';
+// const ROOT_URL = 'https://trailtracker-api.herokuapp.com/api';
+// const WEATHER_ROOT_URL = 'https://trailtracker-api.herokuapp.com/api/weather';
 
 // ************* localhost:3000 testing of api *************
-// const ROOT_URL = 'http://localhost:3000/api';
-// const WEATHER_ROOT_URL = 'http://localhost:3000/api/weather';
+const ROOT_URL = 'http://localhost:3000/api';
+const WEATHER_ROOT_URL = 'http://localhost:3000/api/weather';
 
 export function getTrails() {
 	const request = axios.get(`${ROOT_URL}/trails`);
