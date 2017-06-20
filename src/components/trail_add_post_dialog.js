@@ -25,8 +25,7 @@ class AddPostDialog extends Component {
 
 	componentDidMount() {
 		const currentUser = this.props.user.user;
-		// console.log("currentUser", currentUser);
-		this.setState({userName: currentUser.name, userImgUrl: currentUser.iconUrl})
+		this.setState({userName: currentUser.name, userImgUrl: currentUser.iconUrl, userId: currentUser._id})
 	}
 
 	handleOpen = () => {
@@ -39,12 +38,21 @@ class AddPostDialog extends Component {
 	};
 
 	handlePost = () => {
+		const timeStamp = new Date();
 		const newPost = {
 			description: this.state.msg,
 			postTypeString: this.state.postType,
 			userName: this.state.userName,
-			userImgUrl: this.state.userImgUrl
+			userImgUrl: this.state.userImgUrl,
+			userId: this.state.userId,
+			// postTrailId: '',
+			// hasPhoto: false,
+			// photoUrl: '',
+			postDate: timeStamp,
 		};
+
+		newPost.postFormatDate = this.formatDate(timeStamp);
+		newPost.ticketopen = this.state.postType === 'open-ticket' ? true : false;
 		console.log("newPost:", newPost);
 
 		this.props.addPost(newPost)
@@ -59,6 +67,21 @@ class AddPostDialog extends Component {
 			postType: ''
 		});
 	}
+
+	formatDate (newDate) {
+		var now = newDate;
+		var date = [ now.getMonth() + 1, now.getDate(), now.getFullYear() ];
+		var time = [ now.getHours(), now.getMinutes(), now.getSeconds() ];
+		var suffix = ( time[0] < 12 ) ? "AM" : "PM";
+		time[0] = ( time[0] < 12 ) ? time[0] : time[0] - 12;
+		time[0] = time[0] || 12;
+		for ( var i = 1; i < 3; i++ ) {
+			if ( time[i] < 10 ) {
+				time[i] = "0" + time[i];
+			}
+		}
+		return date.join("/") + " " + time.join(":") + " " + suffix;
+	};
 
 	handleChange(event, value) {
 		this.setState({
@@ -75,8 +98,6 @@ class AddPostDialog extends Component {
 
 	render() {
 		const {values} = this.props;
-		// console.log("this.props", this.props);
-		// console.log("user?", user.user.name);
 
 		const actions = [
 			<FlatButton
@@ -88,7 +109,6 @@ class AddPostDialog extends Component {
 			<FlatButton
 				label="Post"
 				primary={true}
-				// keyboardFocused={true}
 				labelStyle={{color: `${values.primary.color}`}}
 				onTouchTap={this.handlePost}
 			/>
@@ -121,10 +141,10 @@ class AddPostDialog extends Component {
 						value={this.state.postType}
 						onChange={this.handleSelectChange}
 					>
-	          <MenuItem value={"meetup"} primaryText="Meetup - organize a group ride" />
-	          <MenuItem value={"ride-report"} primaryText="Ride Report - trail conditions (non-critical)" />
-	          <MenuItem value={"open-ticket"} primaryText="Open Ticket - for issues that need repair" />
-	        </SelectField>
+						<MenuItem value={"meetup"} primaryText="Meetup - organize a group ride" />
+						<MenuItem value={"ride-report"} primaryText="Ride Report - trail conditions (non-critical)" />
+						<MenuItem value={"open-ticket"} primaryText="Open Ticket - for issues that need repair" />
+					</SelectField>
 
 				</Dialog>
 			</div>
@@ -133,7 +153,7 @@ class AddPostDialog extends Component {
 }
 
 function mapStateToProps({values, user}) {
-	return { values: values, user: user };
+	return { values: values, user: user};
 }
 
 export default connect(mapStateToProps, {addPost})(AddPostDialog);
