@@ -1,8 +1,9 @@
 import React from 'react';
+import TrailAddPostButton from './trail_add_post_button';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
-import RaisedButton from 'material-ui/RaisedButton';
-// import DatePicker from 'material-ui/DatePicker';
+import FontIcon from 'material-ui/FontIcon';
+// import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
@@ -18,6 +19,7 @@ export default class AddPostDialog extends React.Component {
 		};
 
 		this.handleChange = this.handleChange.bind(this);
+		this.handleSelectChange = this.handleSelectChange.bind(this);
 	}
 
 	handleOpen = () => {
@@ -29,21 +31,17 @@ export default class AddPostDialog extends React.Component {
 		console.log("state", this.state);
 	};
 
-	handleChange(event) {
-		console.log("event", event);
-		const target = event.target;
-		// const value = target.type === 'checkbox' ? target.checked : target.value;
-		console.log("target", target);
-		console.log("target.value", target.value);
-		// const value = target.value;
-		// console.log("value", value);
-		const name = target.name;
-		console.log("name", name);
-
+	handleChange(event, value) {
 		this.setState({
-			[name]: target.value
-			// value
+			msg: value
 		});
+	}
+
+	handleSelectChange(event, index, value) {
+		this.setState({
+			postType: value
+		});
+
 	}
 
 	render() {
@@ -56,14 +54,19 @@ export default class AddPostDialog extends React.Component {
 			<FlatButton
 				label="Ok"
 				primary={true}
-				keyboardFocused={true}
+				// keyboardFocused={true}
 				onTouchTap={this.handleClose}
 			/>
 		];
 
 		return (
 			<div>
-				<RaisedButton label="Add Post" onTouchTap={this.handleOpen} />
+				<FlatButton
+					label="Add a new post"
+					style={{color: '#666', flatButton: {textTransform: 'lowercase'}}}
+					icon={<FontIcon className="material-icons" color="#666" style={{fontSize: 35, marginLeft: 0}}>add_circle</FontIcon>}
+					onTouchTap={this.handleOpen}
+				/>
 				<Dialog
 					title="Add a message and select the type of post"
 					actions={actions}
@@ -71,26 +74,28 @@ export default class AddPostDialog extends React.Component {
 					open={this.state.open}
 					onRequestClose={this.handleClose}
 				>
-
 					<TextField
 						name="msg"
 						hintText="Type message here"
+						fullWidth={true}
 						value={this.state.msg}
 						onChange={this.handleChange}
 					/>
-					<select
+					<br/>
+					<SelectField
 						name="postType"
-						// floatingLabelText="Post type"
+						floatingLabelText="Post type"
+						autoWidth={true}
 						value={this.state.postType}
-						onChange={this.handleChange}
+						onChange={this.handleSelectChange}
 					>
-						<option value="meetup" >Meetup - get together and ride</option>
-						<option value="ride-report" >Ride Report - conditions on the trail</option>
-						<option value="open-ticket" >Open ticket - report an issue that needs repair</option>
-					</select>
+	          <MenuItem value={"meetup"} primaryText="Meetup - organize a group ride" />
+	          <MenuItem value={"ride-report"} primaryText="Ride Report - trail conditions (non-critical)" />
+	          <MenuItem value={"open-ticket"} primaryText="Open Ticket - for issues that need repair" />
+	        </SelectField>
+
 				</Dialog>
 			</div>
 		);
 	}
 }
-

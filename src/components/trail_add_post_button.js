@@ -24,7 +24,7 @@ class TrailAddPostButton extends Component {
 	static muiName = 'TrailAddPostButton';
 
 	static propTypes = {
-		style: PropTypes.object
+		style: PropTypes.object,
 	};
 
 	static contextTypes = {
