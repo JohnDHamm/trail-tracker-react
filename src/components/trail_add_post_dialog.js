@@ -23,6 +23,12 @@ class AddPostDialog extends Component {
 		this.handleSelectChange = this.handleSelectChange.bind(this);
 	}
 
+	componentDidMount() {
+		const currentUser = this.props.user.user;
+		// console.log("currentUser", currentUser);
+		this.setState({userName: currentUser.name, userImgUrl: currentUser.iconUrl})
+	}
+
 	handleOpen = () => {
 		this.setState({open: true});
 	};
@@ -35,14 +41,16 @@ class AddPostDialog extends Component {
 	handlePost = () => {
 		const newPost = {
 			description: this.state.msg,
-			postTypeString: this.state.postType
+			postTypeString: this.state.postType,
+			userName: this.state.userName,
+			userImgUrl: this.state.userImgUrl
 		};
 		console.log("newPost:", newPost);
 
 		this.props.addPost(newPost)
 			.then(() => console.log("new post saved"));
 		this.clearState();
-	}
+	};
 
 	clearState = () => {
 		this.setState({
@@ -67,6 +75,8 @@ class AddPostDialog extends Component {
 
 	render() {
 		const {values} = this.props;
+		// console.log("this.props", this.props);
+		// console.log("user?", user.user.name);
 
 		const actions = [
 			<FlatButton
@@ -122,8 +132,8 @@ class AddPostDialog extends Component {
 	}
 }
 
-function mapStateToProps(state) {
-	return { values: state.values };
+function mapStateToProps({values, user}) {
+	return { values: values, user: user };
 }
 
 export default connect(mapStateToProps, {addPost})(AddPostDialog);
