@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addPost, getPosts } from '../actions';
+import { addPost, getPosts, deleteClosedTicket, updateTrailTicketCount } from '../actions';
 
 import TrailCloseTicketButton from './trail_close_ticket_button';
 import Dialog from 'material-ui/Dialog';
@@ -32,11 +32,10 @@ class TrailCloseTicketDialog extends Component {
 
 	handleClose = () => {
 		this.clearState();
-		console.log("canceled! state:", this.state);
 	};
 
 	handlePost = () => {
-		const trailId = this.props.currentTrailId.trailId;
+		const trailId = this.props.currentTrail._id;
 		const timeStamp = new Date();
 		const origPost = this.props.ticketToClose;
 		const closingMsg = `original issue: "${origPost.description}" by ${origPost.userName} on ${origPost.postFormatDate} has been closed by ${this.state.userName} - "${this.state.msg}" - Beers for all!`;
@@ -57,8 +56,16 @@ class TrailCloseTicketDialog extends Component {
 
 		this.props.addPost(newPost, () => {
 			this.clearState();
-			//delete open ticket post just closed
-			this.props.getPosts(trailId);
+			this.props.deleteClosedTicket(origPost._id, () => {
+				const newNumOpenTickets = this.props.currentTrail.numOpenTickets - 1;
+				const trailUpdateObj = {
+					_id: trailId,
+					numOpenTickets: newNumOpenTickets
+				};
+				this.props.updateTrailTicketCount(trailUpdateObj, () => {
+					this.props.getPosts(trailId);
+				})
+			})
 		})
 	};
 
@@ -135,8 +142,8 @@ class TrailCloseTicketDialog extends Component {
 	}
 }
 
-function mapStateToProps({values, user, currentTrailId, ticketToClose}) {
-	return { values, user, currentTrailId, ticketToClose};
+function mapStateToProps({values, user, currentTrail, ticketToClose}) {
+	return { values, user, currentTrail, ticketToClose};
 }
 
-export default connect(mapStateToProps, { addPost, getPosts})(TrailCloseTicketDialog);
+export default connect(mapStateToProps, { addPost, getPosts, deleteClosedTicket, updateTrailTicketCount })(TrailCloseTicketDialog);

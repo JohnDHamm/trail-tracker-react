@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addPost, getPosts } from '../actions';
+import { addPost, getPosts, updateTrailTicketCount } from '../actions';
 
 import TrailAddPostButton from './trail_add_post_button';
 import Dialog from 'material-ui/Dialog';
@@ -34,11 +34,10 @@ class AddPostDialog extends Component {
 
 	handleClose = () => {
 		this.clearState();
-		console.log("canceled! state:", this.state);
 	};
 
 	handlePost = () => {
-		const trailId = this.props.currentTrailId.trailId;
+		const trailId = this.props.currentTrail._id;
 		const timeStamp = new Date();
 		const newPost = {
 			description: this.state.msg,
@@ -56,7 +55,18 @@ class AddPostDialog extends Component {
 
 		this.props.addPost(newPost, () => {
 			this.clearState();
-			this.props.getPosts(trailId);
+			if (newPost.ticketopen) {
+				const newNumOpenTickets = this.props.currentTrail.numOpenTickets + 1;
+				const trailUpdateObj = {
+					_id: trailId,
+					numOpenTickets: newNumOpenTickets
+				};
+				this.props.updateTrailTicketCount(trailUpdateObj, () => {
+					this.props.getPosts(trailId);
+				})
+			} else {
+				this.props.getPosts(trailId);
+			}
 		})
 	};
 
@@ -153,8 +163,8 @@ class AddPostDialog extends Component {
 	}
 }
 
-function mapStateToProps({values, user, currentTrailId}) {
-	return { values, user, currentTrailId};
+function mapStateToProps({values, user, currentTrail}) {
+	return { values, user, currentTrail};
 }
 
-export default connect(mapStateToProps, {addPost, getPosts})(AddPostDialog);
+export default connect(mapStateToProps, {addPost, getPosts, updateTrailTicketCount })(AddPostDialog);

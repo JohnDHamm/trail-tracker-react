@@ -11,7 +11,7 @@ import UserReducer from './reducer_user';
 
 const rootReducer = combineReducers({
   trails: TrailsReducer,
-  currentTrailId: CurrentTrailReducer,
+  currentTrail: CurrentTrailReducer,
   posts: PostsReducer,
   ticketToClose: TicketToCloseReducer,
   values: ValuesReducer,

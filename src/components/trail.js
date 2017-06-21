@@ -2,7 +2,15 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { getPosts, setCurrentTrailId, setTicketToClose, getCurrentWeather, getWeatherForecast, getWeatherRadarUrl } from '../actions';
+import {
+		getPosts,
+		// setCurrentTrailId,
+		setCurrentTrail,
+		setTicketToClose,
+		getCurrentWeather,
+		getWeatherForecast,
+		getWeatherRadarUrl
+	} from '../actions';
 
 import Navbar from './navbar'
 import TrailTitleCard from './trail_title_card';
@@ -23,7 +31,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 class Trail extends Component {
 	componentDidMount() {
 		const { id } = this.props.match.params;
-		this.props.setCurrentTrailId(id);
+		this.props.setCurrentTrail(this.props.trail);
+		// this.props.setCurrentTrailId(id);
 		this.props.getPosts(id);
 		const { latitude, longitude } = this.props.trail;
 		const coords = latitude.toString() + ',' + longitude.toString();
@@ -71,17 +80,34 @@ class Trail extends Component {
 						</div>
 					)
 				}
-
 			} else {
-				return (
-					<div className={postStyle} key={post._id}>
-						<TrailPostCard
-							userImgUrl={post.userImgUrl}
-							postUserName={post.userName}
-							date={post.postFormatDate}
-							message={post.description}/>
-					</div>
-				)
+				if (post.ticketopen) {
+					return (
+						<div className={postStyle} key={post._id}>
+							<TrailOpenTicketPostTop />
+							<TrailPostCard
+								userImgUrl={post.userImgUrl}
+								postUserName={post.userName}
+								date={post.postFormatDate}
+								message={post.description}/>
+							<div id={post._id} className="closeTicketDiv">
+								<div onClick={() => this.setClosingTicket(post._id)}>
+									<TrailCloseTicketDialog />
+								</div>
+							</div>
+						</div>
+					)
+				} else {
+					return (
+						<div className={postStyle} key={post._id}>
+							<TrailPostCard
+								userImgUrl={post.userImgUrl}
+								postUserName={post.userName}
+								date={post.postFormatDate}
+								message={post.description}/>
+						</div>
+					)
+				}
 			}
 		})
 	}
@@ -188,5 +214,5 @@ function mapStateToProps({ user, trails, posts, currentWeather, weatherForecast,
 	return { trail: trails[ownProps.match.params.id], posts, currentWeather, weatherForecast, user, weatherRadarUrl };
 }
 
-export default connect(mapStateToProps, { getPosts, getCurrentWeather, getWeatherForecast, getWeatherRadarUrl, setCurrentTrailId, setTicketToClose } )(Trail);
+export default connect(mapStateToProps, { getPosts, getCurrentWeather, getWeatherForecast, getWeatherRadarUrl, setCurrentTrail, setTicketToClose } )(Trail);
 
