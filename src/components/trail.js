@@ -2,14 +2,13 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { getPosts, setCurrentTrailId, getCurrentWeather, getWeatherForecast, getWeatherRadarUrl } from '../actions';
+import { getPosts, setCurrentTrailId, setTicketToClose, getCurrentWeather, getWeatherForecast, getWeatherRadarUrl } from '../actions';
 
 import Navbar from './navbar'
 import TrailTitleCard from './trail_title_card';
 import TrailAddPostButton from './trail_add_post_button';
 import TrailPostCard from './trail_post_card';
 import TrailPostCardPhoto from './trail_post_card_photo';
-// import TrailCloseTicketButton from './trail_close_ticket_button';
 import TrailCloseTicketDialog from './trail_close_ticket_dialog';
 import TrailOpenTicketPostTop from './trail_open_ticket_post_top';
 import WeatherCurrentConditionsCard from './weather_current_conditions_card'
@@ -33,10 +32,8 @@ class Trail extends Component {
 		this.props.getWeatherRadarUrl(coords);
 	}
 
-	closeTicket (id) {
-		//need to set state.ticketToClose to post values
-		const { user } = this.props.user;
-		console.log("close ticket id:", id, "by ", user.name);
+	setClosingTicket (id) {
+		this.props.setTicketToClose(this.props.posts[id]);
 	}
 
 	renderPosts () {
@@ -56,7 +53,7 @@ class Trail extends Component {
 								message={post.description}
 								photoUrl={post.photoUrl} />
 							<div id={post._id} className="closeTicketDiv">
-								<div onClick={() => this.closeTicket(post._id)}>
+								<div onClick={() => this.setClosingTicket(post._id)}>
 									<TrailCloseTicketDialog />
 								</div>
 							</div>
@@ -191,5 +188,5 @@ function mapStateToProps({ user, trails, posts, currentWeather, weatherForecast,
 	return { trail: trails[ownProps.match.params.id], posts, currentWeather, weatherForecast, user, weatherRadarUrl };
 }
 
-export default connect(mapStateToProps, { getPosts, getCurrentWeather, getWeatherForecast, getWeatherRadarUrl, setCurrentTrailId } )(Trail);
+export default connect(mapStateToProps, { getPosts, getCurrentWeather, getWeatherForecast, getWeatherRadarUrl, setCurrentTrailId, setTicketToClose } )(Trail);
 

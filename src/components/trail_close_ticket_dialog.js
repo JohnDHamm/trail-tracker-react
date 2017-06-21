@@ -15,12 +15,10 @@ class TrailCloseTicketDialog extends Component {
 		super(props);
 		this.state = {
 			open: false,
-			msg: '',
-			// postType: ''
+			msg: ''
 		};
 
 		this.handleChange = this.handleChange.bind(this);
-		// this.handleSelectChange = this.handleSelectChange.bind(this);
 	}
 
 	componentDidMount() {
@@ -30,7 +28,6 @@ class TrailCloseTicketDialog extends Component {
 
 	handleOpen = () => {
 		this.setState({open: true});
-		// console.log("event", event);
 	};
 
 	handleClose = () => {
@@ -41,8 +38,8 @@ class TrailCloseTicketDialog extends Component {
 	handlePost = () => {
 		const trailId = this.props.currentTrailId.trailId;
 		const timeStamp = new Date();
-		//need to get original open ticket post values (state.ticketToClose)
-		const closingMsg = `original issue: "(open ticket desc)" by (open ticket userName) on (open ticket date) has been closed by ${this.state.userName} - "${this.state.msg}" - Beers for all!`;
+		const origPost = this.props.ticketToClose;
+		const closingMsg = `original issue: "${origPost.description}" by ${origPost.userName} on ${origPost.postFormatDate} has been closed by ${this.state.userName} - "${this.state.msg}" - Beers for all!`;
 
 		const newPost = {
 			description: closingMsg,
@@ -53,10 +50,10 @@ class TrailCloseTicketDialog extends Component {
 			hasPhoto: false,
 			photoUrl: '',
 			postDate: timeStamp,
+			postFormatDate: this.formatDate(timeStamp),
 			postTrailId: trailId,
 			ticketopen: false
 		};
-		newPost.postFormatDate = this.formatDate(timeStamp);
 
 		this.props.addPost(newPost, () => {
 			this.clearState();
@@ -93,12 +90,6 @@ class TrailCloseTicketDialog extends Component {
 		});
 	}
 
-	// handleSelectChange(event, index, value) {
-	// 	this.setState({
-	// 		postType: value
-	// 	});
-
-	// }
 
 	render() {
 		const {values} = this.props;
@@ -144,8 +135,8 @@ class TrailCloseTicketDialog extends Component {
 	}
 }
 
-function mapStateToProps({values, user, currentTrailId}) {
-	return { values, user, currentTrailId};
+function mapStateToProps({values, user, currentTrailId, ticketToClose}) {
+	return { values, user, currentTrailId, ticketToClose};
 }
 
 export default connect(mapStateToProps, { addPost, getPosts})(TrailCloseTicketDialog);
