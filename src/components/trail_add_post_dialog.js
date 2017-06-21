@@ -37,7 +37,8 @@ class AddPostDialog extends Component {
 	};
 
 	handlePost = () => {
-		const trailId = this.props.currentTrailId.trailId;
+		console.log("current trail", this.props.currentTrail);
+		const trailId = this.props.currentTrail._id;
 		const timeStamp = new Date();
 		const newPost = {
 			description: this.state.msg,
@@ -152,8 +153,8 @@ class AddPostDialog extends Component {
 	}
 }
 
-function mapStateToProps({values, user, currentTrailId}) {
-	return { values, user, currentTrailId};
+function mapStateToProps({values, user, currentTrail}) {
+	return { values, user, currentTrail};
 }
 
 export default connect(mapStateToProps, {addPost, getPosts})(AddPostDialog);

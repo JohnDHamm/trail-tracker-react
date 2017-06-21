@@ -35,7 +35,8 @@ class TrailCloseTicketDialog extends Component {
 	};
 
 	handlePost = () => {
-		const trailId = this.props.currentTrailId.trailId;
+		console.log("current trail", this.props.currentTrail);
+		const trailId = this.props.currentTrail._id;
 		const timeStamp = new Date();
 		const origPost = this.props.ticketToClose;
 		const closingMsg = `original issue: "${origPost.description}" by ${origPost.userName} on ${origPost.postFormatDate} has been closed by ${this.state.userName} - "${this.state.msg}" - Beers for all!`;
@@ -136,8 +137,8 @@ class TrailCloseTicketDialog extends Component {
 	}
 }
 
-function mapStateToProps({values, user, currentTrailId, ticketToClose}) {
-	return { values, user, currentTrailId, ticketToClose};
+function mapStateToProps({values, user, currentTrail, ticketToClose}) {
+	return { values, user, currentTrail, ticketToClose};
 }
 
 export default connect(mapStateToProps, { addPost, getPosts, deleteClosedTicket })(TrailCloseTicketDialog);

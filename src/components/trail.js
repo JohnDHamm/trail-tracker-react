@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 
 import {
 		getPosts,
-		setCurrentTrailId,
+		// setCurrentTrailId,
+		setCurrentTrail,
 		setTicketToClose,
 		getCurrentWeather,
 		getWeatherForecast,
@@ -30,7 +31,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 class Trail extends Component {
 	componentDidMount() {
 		const { id } = this.props.match.params;
-		this.props.setCurrentTrailId(id);
+		this.props.setCurrentTrail(this.props.trail);
+		// this.props.setCurrentTrailId(id);
 		this.props.getPosts(id);
 		const { latitude, longitude } = this.props.trail;
 		const coords = latitude.toString() + ',' + longitude.toString();
@@ -212,5 +214,5 @@ function mapStateToProps({ user, trails, posts, currentWeather, weatherForecast,
 	return { trail: trails[ownProps.match.params.id], posts, currentWeather, weatherForecast, user, weatherRadarUrl };
 }
 
-export default connect(mapStateToProps, { getPosts, getCurrentWeather, getWeatherForecast, getWeatherRadarUrl, setCurrentTrailId, setTicketToClose } )(Trail);
+export default connect(mapStateToProps, { getPosts, getCurrentWeather, getWeatherForecast, getWeatherRadarUrl, setCurrentTrail, setTicketToClose } )(Trail);
 
