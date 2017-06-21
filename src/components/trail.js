@@ -9,7 +9,8 @@ import TrailTitleCard from './trail_title_card';
 import TrailAddPostButton from './trail_add_post_button';
 import TrailPostCard from './trail_post_card';
 import TrailPostCardPhoto from './trail_post_card_photo';
-import TrailCloseTicketButton from './trail_close_ticket_button';
+// import TrailCloseTicketButton from './trail_close_ticket_button';
+import TrailCloseTicketDialog from './trail_close_ticket_dialog';
 import TrailOpenTicketPostTop from './trail_open_ticket_post_top';
 import WeatherCurrentConditionsCard from './weather_current_conditions_card'
 import WeatherRadar from './weather_radar'
@@ -33,6 +34,7 @@ class Trail extends Component {
 	}
 
 	closeTicket (id) {
+		//need to set state.ticketToClose to post values
 		const { user } = this.props.user;
 		console.log("close ticket id:", id, "by ", user.name);
 	}
@@ -53,9 +55,9 @@ class Trail extends Component {
 								date={post.postFormatDate}
 								message={post.description}
 								photoUrl={post.photoUrl} />
-							<div className="closeTicketDiv">
-								<div className="closeTicketBtn" onClick={() => this.closeTicket(post._id)}>
-									<TrailCloseTicketButton />
+							<div id={post._id} className="closeTicketDiv">
+								<div onClick={() => this.closeTicket(post._id)}>
+									<TrailCloseTicketDialog />
 								</div>
 							</div>
 						</div>
