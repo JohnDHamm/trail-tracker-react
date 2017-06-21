@@ -2,10 +2,7 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { getPosts } from '../actions';
-import { getCurrentWeather } from '../actions';
-import { getWeatherForecast } from '../actions';
-import { getWeatherRadarUrl } from '../actions';
+import { getPosts, setCurrentTrailId, getCurrentWeather, getWeatherForecast, getWeatherRadarUrl } from '../actions';
 
 import Navbar from './navbar'
 import TrailTitleCard from './trail_title_card';
@@ -25,7 +22,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 class Trail extends Component {
 	componentDidMount() {
-		const { id } = this.props.match.params; //get from url
+		const { id } = this.props.match.params;
+		this.props.setCurrentTrailId(id);
 		this.props.getPosts(id);
 		const { latitude, longitude } = this.props.trail;
 		const coords = latitude.toString() + ',' + longitude.toString();
@@ -188,8 +186,8 @@ class Trail extends Component {
 }
 
 function mapStateToProps({ user, trails, posts, currentWeather, weatherForecast, weatherRadarUrl }, ownProps) {
-	return { trail: trails[ownProps.match.params.id], posts: posts, currentWeather: currentWeather, weatherForecast: weatherForecast, user: user, weatherRadarUrl: weatherRadarUrl };
+	return { trail: trails[ownProps.match.params.id], posts, currentWeather, weatherForecast, user, weatherRadarUrl };
 }
 
-export default connect(mapStateToProps, { getPosts, getCurrentWeather, getWeatherForecast, getWeatherRadarUrl } )(Trail);
+export default connect(mapStateToProps, { getPosts, getCurrentWeather, getWeatherForecast, getWeatherRadarUrl, setCurrentTrailId } )(Trail);
 

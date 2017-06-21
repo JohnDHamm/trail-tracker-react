@@ -64,6 +64,10 @@ class WeatherForecast extends Component {
 		const {prepareStyles} = this.context.muiTheme;
 		const styles = getStyles(this.props, this.context);
 
+		if (!weekday) {
+			return ( <div>loading forecast...</div>)
+		}
+
 		return (
 			<div style={prepareStyles(Object.assign(styles.root, style))}>
 				<div style={prepareStyles(Object.assign(styles.weekday, style))}>
@@ -89,8 +93,8 @@ class WeatherForecast extends Component {
 	}
 }
 
-function mapStateToProps(state) {
-	return { values: state.values };
+function mapStateToProps({values}) {
+	return { values };
 }
 
 export default connect(mapStateToProps)(WeatherForecast);

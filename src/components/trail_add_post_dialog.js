@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addPost } from '../actions';
+import { addPost, getPosts } from '../actions';
 
 import TrailAddPostButton from './trail_add_post_button';
 import Dialog from 'material-ui/Dialog';
@@ -25,7 +25,7 @@ class AddPostDialog extends Component {
 
 	componentDidMount() {
 		const currentUser = this.props.user.user;
-		this.setState({userName: currentUser.name, userImgUrl: currentUser.iconUrl, userId: currentUser._id})
+		this.setState({userName: currentUser.name, userImgUrl: currentUser.iconUrl, userId: currentUser._id});
 	}
 
 	handleOpen = () => {
@@ -34,10 +34,11 @@ class AddPostDialog extends Component {
 
 	handleClose = () => {
 		this.clearState();
-		console.log("cancelled! state:", this.state);
+		console.log("canceled! state:", this.state);
 	};
 
 	handlePost = () => {
+		const trailId = this.props.currentTrailId.trailId;
 		const timeStamp = new Date();
 		const newPost = {
 			description: this.state.msg,
@@ -45,19 +46,18 @@ class AddPostDialog extends Component {
 			userName: this.state.userName,
 			userImgUrl: this.state.userImgUrl,
 			userId: this.state.userId,
-			// postTrailId: '',
-			// hasPhoto: false,
-			// photoUrl: '',
+			hasPhoto: false,
+			photoUrl: '',
 			postDate: timeStamp,
+			postTrailId: trailId,
 		};
-
 		newPost.postFormatDate = this.formatDate(timeStamp);
 		newPost.ticketopen = this.state.postType === 'open-ticket' ? true : false;
-		console.log("newPost:", newPost);
 
-		this.props.addPost(newPost)
-			.then(() => console.log("new post saved"));
-		this.clearState();
+		this.props.addPost(newPost, () => {
+			this.clearState();
+			this.props.getPosts(trailId);
+		})
 	};
 
 	clearState = () => {
@@ -120,20 +120,12 @@ class AddPostDialog extends Component {
 					<TrailAddPostButton />
 				</div>
 				<Dialog
-					title="Add a message and select the type of post"
+					title="Select the type of post and add a message"
 					actions={actions}
 					modal={false}
 					open={this.state.open}
 					onRequestClose={this.handleClose}
 				>
-					<TextField
-						name="msg"
-						hintText="Type message here"
-						fullWidth={true}
-						value={this.state.msg}
-						onChange={this.handleChange}
-					/>
-					<br/>
 					<SelectField
 						name="postType"
 						floatingLabelText="Post type"
@@ -145,6 +137,15 @@ class AddPostDialog extends Component {
 						<MenuItem value={"ride-report"} primaryText="Ride Report - trail conditions (non-critical)" />
 						<MenuItem value={"open-ticket"} primaryText="Open Ticket - for issues that need repair" />
 					</SelectField>
+					<br/>
+					<TextField
+						name="msg"
+						hintText="Type message here"
+						fullWidth={true}
+						value={this.state.msg}
+						onChange={this.handleChange}
+						autoFocus={true}
+					/>
 
 				</Dialog>
 			</div>
@@ -152,8 +153,8 @@ class AddPostDialog extends Component {
 	}
 }
 
-function mapStateToProps({values, user}) {
-	return { values: values, user: user};
+function mapStateToProps({values, user, currentTrailId}) {
+	return { values, user, currentTrailId};
 }
 
-export default connect(mapStateToProps, {addPost})(AddPostDialog);
+export default connect(mapStateToProps, {addPost, getPosts})(AddPostDialog);

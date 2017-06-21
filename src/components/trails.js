@@ -53,7 +53,6 @@ class Trails extends Component {
 	}
 
 	render() {
-		// console.log("this.props.trails", this.props.trails);
 		return (
 			<MuiThemeProvider>
 				<div>
@@ -69,8 +68,8 @@ class Trails extends Component {
 	}
 }
 
-function mapStateToProps (state) {
-	return { trails: state.trails };
+function mapStateToProps ({trails}) {
+	return { trails };
 }
 
 export default connect (mapStateToProps, { getTrails })(Trails);

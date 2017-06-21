@@ -1,4 +1,5 @@
-import { GET_TRAILS} from '../actions';
+import { GET_TRAILS } from '../actions';
+// import { SET_CURRENT_TRAIL_ID } from '../actions';
 import _ from 'lodash';
 
 export default function (state={}, action) {

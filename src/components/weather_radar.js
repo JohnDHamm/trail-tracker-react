@@ -33,6 +33,10 @@ class WeatherRadar extends Component {
 		const {prepareStyles} = this.context.muiTheme;
 		const styles = getStyles(this.props, this.context);
 
+		if (!radarUrl) {
+			return ( <div>loading radar...</div>)
+		}
+
 		return (
 			<div style={prepareStyles(Object.assign(styles.root, style))}>
 				<img src={radarUrl} style={prepareStyles(Object.assign(styles.img, style))}></img>
