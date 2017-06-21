@@ -37,7 +37,6 @@ class AddPostDialog extends Component {
 	};
 
 	handlePost = () => {
-		console.log("current trail", this.props.currentTrail);
 		const trailId = this.props.currentTrail._id;
 		const timeStamp = new Date();
 		const newPost = {
@@ -58,7 +57,6 @@ class AddPostDialog extends Component {
 			this.clearState();
 			if (newPost.ticketopen) {
 				const newNumOpenTickets = this.props.currentTrail.numOpenTickets + 1;
-				console.log("newNumOpenTickets", newNumOpenTickets);
 				const trailUpdateObj = {
 					_id: trailId,
 					numOpenTickets: newNumOpenTickets

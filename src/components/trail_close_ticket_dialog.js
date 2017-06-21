@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addPost, getPosts, deleteClosedTicket } from '../actions';
+import { addPost, getPosts, deleteClosedTicket, updateTrailTicketCount } from '../actions';
 
 import TrailCloseTicketButton from './trail_close_ticket_button';
 import Dialog from 'material-ui/Dialog';
@@ -35,7 +35,6 @@ class TrailCloseTicketDialog extends Component {
 	};
 
 	handlePost = () => {
-		console.log("current trail", this.props.currentTrail);
 		const trailId = this.props.currentTrail._id;
 		const timeStamp = new Date();
 		const origPost = this.props.ticketToClose;
@@ -58,8 +57,14 @@ class TrailCloseTicketDialog extends Component {
 		this.props.addPost(newPost, () => {
 			this.clearState();
 			this.props.deleteClosedTicket(origPost._id, () => {
-				//****** update trail ticket count ****
-				this.props.getPosts(trailId);
+				const newNumOpenTickets = this.props.currentTrail.numOpenTickets - 1;
+				const trailUpdateObj = {
+					_id: trailId,
+					numOpenTickets: newNumOpenTickets
+				};
+				this.props.updateTrailTicketCount(trailUpdateObj, () => {
+					this.props.getPosts(trailId);
+				})
 			})
 		})
 	};
@@ -141,4 +146,4 @@ function mapStateToProps({values, user, currentTrail, ticketToClose}) {
 	return { values, user, currentTrail, ticketToClose};
 }
 
-export default connect(mapStateToProps, { addPost, getPosts, deleteClosedTicket })(TrailCloseTicketDialog);
+export default connect(mapStateToProps, { addPost, getPosts, deleteClosedTicket, updateTrailTicketCount })(TrailCloseTicketDialog);

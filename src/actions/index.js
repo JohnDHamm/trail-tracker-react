@@ -49,14 +49,12 @@ export function deleteClosedTicket(postId, callback) {
 }
 
 export function updateTrailTicketCount(trail, callback) {
-	console.log("trail update obj", trail);
 	const request = axios.patch(`${ROOT_URL}/trail`, trail)
 		.then(() => callback());
 	return {
 		type: UPDATE_TRAIL,
 		payload: request
 	}
-
 }
 
 export function getPosts(id) {
