@@ -6,8 +6,6 @@ import {
 		getPosts,
 		setCurrentTrailId,
 		setTicketToClose,
-		// deleteClosedTicket,
-		// updateTrailTicketCount,
 		getCurrentWeather,
 		getWeatherForecast,
 		getWeatherRadarUrl
@@ -80,17 +78,34 @@ class Trail extends Component {
 						</div>
 					)
 				}
-
 			} else {
-				return (
-					<div className={postStyle} key={post._id}>
-						<TrailPostCard
-							userImgUrl={post.userImgUrl}
-							postUserName={post.userName}
-							date={post.postFormatDate}
-							message={post.description}/>
-					</div>
-				)
+				if (post.ticketopen) {
+					return (
+						<div className={postStyle} key={post._id}>
+							<TrailOpenTicketPostTop />
+							<TrailPostCard
+								userImgUrl={post.userImgUrl}
+								postUserName={post.userName}
+								date={post.postFormatDate}
+								message={post.description}/>
+							<div id={post._id} className="closeTicketDiv">
+								<div onClick={() => this.setClosingTicket(post._id)}>
+									<TrailCloseTicketDialog />
+								</div>
+							</div>
+						</div>
+					)
+				} else {
+					return (
+						<div className={postStyle} key={post._id}>
+							<TrailPostCard
+								userImgUrl={post.userImgUrl}
+								postUserName={post.userName}
+								date={post.postFormatDate}
+								message={post.description}/>
+						</div>
+					)
+				}
 			}
 		})
 	}
