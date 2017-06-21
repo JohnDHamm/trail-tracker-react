@@ -2,7 +2,16 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { getPosts, setCurrentTrailId, setTicketToClose, getCurrentWeather, getWeatherForecast, getWeatherRadarUrl } from '../actions';
+import {
+		getPosts,
+		setCurrentTrailId,
+		setTicketToClose,
+		// deleteClosedTicket,
+		// updateTrailTicketCount,
+		getCurrentWeather,
+		getWeatherForecast,
+		getWeatherRadarUrl
+	} from '../actions';
 
 import Navbar from './navbar'
 import TrailTitleCard from './trail_title_card';

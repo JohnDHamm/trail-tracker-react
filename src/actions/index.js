@@ -1,6 +1,8 @@
 export const GET_TRAILS = 'get_trails';
 export const SET_CURRENT_TRAIL_ID = 'set_current_trail_id';
 export const SET_TICKET_TO_CLOSE = 'set_ticket_to_close';
+export const DELETE_CLOSED_TICKET = 'delete_closed_ticket';
+export const UPDATE_TRAIL = 'update_trail';
 export const GET_POSTS = 'get_posts';
 export const ADD_POST = 'add_post';
 export const GET_CURRENT_WEATHER = 'get_current_weather';
@@ -33,11 +35,30 @@ export function setCurrentTrailId(id) {
 }
 
 export function setTicketToClose(post) {
-
 	return {
 		type: SET_TICKET_TO_CLOSE,
 		payload: post
 	}
+}
+
+export function deleteClosedTicket(postId, callback) {
+	const request = axios.delete(`${ROOT_URL}/closeTicket/${postId}`)
+		.then(() => callback());
+	return {
+		type: DELETE_CLOSED_TICKET,
+		payload: request
+	}
+}
+
+export function updateTrailTicketCount(trail, callback) {
+	console.log("trail", trail);
+	// const request = axios.put(`${ROOT_URL}/trail/${trail._id}`, trail)
+		// .then(() => callback());
+	return {
+		type: UPDATE_TRAIL,
+		// payload: request
+	}
+
 }
 
 export function getPosts(id) {

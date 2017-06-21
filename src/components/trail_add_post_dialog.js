@@ -34,7 +34,6 @@ class AddPostDialog extends Component {
 
 	handleClose = () => {
 		this.clearState();
-		console.log("canceled! state:", this.state);
 	};
 
 	handlePost = () => {
