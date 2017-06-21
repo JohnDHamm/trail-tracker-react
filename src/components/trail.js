@@ -2,17 +2,14 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { getPosts } from '../actions';
-import { getCurrentWeather } from '../actions';
-import { getWeatherForecast } from '../actions';
-import { getWeatherRadarUrl } from '../actions';
+import { getPosts, setCurrentTrailId, setTicketToClose, getCurrentWeather, getWeatherForecast, getWeatherRadarUrl } from '../actions';
 
 import Navbar from './navbar'
 import TrailTitleCard from './trail_title_card';
 import TrailAddPostButton from './trail_add_post_button';
 import TrailPostCard from './trail_post_card';
 import TrailPostCardPhoto from './trail_post_card_photo';
-import TrailCloseTicketButton from './trail_close_ticket_button';
+import TrailCloseTicketDialog from './trail_close_ticket_dialog';
 import TrailOpenTicketPostTop from './trail_open_ticket_post_top';
 import WeatherCurrentConditionsCard from './weather_current_conditions_card'
 import WeatherRadar from './weather_radar'
@@ -25,7 +22,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 class Trail extends Component {
 	componentDidMount() {
-		const { id } = this.props.match.params; //get from url
+		const { id } = this.props.match.params;
+		this.props.setCurrentTrailId(id);
 		this.props.getPosts(id);
 		const { latitude, longitude } = this.props.trail;
 		const coords = latitude.toString() + ',' + longitude.toString();
@@ -34,9 +32,8 @@ class Trail extends Component {
 		this.props.getWeatherRadarUrl(coords);
 	}
 
-	closeTicket (id) {
-		const { user } = this.props.user;
-		console.log("close ticket id:", id, "by ", user.name);
+	setClosingTicket (id) {
+		this.props.setTicketToClose(this.props.posts[id]);
 	}
 
 	renderPosts () {
@@ -55,9 +52,9 @@ class Trail extends Component {
 								date={post.postFormatDate}
 								message={post.description}
 								photoUrl={post.photoUrl} />
-							<div className="closeTicketDiv">
-								<div className="closeTicketBtn" onClick={() => this.closeTicket(post._id)}>
-									<TrailCloseTicketButton />
+							<div id={post._id} className="closeTicketDiv">
+								<div onClick={() => this.setClosingTicket(post._id)}>
+									<TrailCloseTicketDialog />
 								</div>
 							</div>
 						</div>
@@ -188,8 +185,8 @@ class Trail extends Component {
 }
 
 function mapStateToProps({ user, trails, posts, currentWeather, weatherForecast, weatherRadarUrl }, ownProps) {
-	return { trail: trails[ownProps.match.params.id], posts: posts, currentWeather: currentWeather, weatherForecast: weatherForecast, user: user, weatherRadarUrl: weatherRadarUrl };
+	return { trail: trails[ownProps.match.params.id], posts, currentWeather, weatherForecast, user, weatherRadarUrl };
 }
 
-export default connect(mapStateToProps, { getPosts, getCurrentWeather, getWeatherForecast, getWeatherRadarUrl } )(Trail);
+export default connect(mapStateToProps, { getPosts, getCurrentWeather, getWeatherForecast, getWeatherRadarUrl, setCurrentTrailId, setTicketToClose } )(Trail);
 

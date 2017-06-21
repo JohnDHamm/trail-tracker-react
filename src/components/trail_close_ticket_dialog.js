@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addPost, getPosts } from '../actions';
 
-import TrailAddPostButton from './trail_add_post_button';
+import TrailCloseTicketButton from './trail_close_ticket_button';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
@@ -10,17 +10,15 @@ import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 
 
-class AddPostDialog extends Component {
+class TrailCloseTicketDialog extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			open: false,
-			msg: '',
-			postType: ''
+			msg: ''
 		};
 
 		this.handleChange = this.handleChange.bind(this);
-		this.handleSelectChange = this.handleSelectChange.bind(this);
 	}
 
 	componentDidMount() {
@@ -40,22 +38,26 @@ class AddPostDialog extends Component {
 	handlePost = () => {
 		const trailId = this.props.currentTrailId.trailId;
 		const timeStamp = new Date();
+		const origPost = this.props.ticketToClose;
+		const closingMsg = `original issue: "${origPost.description}" by ${origPost.userName} on ${origPost.postFormatDate} has been closed by ${this.state.userName} - "${this.state.msg}" - Beers for all!`;
+
 		const newPost = {
-			description: this.state.msg,
-			postTypeString: this.state.postType,
+			description: closingMsg,
+			postTypeString: 'closed-ticket',
 			userName: this.state.userName,
 			userImgUrl: this.state.userImgUrl,
 			userId: this.state.userId,
 			hasPhoto: false,
 			photoUrl: '',
 			postDate: timeStamp,
+			postFormatDate: this.formatDate(timeStamp),
 			postTrailId: trailId,
+			ticketopen: false
 		};
-		newPost.postFormatDate = this.formatDate(timeStamp);
-		newPost.ticketopen = this.state.postType === 'open-ticket' ? true : false;
 
 		this.props.addPost(newPost, () => {
 			this.clearState();
+			//delete open ticket post just closed
 			this.props.getPosts(trailId);
 		})
 	};
@@ -63,8 +65,7 @@ class AddPostDialog extends Component {
 	clearState = () => {
 		this.setState({
 			open: false,
-			msg: '',
-			postType: ''
+			msg: ''
 		});
 	}
 
@@ -89,12 +90,6 @@ class AddPostDialog extends Component {
 		});
 	}
 
-	handleSelectChange(event, index, value) {
-		this.setState({
-			postType: value
-		});
-
-	}
 
 	render() {
 		const {values} = this.props;
@@ -115,46 +110,33 @@ class AddPostDialog extends Component {
 		];
 
 		return (
-			<div>
+			<div className="closeTicketDialog">
 				<div onClick={this.handleOpen}>
-					<TrailAddPostButton />
+					<TrailCloseTicketButton />
 				</div>
 				<Dialog
-					title="Select the type of post and add a message"
+					title="Please provide some details about closing this ticket"
 					actions={actions}
 					modal={false}
 					open={this.state.open}
 					onRequestClose={this.handleClose}
 				>
-					<SelectField
-						name="postType"
-						floatingLabelText="Post type"
-						autoWidth={true}
-						value={this.state.postType}
-						onChange={this.handleSelectChange}
-					>
-						<MenuItem value={"meetup"} primaryText="Meetup - organize a group ride" />
-						<MenuItem value={"ride-report"} primaryText="Ride Report - trail conditions (non-critical)" />
-						<MenuItem value={"open-ticket"} primaryText="Open Ticket - for issues that need repair" />
-					</SelectField>
-					<br/>
 					<TextField
 						name="msg"
-						hintText="Type message here"
+						hintText="details"
 						fullWidth={true}
 						value={this.state.msg}
 						onChange={this.handleChange}
 						autoFocus={true}
 					/>
-
 				</Dialog>
 			</div>
 		);
 	}
 }
 
-function mapStateToProps({values, user, currentTrailId}) {
-	return { values, user, currentTrailId};
+function mapStateToProps({values, user, currentTrailId, ticketToClose}) {
+	return { values, user, currentTrailId, ticketToClose};
 }
 
-export default connect(mapStateToProps, {addPost, getPosts})(AddPostDialog);
+export default connect(mapStateToProps, { addPost, getPosts})(TrailCloseTicketDialog);

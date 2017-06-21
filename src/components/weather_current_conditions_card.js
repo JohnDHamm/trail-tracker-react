@@ -68,6 +68,10 @@ class WeatherCurrentConditionsCard extends Component {
 		const {prepareStyles} = this.context.muiTheme;
 		const styles = getStyles(this.props, this.context);
 
+		if (!conditions) {
+			return ( <div>loading current conditions...</div>)
+		}
+
 		return (
 			<div style={prepareStyles(Object.assign(styles.root, style))}>
 				<div style={prepareStyles(Object.assign(styles.title, style))}>
@@ -90,8 +94,8 @@ class WeatherCurrentConditionsCard extends Component {
 	}
 }
 
-function mapStateToProps(state) {
-	return { values: state.values };
+function mapStateToProps({values}) {
+	return { values };
 }
 
 export default connect(mapStateToProps)(WeatherCurrentConditionsCard);

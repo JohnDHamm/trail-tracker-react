@@ -1,4 +1,6 @@
 export const GET_TRAILS = 'get_trails';
+export const SET_CURRENT_TRAIL_ID = 'set_current_trail_id';
+export const SET_TICKET_TO_CLOSE = 'set_ticket_to_close';
 export const GET_POSTS = 'get_posts';
 export const ADD_POST = 'add_post';
 export const GET_CURRENT_WEATHER = 'get_current_weather';
@@ -19,6 +21,22 @@ export function getTrails() {
 	return {
 		type: GET_TRAILS,
 		payload: request
+	}
+}
+
+export function setCurrentTrailId(id) {
+	const idObj = { trailId: id }
+	return {
+		type: SET_CURRENT_TRAIL_ID,
+		payload: idObj
+	}
+}
+
+export function setTicketToClose(post) {
+
+	return {
+		type: SET_TICKET_TO_CLOSE,
+		payload: post
 	}
 }
 
