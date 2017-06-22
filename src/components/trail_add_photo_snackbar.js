@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import Snackbar from 'material-ui/Snackbar';
-// import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 
 class AddPhotoTempSnackbar extends React.Component {

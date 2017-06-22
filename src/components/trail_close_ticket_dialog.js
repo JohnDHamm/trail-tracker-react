@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addPost, getPosts, deleteClosedTicket, updateTrailTicketCount } from '../actions';
+import { addPost,
+				getPosts,
+				deleteClosedTicket,
+				updateTrailTicketCount } from '../actions';
 
 import TrailCloseTicketButton from './trail_close_ticket_button';
 import AddPhotoTempSnackbar from './trail_add_photo_snackbar';

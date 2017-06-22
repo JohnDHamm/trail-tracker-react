@@ -3,6 +3,7 @@ body {
 	background-color: #ffca28;
 }
 
+/***** HOME ******/
 #home {
 	background-image: url(/src/img/homePageBG.jpg);
 	background-size: cover;
