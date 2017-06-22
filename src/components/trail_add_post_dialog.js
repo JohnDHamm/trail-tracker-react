@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { addPost, getPosts, updateTrailTicketCount } from '../actions';
 
 import TrailAddPostButton from './trail_add_post_button';
+import AddPhotoTempSnackbar from './trail_add_photo_snackbar';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
@@ -156,6 +157,8 @@ class AddPostDialog extends Component {
 						onChange={this.handleChange}
 						autoFocus={true}
 					/>
+					<br/>
+					<AddPhotoTempSnackbar />
 
 				</Dialog>
 			</div>
