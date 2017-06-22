@@ -6,6 +6,7 @@ import { createStore, applyMiddleware } from 'redux';
 import promise from 'redux-promise';
 import reducers from './reducers';
 
+import Navbar from './components/navbar'
 import Home from './components/home';
 import Trails from './components/trails';
 import Trail from './components/trail';
@@ -16,6 +17,7 @@ ReactDOM.render(
 	<Provider store={createStoreWithMiddleware(reducers)}>
 		<BrowserRouter>
 			<div>
+				<Navbar />
 				<Switch>
 					<Route path="/trails" component={Trails} />
 					<Route path="/trail/:id" component={Trail} />

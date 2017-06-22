@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 
 import { getTrails } from '../actions';
 
-import Navbar from './navbar'
 import TrailsSelectCard from './trails_select_card';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -56,7 +55,6 @@ class Trails extends Component {
 		return (
 			<MuiThemeProvider>
 				<div>
-					<Navbar />
 					<div className="container">
 						<div className="row">
 							{this.renderTrails()}

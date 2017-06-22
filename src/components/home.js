@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import Navbar from './navbar'
 import FlatButton from 'material-ui/FlatButton';
 import FontIcon from 'material-ui/FontIcon';
 
@@ -15,7 +14,6 @@ class Home extends Component {
 		return (
 			<MuiThemeProvider>
 				<div>
-					<Navbar />
 					<div id="home" className="container">
 						<div className="row justify-content-center">
 							<div className="col">

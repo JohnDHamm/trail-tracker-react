@@ -8,10 +8,8 @@ import {
 		setTicketToClose,
 		getCurrentWeather,
 		getWeatherForecast,
-		getWeatherRadarUrl
-	} from '../actions';
+		getWeatherRadarUrl } from '../actions';
 
-import Navbar from './navbar'
 import TrailTitleCard from './trail_title_card';
 import TrailAddPostButton from './trail_add_post_button';
 import TrailPostCard from './trail_post_card';
@@ -31,7 +29,6 @@ class Trail extends Component {
 	componentDidMount() {
 		const { id } = this.props.match.params;
 		this.props.setCurrentTrail(this.props.trail);
-		// this.props.setCurrentTrailId(id);
 		this.props.getPosts(id);
 		const { latitude, longitude } = this.props.trail;
 		const coords = latitude.toString() + ',' + longitude.toString();
@@ -130,7 +127,7 @@ class Trail extends Component {
 	}
 
 	render() {
-		const { trail, posts, currentWeather, weatherForecast, weatherRadarUrl, user } = this.props;
+		const { trail, currentWeather, weatherRadarUrl } = this.props;
 
 		if (!trail) {
 			return <div>Loading trail...</div>;
@@ -139,7 +136,6 @@ class Trail extends Component {
 		return (
 			<MuiThemeProvider>
 				<div>
-					<Navbar />
 					<div className="container">
 						<div className="row">
 
@@ -209,8 +205,8 @@ class Trail extends Component {
 	}
 }
 
-function mapStateToProps({ user, trails, posts, currentWeather, weatherForecast, weatherRadarUrl }, ownProps) {
-	return { trail: trails[ownProps.match.params.id], posts, currentWeather, weatherForecast, user, weatherRadarUrl };
+function mapStateToProps({ trails, posts, currentWeather, weatherForecast, weatherRadarUrl }, ownProps) {
+	return { trail: trails[ownProps.match.params.id], posts, currentWeather, weatherForecast, weatherRadarUrl };
 }
 
 export default connect(mapStateToProps, { getPosts, getCurrentWeather, getWeatherForecast, getWeatherRadarUrl, setCurrentTrail, setTicketToClose } )(Trail);
