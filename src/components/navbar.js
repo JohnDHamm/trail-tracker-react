@@ -13,10 +13,6 @@ import IconMenu from 'material-ui/IconMenu';
 import IconButton from 'material-ui/IconButton';
 import MenuItem from 'material-ui/MenuItem';
 import FontIcon from 'material-ui/FontIcon';
-import {
-	lime800,
-	lime900
-} from 'material-ui/styles/colors';
 
 class Navbar extends Component {
 
@@ -26,13 +22,13 @@ class Navbar extends Component {
 
 		return (
 			<MuiThemeProvider>
-				<Toolbar style={{backgroundColor: lime800}}>
+				<Toolbar style={{backgroundColor: `${values.primary.color}`}}>
 					<ToolbarGroup firstChild={true}>
 						<FlatButton
 							label="Trail Tracker"
 							labelStyle={{fontFamily: `${values.primary.font}`, fontSize: 20}}
 							style={{color: 'white'}}
-							hoverColor={lime900}
+							hoverColor="rgba(0,0,0,0.1)"
 							href="/" />
 					</ToolbarGroup>
 					<ToolbarGroup>
@@ -40,7 +36,7 @@ class Navbar extends Component {
 							label="Trails"
 							labelStyle={{fontFamily: `${values.primary.font}`}}
 							style={{color: 'white'}}
-							hoverColor={lime900}
+							hoverColor="rgba(0,0,0,0.1)"
 							href="/trails"
 							icon={<FontIcon className="material-icons">directions_bike</FontIcon>} />
 
