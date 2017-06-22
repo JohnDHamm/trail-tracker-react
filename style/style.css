@@ -3,6 +3,47 @@ body {
 	background-color: #ffca28;
 }
 
+#home {
+	background-image: url(/src/img/homePageBG.jpg);
+	background-size: cover;
+	background-position: center;
+	width: 100%;
+	height: 100vh;
+}
+
+h1.appTitle {
+	padding: 30px 0;
+	font-family: 'Chelsea Market', cursive;
+	font-size: 60px;
+	color: #ffca28;
+	text-shadow: 2px 2px 0 #9e9d24;
+	text-align: center;
+}
+
+#appDescription p {
+	text-align: center;
+	font-family: 'Harmattan', sans-serif;
+	color: white;
+	text-shadow: 2px 2px 1px #3e2723;
+	font-size: 40px;
+}
+
+#homeBottom p {
+	text-align: center;
+	font-family: 'Harmattan', sans-serif;
+	font-style: italic;
+	color: white;
+	text-shadow: 2px 2px 1px #3e2723;
+	font-size: 30px;
+}
+
+span.userName {
+	font-family: 'Rancho', cursive;
+	color: #ffca28;
+	text-shadow: 2px 2px 1px #3e2723;
+	font-size: 30px;
+}
+
 /*POSTS*/
 .test-div-fill {
 	border: 1px solid #eee;
@@ -93,5 +134,16 @@ body {
 	font-family: 'Harmattan', sans-serif;
 }
 
+/*// $primary-color: #9e9d24; // lime darken-3
+// $secondary-color: #ffca28; //amber lighten-1
+// $tertiary-color: #3e2723; //brown darken-4
 
+// $primary-font: 'Chelsea Market', cursive;
+// $secondary-font: 'Harmattan', sans-serif;
+// $tertiary-font: 'Rancho', cursive;
+
+// $rideReport-color: #558b2f; //light-green darken-3
+// $openTicket-color: #c62828; //red darken-3
+// $meetup-color: #0277bd; //light-blue darken-3
+// $closedTicket-color: #616161; //grey darken-2*/
 
