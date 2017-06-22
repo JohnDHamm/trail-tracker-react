@@ -13,53 +13,45 @@ import IconMenu from 'material-ui/IconMenu';
 import IconButton from 'material-ui/IconButton';
 import MenuItem from 'material-ui/MenuItem';
 import FontIcon from 'material-ui/FontIcon';
-import {
-	lime800,
-	lime900
-} from 'material-ui/styles/colors';
 
 class Navbar extends Component {
 
 	render() {
 		const { user } = this.props.user;
+		const { values } = this.props;
 
 		return (
 			<MuiThemeProvider>
-				<Toolbar style={{backgroundColor: lime800}}>
+				<Toolbar style={{backgroundColor: `${values.primary.color}`}}>
 					<ToolbarGroup firstChild={true}>
 						<FlatButton
 							label="Trail Tracker"
+							labelStyle={{fontFamily: `${values.primary.font}`, fontSize: 20}}
 							style={{color: 'white'}}
-							hoverColor={lime900}
+							hoverColor="rgba(0,0,0,0.1)"
 							href="/" />
 					</ToolbarGroup>
 					<ToolbarGroup>
 						<FlatButton
 							label="Trails"
+							labelStyle={{fontFamily: `${values.primary.font}`}}
 							style={{color: 'white'}}
-							hoverColor={lime900}
+							hoverColor="rgba(0,0,0,0.1)"
 							href="/trails"
 							icon={<FontIcon className="material-icons">directions_bike</FontIcon>} />
 
-						<ToolbarTitle text={user.name} style={{color: 'white'}} />
+						<ToolbarTitle
+							text={user.name}
+							style={{
+								color: `${values.secondary.color}`,
+								fontFamily: `${values.tertiary.font}`,
+								fontSize: 25
+							}}
+						/>
 						<Avatar
 							size={30}
 							src={user.iconUrl}
 							/>
-						<IconMenu
-							iconStyle={{color: 'white'}}
-							iconButtonElement={
-								<IconButton
-									touch={true}>
-									<MoreVertIcon />
-								</IconButton>
-							}
-							targetOrigin={{horizontal: 'right', vertical: 'top'}}
-							anchorOrigin={{horizontal: 'right', vertical: 'top'}}
-						>
-							<MenuItem primaryText="Menu 1" />
-							<MenuItem primaryText="Menu 2" />
-						</IconMenu>
 					</ToolbarGroup>
 				</Toolbar>
 			</MuiThemeProvider>
@@ -67,8 +59,8 @@ class Navbar extends Component {
 	}
 }
 
-function mapStateToProps({ user }) {
-	return { user: user };
+function mapStateToProps({ user, values }) {
+	return { user, values };
 }
 
 export default connect(mapStateToProps)(Navbar);
