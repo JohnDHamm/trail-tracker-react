@@ -5,7 +5,7 @@ export default function() {
 			{
 				_id: '594983c48716c12f54138371',
 				name: 'Guest User',
-				iconUrl: '/src/img/user_avatars/guest_user.jpg'
+				iconUrl: 'https://s3.us-east-2.amazonaws.com/johndhammcodes.trailtracker/user_avatars/Guest_User.jpg'
 			}
 	}
 }
