@@ -5,6 +5,7 @@ import { addPost,
 				updateTrailTicketCount } from '../actions';
 
 import TrailAddPostButton from './trail_add_post_button';
+import PhotoUpload from './photo_upload';
 import AddPhotoTempSnackbar from './trail_add_photo_snackbar';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
@@ -161,7 +162,7 @@ class AddPostDialog extends Component {
 						autoFocus={true}
 					/>
 					<br/>
-					<AddPhotoTempSnackbar />
+					<PhotoUpload />
 
 				</Dialog>
 			</div>
