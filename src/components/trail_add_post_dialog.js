@@ -9,7 +9,6 @@ import { addPost,
 
 import TrailAddPostButton from './trail_add_post_button';
 import PhotoUpload from './photo_upload';
-import AddPhotoTempSnackbar from './trail_add_photo_snackbar';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import FontIcon from 'material-ui/FontIcon';
@@ -56,12 +55,19 @@ class AddPostDialog extends Component {
 			hasPhoto: false,
 			photoUrl: '',
 			postDate: timeStamp,
+			postFormatDate: this.formatDate(timeStamp),
 			postTrailId: trailId,
+			ticketopen: this.state.postType === 'open-ticket' ? true : false
 		};
-		newPost.postFormatDate = this.formatDate(timeStamp);
-		newPost.ticketopen = this.state.postType === 'open-ticket' ? true : false;
+		// newPost.postFormatDate = this.formatDate(timeStamp);
+		// newPost.ticketopen = this.state.postType === 'open-ticket' ? true : false;
+
 		const uploadFile = this.props.uploadPhoto;
 		if (uploadFile.length > 0) {
+			const uploadFileName = uploadFile[0].name;
+			newPost.hasPhoto = true;
+			newPost.photoUrl = `https://s3.us-east-2.amazonaws.com/johndhammcodes.trailtracker/${this.state.postType}/${uploadFileName}`;
+
 			superagent.post(`https://trailtracker-api.herokuapp.com/api/photoupload/${this.state.postType}`)
       .attach('theseNamesMustMatch', uploadFile[0])
       .end((err, res) => {
@@ -69,10 +75,6 @@ class AddPostDialog extends Component {
         // alert('File uploaded!');
         console.log("res", res);
       })
-			const uploadFileName = uploadFile[0].name;
-			// console.log("uploadFileName", uploadFileName);
-			newPost.hasPhoto = true;
-			newPost.photoUrl = `https://s3.us-east-2.amazonaws.com/johndhammcodes.trailtracker/${this.state.postType}/${uploadFileName}`;
 		}
 		// console.log("newPost", newPost);
 

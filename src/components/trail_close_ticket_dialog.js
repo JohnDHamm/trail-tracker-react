@@ -6,7 +6,8 @@ import { addPost,
 				updateTrailTicketCount } from '../actions';
 
 import TrailCloseTicketButton from './trail_close_ticket_button';
-import AddPhotoTempSnackbar from './trail_add_photo_snackbar';
+import PhotoUpload from './photo_upload';
+
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
@@ -141,7 +142,7 @@ class TrailCloseTicketDialog extends Component {
 						autoFocus={true}
 					/>
 					<br/>
-					<AddPhotoTempSnackbar />
+					<PhotoUpload />
 				</Dialog>
 			</div>
 		);
