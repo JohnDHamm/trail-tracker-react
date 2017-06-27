@@ -8,17 +8,15 @@ export const ADD_POST = 'add_post';
 export const GET_CURRENT_WEATHER = 'get_current_weather';
 export const GET_WEATHER_FORECAST = 'get_weather_forecast';
 export const GET_WEATHER_RADAR = 'get_weather_radar';
-export const UPLOAD_PHOTO = 'upload_photo';
 export const SET_UPLOAD_PHOTO = 'set_upload_photo';
 import axios from 'axios';
-import superagent from 'superagent';
 
-// const ROOT_URL = 'https://trailtracker-api.herokuapp.com/api';
-// const WEATHER_ROOT_URL = 'https://trailtracker-api.herokuapp.com/api/weather';
+const ROOT_URL = 'https://trailtracker-api.herokuapp.com/api';
+const WEATHER_ROOT_URL = 'https://trailtracker-api.herokuapp.com/api/weather';
 
 // ************* localhost:3000 testing of api *************
-const ROOT_URL = 'http://localhost:3000/api';
-const WEATHER_ROOT_URL = 'http://localhost:3000/api/weather';
+// const ROOT_URL = 'http://localhost:3000/api';
+// const WEATHER_ROOT_URL = 'http://localhost:3000/api/weather';
 
 export function getTrails() {
 	const request = axios.get(`${ROOT_URL}/trails`);
@@ -102,23 +100,7 @@ export function getWeatherRadarUrl(coords) {
 	}
 }
 
-export function uploadS3Photo(files) {
-	// const request =
-		superagent.post(`${ROOT_URL}/photoupload`)
-      .attach('theseNamesMustMatch', files[0])
-      .end((err, res) => {
-        if (err) console.log(err);
-        alert('File uploaded!');
-        console.log("res", res);
-      })
-  // return {
-  // 	type: UPLOAD_PHOTO,
-  // 	payload: request
-  // }
-}
-
 export function setUploadPhoto(file) {
-	// console.log("file", file);
 	return {
 		type: SET_UPLOAD_PHOTO,
 		payload: file

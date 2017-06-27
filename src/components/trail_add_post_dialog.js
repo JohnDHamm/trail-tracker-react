@@ -62,7 +62,7 @@ class AddPostDialog extends Component {
 		newPost.ticketopen = this.state.postType === 'open-ticket' ? true : false;
 		const uploadFile = this.props.uploadPhoto;
 		if (uploadFile.length > 0) {
-			superagent.post(`http://localhost:3000/api/photoupload/${this.state.postType}`)
+			superagent.post(`https://trailtracker-api.herokuapp.com/api/photoupload/${this.state.postType}`)
       .attach('theseNamesMustMatch', uploadFile[0])
       .end((err, res) => {
         if (err) console.log(err);
@@ -70,11 +70,11 @@ class AddPostDialog extends Component {
         console.log("res", res);
       })
 			const uploadFileName = uploadFile[0].name;
-			console.log("uploadFileName", uploadFileName);
+			// console.log("uploadFileName", uploadFileName);
 			newPost.hasPhoto = true;
 			newPost.photoUrl = `https://s3.us-east-2.amazonaws.com/johndhammcodes.trailtracker/${this.state.postType}/${uploadFileName}`;
 		}
-		console.log("newPost", newPost);
+		// console.log("newPost", newPost);
 
 		this.props.addPost(newPost, () => {
 			this.clearState();
