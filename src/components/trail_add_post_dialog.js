@@ -57,6 +57,14 @@ class AddPostDialog extends Component {
 		};
 		newPost.postFormatDate = this.formatDate(timeStamp);
 		newPost.ticketopen = this.state.postType === 'open-ticket' ? true : false;
+		// console.log("posting file?", this.props.uploadPhoto);
+		if (this.props.uploadPhoto.length > 0) {
+			const uploadFileName = this.props.uploadPhoto[0].name;
+			// console.log("uploadFileName", uploadFileName);
+			newPost.hasPhoto = true;
+			newPost.photoUrl = `https://s3.us-east-2.amazonaws.com/johndhammcodes.trailtracker/open_tickets/${uploadFileName}`;
+		}
+		console.log("newPost", newPost);
 
 		this.props.addPost(newPost, () => {
 			this.clearState();
@@ -170,8 +178,8 @@ class AddPostDialog extends Component {
 	}
 }
 
-function mapStateToProps({values, user, currentTrail}) {
-	return { values, user, currentTrail};
+function mapStateToProps({values, user, currentTrail, uploadPhoto}) {
+	return { values, user, currentTrail, uploadPhoto};
 }
 
 export default connect(mapStateToProps, {addPost, getPosts, updateTrailTicketCount })(AddPostDialog);

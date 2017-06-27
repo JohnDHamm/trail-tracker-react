@@ -1,28 +1,42 @@
-const React = require('react');
-const Dropzone = require('react-dropzone');
-const superagent = require('superagent')
+import React, { Component } from 'react';
+import Dropzone from 'react-dropzone';
+import superagent from 'superagent';
+import { connect } from 'react-redux';
+import { setUploadPhoto } from '../actions';
 
- class PhotoUpload extends React.Component{
-    onDrop (files) {
-      console.log("onDrop", files);
-      superagent.post('http://localhost:3000/api/photoupload')
-      .attach('theseNamesMustMatch', files[0])
-      .end((err, res) => {
-        if (err) console.log(err);
-        alert('File uploaded!');
-        console.log("res", res);
-      })
-    }
+class PhotoUpload extends Component{
 
-    render(){
-      return (
-          <div>
-            <Dropzone onDrop={this.onDrop} multiple={false}>
-              <div>Try dropping a file here, or click to select a file to upload.</div>
-            </Dropzone>
-          </div>
-      );
-    }
+	onDrop = (files) => {
+
+		// console.log("onDrop", files);
+		this.props.setUploadPhoto(files);
+
+		// superagent.post('http://localhost:3000/api/photoupload')
+		// .attach('theseNamesMustMatch', files[0])
+		// .end((err, res) => {
+		//   if (err) console.log(err);
+		//   alert('File uploaded!');
+		//   console.log("res", res);
+		// })
+	}
+
+	render(){
+		const filename = this.props.uploadPhoto[0];
+		// console.log("file name", filename);
+		return (
+			<div>
+				<Dropzone onDrop={this.onDrop} multiple={false}>
+					<div>Click here or drag photo to upload with your post.</div>
+				</Dropzone>
+				<div>Selected photo:
+				</div>
+			</div>
+		);
+	}
 };
 
-export default PhotoUpload;
+function mapStateToProps({values, uploadPhoto}) {
+	return { values, uploadPhoto};
+}
+
+export default connect(mapStateToProps, {setUploadPhoto})(PhotoUpload);

@@ -8,6 +8,7 @@ import CurrentWeatherReducer from './reducer_weather_current';
 import WeatherForecastReducer from './reducer_weather_forecast';
 import WeatherRadarReducer from './reducer_weather_radar';
 import UserReducer from './reducer_user';
+import PhotoUploadReducer from './reducer_photo_upload';
 
 const rootReducer = combineReducers({
   trails: TrailsReducer,
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
   currentWeather: CurrentWeatherReducer,
   weatherForecast: WeatherForecastReducer,
   weatherRadarUrl: WeatherRadarReducer,
-  user: UserReducer
+  user: UserReducer,
+  uploadPhoto: PhotoUploadReducer
 });
 
 export default rootReducer;
