@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import superagent from 'superagent';
+
 import { addPost,
 				getPosts,
 				deleteClosedTicket,
@@ -59,17 +61,46 @@ class TrailCloseTicketDialog extends Component {
 			ticketopen: false
 		};
 
-		this.props.addPost(newPost, () => {
-			this.clearState();
-			this.props.deleteClosedTicket(origPost._id, () => {
-				const newNumOpenTickets = this.props.currentTrail.numOpenTickets - 1;
-				const trailUpdateObj = {
-					_id: trailId,
-					numOpenTickets: newNumOpenTickets
-				};
-				this.props.updateTrailTicketCount(trailUpdateObj, () => {
+		const uploadFile = this.props.uploadPhoto;
+		if (uploadFile.length > 0) {
+			const uploadFileName = uploadFile[0].name;
+			newPost.hasPhoto = true;
+			newPost.photoUrl = `https://s3.us-east-2.amazonaws.com/johndhammcodes.trailtracker/${this.state.postType}/${uploadFileName}`;
+
+			superagent.post(`https://trailtracker-api.herokuapp.com/api/photoupload/${this.state.postType}`)
+      .attach('theseNamesMustMatch', uploadFile[0])
+      .then((res, err) => {
+        if (err) console.log(err);
+        // console.log("file uploaded:", res);
+      })
+      .then(() => {
+      	// console.log("next up: close post", newPost);
+      	this.props.addPost(newPost, () => {
+					// console.log("added post");
+					this.clearState();
+					// console.log("get posts");
 					this.props.getPosts(trailId);
-				})
+	      })
+			})
+    } else {
+			this.props.addPost(newPost, () => {
+				// console.log("no photo, closed post:", newPost);
+				this.clearState();
+				this.props.getPosts(trailId);
+			})
+    }
+
+    console.log("delete orig open ticket");
+		this.props.deleteClosedTicket(origPost._id, () => {
+			// console.log("done deleted, now update count", this.props.currentTrail.numOpenTickets);
+			const newNumOpenTickets = this.props.currentTrail.numOpenTickets - 1;
+			const trailUpdateObj = {
+				_id: trailId,
+				numOpenTickets: newNumOpenTickets
+			};
+			this.props.updateTrailTicketCount(trailUpdateObj, () => {
+				// this.props.getPosts(trailId);
+				// console.log("updated count!");
 			})
 		})
 	};
@@ -149,8 +180,8 @@ class TrailCloseTicketDialog extends Component {
 	}
 }
 
-function mapStateToProps({values, user, currentTrail, ticketToClose}) {
-	return { values, user, currentTrail, ticketToClose};
+function mapStateToProps({values, user, currentTrail, ticketToClose, uploadPhoto}) {
+	return { values, user, currentTrail, ticketToClose, uploadPhoto};
 }
 
 export default connect(mapStateToProps, { addPost, getPosts, deleteClosedTicket, updateTrailTicketCount })(TrailCloseTicketDialog);
