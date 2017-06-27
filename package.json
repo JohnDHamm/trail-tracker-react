@@ -24,12 +24,14 @@
     "material-ui": "^0.18.2",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
+    "react-dropzone": "^3.13.3",
     "react-redux": "^5.0.5",
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
     "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.6.0",
-    "redux-promise": "^0.5.3"
+    "redux-promise": "^0.5.3",
+    "superagent": "^3.5.2"
   },
   "devDependencies": {
     "babel-core": "^6.2.1",

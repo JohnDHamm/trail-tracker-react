@@ -22,5 +22,8 @@ module.exports = {
 	devServer: {
 		historyApiFallback: true,
 		contentBase: './'
+	},
+	node: {
+	  __dirname: true,
 	}
 };

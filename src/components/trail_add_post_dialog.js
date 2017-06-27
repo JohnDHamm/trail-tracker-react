@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import superagent from 'superagent';
+
 import { addPost,
 				getPosts,
-				updateTrailTicketCount } from '../actions';
+				updateTrailTicketCount,
+				uploadS3Photo } from '../actions';
 
 import TrailAddPostButton from './trail_add_post_button';
+import PhotoUpload from './photo_upload';
 import AddPhotoTempSnackbar from './trail_add_photo_snackbar';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
@@ -56,6 +60,21 @@ class AddPostDialog extends Component {
 		};
 		newPost.postFormatDate = this.formatDate(timeStamp);
 		newPost.ticketopen = this.state.postType === 'open-ticket' ? true : false;
+		const uploadFile = this.props.uploadPhoto;
+		if (uploadFile.length > 0) {
+			superagent.post(`http://localhost:3000/api/photoupload/${this.state.postType}`)
+      .attach('theseNamesMustMatch', uploadFile[0])
+      .end((err, res) => {
+        if (err) console.log(err);
+        // alert('File uploaded!');
+        console.log("res", res);
+      })
+			const uploadFileName = uploadFile[0].name;
+			console.log("uploadFileName", uploadFileName);
+			newPost.hasPhoto = true;
+			newPost.photoUrl = `https://s3.us-east-2.amazonaws.com/johndhammcodes.trailtracker/${this.state.postType}/${uploadFileName}`;
+		}
+		console.log("newPost", newPost);
 
 		this.props.addPost(newPost, () => {
 			this.clearState();
@@ -161,7 +180,7 @@ class AddPostDialog extends Component {
 						autoFocus={true}
 					/>
 					<br/>
-					<AddPhotoTempSnackbar />
+					<PhotoUpload />
 
 				</Dialog>
 			</div>
@@ -169,8 +188,8 @@ class AddPostDialog extends Component {
 	}
 }
 
-function mapStateToProps({values, user, currentTrail}) {
-	return { values, user, currentTrail};
+function mapStateToProps({values, user, currentTrail, uploadPhoto}) {
+	return { values, user, currentTrail, uploadPhoto};
 }
 
-export default connect(mapStateToProps, {addPost, getPosts, updateTrailTicketCount })(AddPostDialog);
+export default connect(mapStateToProps, {addPost, getPosts, updateTrailTicketCount, uploadS3Photo })(AddPostDialog);
