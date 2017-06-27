@@ -1,23 +1,13 @@
 import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
-import superagent from 'superagent';
 import { connect } from 'react-redux';
 import { setUploadPhoto } from '../actions';
 
 class PhotoUpload extends Component{
 
 	onDrop = (files) => {
-
 		// console.log("onDrop", files);
 		this.props.setUploadPhoto(files);
-
-		// superagent.post('http://localhost:3000/api/photoupload')
-		// .attach('theseNamesMustMatch', files[0])
-		// .end((err, res) => {
-		//   if (err) console.log(err);
-		//   alert('File uploaded!');
-		//   console.log("res", res);
-		// })
 	}
 
 	render(){

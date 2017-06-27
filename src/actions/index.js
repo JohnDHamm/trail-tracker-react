@@ -102,8 +102,8 @@ export function getWeatherRadarUrl(coords) {
 	}
 }
 
-export function uploadPhoto(files) {
-	const request =
+export function uploadS3Photo(files) {
+	// const request =
 		superagent.post(`${ROOT_URL}/photoupload`)
       .attach('theseNamesMustMatch', files[0])
       .end((err, res) => {
@@ -111,10 +111,10 @@ export function uploadPhoto(files) {
         alert('File uploaded!');
         console.log("res", res);
       })
-  return {
-  	type: UPLOAD_PHOTO,
-  	payload: request
-  }
+  // return {
+  // 	type: UPLOAD_PHOTO,
+  // 	payload: request
+  // }
 }
 
 export function setUploadPhoto(file) {
