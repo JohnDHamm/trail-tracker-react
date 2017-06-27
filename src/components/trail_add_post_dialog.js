@@ -4,12 +4,10 @@ import superagent from 'superagent';
 
 import { addPost,
 				getPosts,
-				updateTrailTicketCount,
-				uploadS3Photo } from '../actions';
+				updateTrailTicketCount } from '../actions';
 
 import TrailAddPostButton from './trail_add_post_button';
 import PhotoUpload from './photo_upload';
-import AddPhotoTempSnackbar from './trail_add_photo_snackbar';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import FontIcon from 'material-ui/FontIcon';
@@ -56,41 +54,50 @@ class AddPostDialog extends Component {
 			hasPhoto: false,
 			photoUrl: '',
 			postDate: timeStamp,
+			postFormatDate: this.formatDate(timeStamp),
 			postTrailId: trailId,
+			ticketopen: this.state.postType === 'open-ticket' ? true : false
 		};
-		newPost.postFormatDate = this.formatDate(timeStamp);
-		newPost.ticketopen = this.state.postType === 'open-ticket' ? true : false;
+
 		const uploadFile = this.props.uploadPhoto;
 		if (uploadFile.length > 0) {
-			superagent.post(`http://localhost:3000/api/photoupload/${this.state.postType}`)
-      .attach('theseNamesMustMatch', uploadFile[0])
-      .end((err, res) => {
-        if (err) console.log(err);
-        // alert('File uploaded!');
-        console.log("res", res);
-      })
 			const uploadFileName = uploadFile[0].name;
-			console.log("uploadFileName", uploadFileName);
 			newPost.hasPhoto = true;
 			newPost.photoUrl = `https://s3.us-east-2.amazonaws.com/johndhammcodes.trailtracker/${this.state.postType}/${uploadFileName}`;
-		}
-		console.log("newPost", newPost);
 
-		this.props.addPost(newPost, () => {
-			this.clearState();
-			if (newPost.ticketopen) {
-				const newNumOpenTickets = this.props.currentTrail.numOpenTickets + 1;
-				const trailUpdateObj = {
-					_id: trailId,
-					numOpenTickets: newNumOpenTickets
-				};
-				this.props.updateTrailTicketCount(trailUpdateObj, () => {
+			superagent.post(`https://trailtracker-api.herokuapp.com/api/photoupload/${this.state.postType}`)
+      .attach('theseNamesMustMatch', uploadFile[0])
+      .then((res, err) => {
+        if (err) console.log(err);
+        // console.log("file uploaded:", res);
+      })
+      .then(() => {
+      	// console.log("next up: add post", newPost);
+      	this.props.addPost(newPost, () => {
+					// console.log("added post");
+					this.clearState();
+					// console.log("get posts");
 					this.props.getPosts(trailId);
-				})
-			} else {
+	      })
+			})
+    } else {
+			this.props.addPost(newPost, () => {
+				// console.log("adding post:", newPost);
+				this.clearState();
 				this.props.getPosts(trailId);
-			}
-		})
+			})
+    }
+
+		if (newPost.ticketopen) {
+			const newNumOpenTickets = this.props.currentTrail.numOpenTickets + 1;
+			const trailUpdateObj = {
+				_id: trailId,
+				numOpenTickets: newNumOpenTickets
+			};
+			this.props.updateTrailTicketCount(trailUpdateObj, () => {
+				// console.log("updated ticket count");
+			})
+		}
 	};
 
 	clearState = () => {
@@ -192,4 +199,4 @@ function mapStateToProps({values, user, currentTrail, uploadPhoto}) {
 	return { values, user, currentTrail, uploadPhoto};
 }
 
-export default connect(mapStateToProps, {addPost, getPosts, updateTrailTicketCount, uploadS3Photo })(AddPostDialog);
+export default connect(mapStateToProps, {addPost, getPosts, updateTrailTicketCount })(AddPostDialog);
