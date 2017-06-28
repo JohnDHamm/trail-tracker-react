@@ -21,6 +21,7 @@ import WeatherRadar from './weather_radar'
 import WeatherForecast from './weather_forecast'
 import GoogleMap from './google_map';
 import AddPostDialog from './trail_add_post_dialog';
+import TrailSteward from './trail_steward';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
@@ -128,6 +129,7 @@ class Trail extends Component {
 
 	render() {
 		const { trail, currentWeather, weatherRadarUrl } = this.props;
+		// console.log("this.props.trail.stewardName", this.props.trail.stewardName);
 
 		if (!trail) {
 			return <div>Loading trail...</div>;
@@ -145,6 +147,11 @@ class Trail extends Component {
 								</div>
 								<div className="mapDiv row">
 									<GoogleMap lon={trail.longitude} lat={trail.latitude} zoom={trail.mapZoom} />
+								</div>
+								<div className="row">
+									<TrailSteward
+										stewardName={trail.stewardName}
+										stewardImgUrl={trail.stewardImgUrl} />
 								</div>
 								<div className="row hidden-lg-up">
 									<WeatherCurrentConditionsCard

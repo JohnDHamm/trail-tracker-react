@@ -65,9 +65,9 @@ class TrailCloseTicketDialog extends Component {
 		if (uploadFile.length > 0) {
 			const uploadFileName = uploadFile[0].name;
 			newPost.hasPhoto = true;
-			newPost.photoUrl = `https://s3.us-east-2.amazonaws.com/johndhammcodes.trailtracker/${this.state.postType}/${uploadFileName}`;
+			newPost.photoUrl = `https://s3.us-east-2.amazonaws.com/johndhammcodes.trailtracker/closed-ticket/${uploadFileName}`;
 
-			superagent.post(`https://trailtracker-api.herokuapp.com/api/photoupload/${this.state.postType}`)
+			superagent.post('https://trailtracker-api.herokuapp.com/api/photoupload/closed-ticket')
       .attach('theseNamesMustMatch', uploadFile[0])
       .then((res, err) => {
         if (err) console.log(err);
@@ -90,7 +90,7 @@ class TrailCloseTicketDialog extends Component {
 			})
     }
 
-    console.log("delete orig open ticket");
+    // console.log("delete orig open ticket");
 		this.props.deleteClosedTicket(origPost._id, () => {
 			// console.log("done deleted, now update count", this.props.currentTrail.numOpenTickets);
 			const newNumOpenTickets = this.props.currentTrail.numOpenTickets - 1;
