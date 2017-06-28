@@ -22,6 +22,7 @@ import WeatherForecast from './weather_forecast'
 import GoogleMap from './google_map';
 import AddPostDialog from './trail_add_post_dialog';
 import TrailSteward from './trail_steward';
+import TrailSponsor from './trail_sponsor_banner';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
@@ -147,6 +148,11 @@ class Trail extends Component {
 								</div>
 								<div className="mapDiv row">
 									<GoogleMap lon={trail.longitude} lat={trail.latitude} zoom={trail.mapZoom} />
+								</div>
+								<div className="row">
+									<TrailSponsor
+										sponsorUrl={trail.sponsorUrl}
+										sponsorLogo={trail.sponsorLogo} />
 								</div>
 								<div className="row">
 									<TrailSteward
