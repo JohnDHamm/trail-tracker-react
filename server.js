@@ -1,6 +1,7 @@
 'use strict';
 
 const express = require('express');
+const path = require('path');
 // const { json } = require('body-parser');
 
 const app = express();
@@ -28,7 +29,9 @@ app.use(express.static(__dirname));
 // });
 
 // API
-
+app.get('*', (req, res) => {
+	res.sendFile(path.resolve(__dirname, 'index.html'));
+});
 
 
 app.listen(PORT, () => {
