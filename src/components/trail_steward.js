@@ -29,7 +29,8 @@ function getStyles(props, context) {
 			fontFamily: `${values.tertiary.font}`,
 			fontSize: 20,
 			paddingLeft: 5,
-			fontWeight: '300'
+			fontWeight: '300',
+			textShadow: `1px 1px 0 ${values.tertiary.color}`
 		}
 	};
 }
