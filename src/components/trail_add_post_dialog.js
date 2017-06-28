@@ -4,7 +4,8 @@ import superagent from 'superagent';
 
 import { addPost,
 				getPosts,
-				updateTrailTicketCount } from '../actions';
+				updateTrailTicketCount,
+				ROOT_URL } from '../actions';
 
 import TrailAddPostButton from './trail_add_post_button';
 import PhotoUpload from './photo_upload';
@@ -65,24 +66,19 @@ class AddPostDialog extends Component {
 			newPost.hasPhoto = true;
 			newPost.photoUrl = `https://s3.us-east-2.amazonaws.com/johndhammcodes.trailtracker/${this.state.postType}/${uploadFileName}`;
 
-			superagent.post(`https://trailtracker-api.herokuapp.com/api/photoupload/${this.state.postType}`)
+			superagent.post(`${ROOT_URL}/photoupload/${this.state.postType}`)
       .attach('theseNamesMustMatch', uploadFile[0])
       .then((res, err) => {
         if (err) console.log(err);
-        // console.log("file uploaded:", res);
       })
       .then(() => {
-      	// console.log("next up: add post", newPost);
       	this.props.addPost(newPost, () => {
-					// console.log("added post");
 					this.clearState();
-					// console.log("get posts");
 					this.props.getPosts(trailId);
 	      })
 			})
     } else {
 			this.props.addPost(newPost, () => {
-				// console.log("adding post:", newPost);
 				this.clearState();
 				this.props.getPosts(trailId);
 			})
@@ -95,7 +91,6 @@ class AddPostDialog extends Component {
 				numOpenTickets: newNumOpenTickets
 			};
 			this.props.updateTrailTicketCount(trailUpdateObj, () => {
-				// console.log("updated ticket count");
 			})
 		}
 	};
