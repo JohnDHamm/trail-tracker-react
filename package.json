@@ -4,8 +4,10 @@
   "description": "A react/redux refactor of trail-tracker app",
   "main": "index.js",
   "scripts": {
+    "heroku-postbuild": "webpack -p",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js"
+    "build": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +22,7 @@
   "dependencies": {
     "axios": "^0.16.2",
     "babel-preset-stage-1": "^6.1.18",
+    "express": "^4.15.3",
     "lodash": "^4.17.4",
     "material-ui": "^0.18.2",
     "react": "^15.5.4",
