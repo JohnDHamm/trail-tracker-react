@@ -5,7 +5,8 @@ import superagent from 'superagent';
 import { addPost,
 				getPosts,
 				deleteClosedTicket,
-				updateTrailTicketCount } from '../actions';
+				updateTrailTicketCount,
+				ROOT_URL } from '../actions';
 
 import TrailCloseTicketButton from './trail_close_ticket_button';
 import PhotoUpload from './photo_upload';
@@ -67,40 +68,31 @@ class TrailCloseTicketDialog extends Component {
 			newPost.hasPhoto = true;
 			newPost.photoUrl = `https://s3.us-east-2.amazonaws.com/johndhammcodes.trailtracker/closed-ticket/${uploadFileName}`;
 
-			superagent.post('https://trailtracker-api.herokuapp.com/api/photoupload/closed-ticket')
+			superagent.post(`${ROOT_URL}/photoupload/closed-ticket`)
       .attach('theseNamesMustMatch', uploadFile[0])
       .then((res, err) => {
         if (err) console.log(err);
-        // console.log("file uploaded:", res);
       })
       .then(() => {
-      	// console.log("next up: close post", newPost);
       	this.props.addPost(newPost, () => {
-					// console.log("added post");
 					this.clearState();
-					// console.log("get posts");
 					this.props.getPosts(trailId);
 	      })
 			})
     } else {
 			this.props.addPost(newPost, () => {
-				// console.log("no photo, closed post:", newPost);
 				this.clearState();
 				this.props.getPosts(trailId);
 			})
     }
 
-    // console.log("delete orig open ticket");
 		this.props.deleteClosedTicket(origPost._id, () => {
-			// console.log("done deleted, now update count", this.props.currentTrail.numOpenTickets);
 			const newNumOpenTickets = this.props.currentTrail.numOpenTickets - 1;
 			const trailUpdateObj = {
 				_id: trailId,
 				numOpenTickets: newNumOpenTickets
 			};
 			this.props.updateTrailTicketCount(trailUpdateObj, () => {
-				// this.props.getPosts(trailId);
-				// console.log("updated count!");
 			})
 		})
 	};

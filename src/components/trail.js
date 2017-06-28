@@ -130,7 +130,6 @@ class Trail extends Component {
 
 	render() {
 		const { trail, currentWeather, weatherRadarUrl } = this.props;
-		// console.log("this.props.trail.stewardName", this.props.trail.stewardName);
 
 		if (!trail) {
 			return <div>Loading trail...</div>;

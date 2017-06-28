@@ -11,7 +11,7 @@ export const GET_WEATHER_RADAR = 'get_weather_radar';
 export const SET_UPLOAD_PHOTO = 'set_upload_photo';
 import axios from 'axios';
 
-const ROOT_URL = 'https://trailtracker-api.herokuapp.com/api';
+export const ROOT_URL = 'https://trailtracker-api.herokuapp.com/api';
 const WEATHER_ROOT_URL = 'https://trailtracker-api.herokuapp.com/api/weather';
 
 // ************* localhost:3000 testing of api *************
