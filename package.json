@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "description": "A react/redux refactor of trail-tracker app",
   "main": "index.js",
+  "engines": {
+    "node": "6"
+  },
   "scripts": {
-    "heroku-postbuild": "webpack -p",
+    "heroku-postbuild": "webpack -p --config ./webpack.config.js --progress",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
     "start": "node server.js"
