@@ -3,6 +3,7 @@ A React/Redux refactor of my Trail Tracker app for the mountain bike community. 
 
 ##### _Technologies:_
 * React/Redux
+* ES6
 * Backend API for MongoDB, WeatherUnderground, AWS S3
 * Webpack
 * Material-UI and Bootstrap
