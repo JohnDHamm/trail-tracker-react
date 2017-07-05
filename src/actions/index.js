@@ -20,8 +20,7 @@ const WEATHER_ROOT_URL = 'https://trailtracker-api.herokuapp.com/api/weather';
 // const WEATHER_ROOT_URL = 'http://localhost:3000/api/weather';
 
 export function wakeUp() {
-	const request = axios.get(`${ROOT_URL}/wakeup`)
-		.then((response) => console.log("response", response));
+	const request = axios.get(`${ROOT_URL}/wakeup`);
 	return {
 		type: WAKE_UP,
 		payload: request

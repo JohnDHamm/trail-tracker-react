@@ -12,7 +12,6 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 class Home extends Component {
 
 	componentWillMount() {
-		console.log("componentWillMount");
 		this.props.wakeUp();
 	}
 
