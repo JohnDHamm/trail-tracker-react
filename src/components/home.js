@@ -1,12 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { wakeUp } from '../actions';
+
+
 import FlatButton from 'material-ui/FlatButton';
 import FontIcon from 'material-ui/FontIcon';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 class Home extends Component {
+
+	componentWillMount() {
+		console.log("componentWillMount");
+		this.props.wakeUp();
+	}
 
 	render() {
 		const { user } = this.props.user;
@@ -54,4 +62,4 @@ function mapStateToProps({ user, values }) {
 	return { user, values };
 }
 
-export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps, { wakeUp })(Home);
