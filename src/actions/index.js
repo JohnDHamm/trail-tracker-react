@@ -1,3 +1,4 @@
+export const WAKE_UP = 'wake_up';
 export const GET_TRAILS = 'get_trails';
 export const SET_CURRENT_TRAIL = 'set_current_trail';
 export const SET_TICKET_TO_CLOSE = 'set_ticket_to_close';
@@ -17,6 +18,15 @@ const WEATHER_ROOT_URL = 'https://trailtracker-api.herokuapp.com/api/weather';
 // ************* localhost:3000 testing of api *************
 // const ROOT_URL = 'http://localhost:3000/api';
 // const WEATHER_ROOT_URL = 'http://localhost:3000/api/weather';
+
+export function wakeUp() {
+	const request = axios.get(`${ROOT_URL}/wakeup`)
+		.then((response) => console.log("response", response));
+	return {
+		type: WAKE_UP,
+		payload: request
+	}
+}
 
 export function getTrails() {
 	const request = axios.get(`${ROOT_URL}/trails`);
