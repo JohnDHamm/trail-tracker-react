@@ -4,7 +4,7 @@
   "description": "A react/redux refactor of trail-tracker app",
   "main": "index.js",
   "engines": {
-    "node": "6"
+    "node": "6.11.1"
   },
   "scripts": {
     "postinstall": "webpack -p --config ./webpack.config.js --progress",
