@@ -121,25 +121,6 @@ span.userName {
 	margin-bottom: 5px;
 }
 
-/*TRAILS*/
-.trailWithTicketDiv {
-	position: relative;
-}
-
-.ticketBadge {
-	width: 20px;
-	height: 20px;
-	border-radius: 50%;
-	background-color: #c62828;
-	color: white;
-	position: absolute;
-	top: -10px;
-	right: -10px;
-	z-index: 10;
-	text-align: center;
-	font-size: 15px;
-	font-family: 'Harmattan', sans-serif;
-}
 
 
 /*// $primary-color: #9e9d24; // lime darken-3
