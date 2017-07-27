@@ -46,32 +46,6 @@ span.userName {
 }
 
 /*POSTS*/
-.test-div-fill {
-	border: 1px solid #eee;
-}
-
-.mapDiv {
-	margin-top: 10px;
-	/*height: 100%;*/
-	/*width: 100%;*/
-}
-
-.stewardDiv {
-	background-color: #9e9d24;
-	border-radius: 2px;
-	margin-top: 8px;
-}
-
-.postsDiv {
-	padding-bottom: 10px;
-}
-
-.post-card {
-	background-color: #fff;
-	border-radius: 2px;
-	margin-top: 8px;
-}
-
 .post-style-meetup {
 	border-left: 4px solid #1E88E5;
 }
@@ -89,23 +63,7 @@ span.userName {
 	border-left: 4px solid #aaa;
 }
 
-.addPostDiv {
-	display: flex;
-	justify-content: flex-start;
-	padding: 10px;
-	border-radius: 2px;
-	background-color: white;
-	border-left: 4px solid #ddd;
-	margin: 10px 0 15px 0;
-}
-
-.closeTicketDiv {
-	display: flex;
-	justify-content: flex-end;
-	padding-left: 10px;
-	padding-bottom: 10px;
-}
-
+/*WEATHER*/
 .weatherForecastDiv {
 	margin-top: 10px;
 	border-radius: 2px;
@@ -113,15 +71,9 @@ span.userName {
 	background-color: rgba(255,255,255,0.5);
 }
 
-.weatherForecastDay {
-	width: 100%;
-}
-
 .weatherForecastDiv div:last-child {
 	margin-bottom: 5px;
 }
-
-
 
 /*// $primary-color: #9e9d24; // lime darken-3
 // $secondary-color: #ffca28; //amber lighten-1
