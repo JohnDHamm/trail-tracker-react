@@ -33,6 +33,7 @@ class Trails extends Component {
 					top: -10,
 					right: -10,
 					zIndex: 10,
+					boxShadow: '0 2px 2px rgba(0,0,0,0.5)',
 					textAlign: 'center',
 					fontSize: 15,
 					fontFamily: `${values.secondary.font}`

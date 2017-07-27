@@ -9,7 +9,8 @@ class TrailsSelectCard extends Component {
 			root: {
 				marginTop: 20,
 				position: 'relative',
-				borderRadius: 2
+				borderRadius: 2,
+				boxShadow: '0 2px 2px rgba(0,0,0,0.25)',
 			},
 			bottom: {
 				position: 'absolute',
