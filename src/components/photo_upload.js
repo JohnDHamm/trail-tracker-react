@@ -15,38 +15,48 @@ class PhotoUpload extends Component{
 	}
 
 	render(){
-		const { values } = this.props;
+		const { style, values } = this.props;
 		const filename = this.props.uploadPhoto[0];
+		const styles = {
+			main: {
+				margin: '0px auto',
+        width: 200,
+        height: 50,
+        paddingTop: 12,
+        textAlign: 'center',
+        borderWidth: 1,
+        borderColor: '#ddd',
+        borderStyle: 'solid',
+        borderRadius: 2
+      },
+      active: {
+        borderStyle: 'solid',
+        borderColor: '#6c6',
+        backgroundColor: '#eee'
+      },
+		   reject: {
+        borderStyle: 'solid',
+        borderColor: '#c66',
+        backgroundColor: '#eee'
+      },
+      uploadPhoto: {
+    		margin: '5px auto',
+				textAlign: 'center'
+      }
+		};
+
 		return (
 			<div>
 				<Dropzone
 					accept="image/jpeg, image/png, image/gif"
 					onDrop={this.onDrop}
 					multiple={false}
-					style = {{
-						margin: '0px auto',
-		        width: 200,
-		        height: 50,
-		        paddingTop: 12,
-		        textAlign: 'center',
-		        borderWidth: 1,
-		        borderColor: '#ddd',
-		        borderStyle: 'solid',
-		        borderRadius: 2
-		      }}
-		      activeStyle = {{
-		        borderStyle: 'solid',
-		        borderColor: '#6c6',
-		        backgroundColor: '#eee'
-		      }}
-		      rejectStyle = {{
-		        borderStyle: 'solid',
-		        borderColor: '#c66',
-		        backgroundColor: '#eee'
-		      }}>
+					style = {styles.main}
+		      activeStyle = {styles.active}
+		      rejectStyle = {styles.reject}>
 					<div>Add photo (click or drag).</div>
 				</Dropzone>
-				<div className="uploadPhotoSelection">Selected photo: {this.state.files.map(f => <div key={f.name}>{f.name}</div>)}
+				<div style={styles.uploadPhoto}>Selected photo: {this.state.files.map(f => <div key={f.name}>{f.name}</div>)}
 				</div>
 			</div>
 		);
