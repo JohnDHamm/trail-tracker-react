@@ -1,68 +1,48 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Avatar from 'material-ui/Avatar';
 
-function getStyles(props, context) {
-	const {TrailSteward} = context.muiTheme;
-	const {values} = props;
-
-	return {
-		root: {
-			padding: '5px 10px 10px 10px',
-			backgroundColor: 'rgba(158,157,36,0.4)',
-			borderRadius: 2,
-			marginTop: 8,
-			width: '100%'
-		},
-		title: {
-			color: `${values.tertiary.color}`,
-			fontFamily: `${values.secondary.font}`,
-			fontSize: 16
-		},
-		steward: {
-			display: 'flex',
-			alignItems: 'center'
-		},
-		userName: {
-			color: 'white',
-			fontFamily: `${values.tertiary.font}`,
-			fontSize: 20,
-			paddingLeft: 5,
-			fontWeight: '300',
-			textShadow: `1px 1px 0 ${values.tertiary.color}`
-		}
-	};
-}
-
 class TrailSteward extends Component {
-	static muiName = 'TrailSteward';
-
-	static propTypes = {
-		stewardName: PropTypes.node,
-		style: PropTypes.object,
-		stewardImgUrl: PropTypes.string
-	};
-
-	static contextTypes = {
-		muiTheme: PropTypes.object.isRequired,
-	};
 
 	render () {
-		const { stewardName, style, stewardImgUrl } = this.props;
-		const {prepareStyles} = this.context.muiTheme;
-		const styles = getStyles(this.props, this.context);
+		const { stewardName, style, stewardImgUrl, values } = this.props;
+		const styles = {
+			root: {
+				padding: '5px 10px 10px 10px',
+				backgroundColor: 'rgba(158,157,36,0.4)',
+				borderRadius: 2,
+				marginTop: 8,
+				width: '100%'
+			},
+			title: {
+				color: `${values.tertiary.color}`,
+				fontFamily: `${values.secondary.font}`,
+				fontSize: 16
+			},
+			steward: {
+				display: 'flex',
+				alignItems: 'center'
+			},
+			userName: {
+				color: 'white',
+				fontFamily: `${values.tertiary.font}`,
+				fontSize: 20,
+				paddingLeft: 5,
+				fontWeight: '300',
+				textShadow: `1px 1px 0 ${values.tertiary.color}`
+			}
+		};
 
 		return (
-			<div style={prepareStyles(Object.assign(styles.root, style))}>
-				<div style={prepareStyles(Object.assign(styles.title, style))}>Trail steward:
+			<div style={styles.root}>
+				<div style={styles.title}>Trail steward:
 				</div>
-				<div style={prepareStyles(Object.assign(styles.steward, style))}>
+				<div style={styles.steward}>
 					<Avatar
 						size={30}
 						src={stewardImgUrl}
 						/>
-					<div style={prepareStyles(Object.assign(styles.userName, style))}>
+					<div style={styles.userName}>
 						{stewardName}
 					</div>
 				</div>

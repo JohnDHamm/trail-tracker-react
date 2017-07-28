@@ -1,55 +1,35 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
-function getStyles(props, context) {
-	const {TrailTitleCard} = context.muiTheme;
-	const {values} = props;
-
-	return {
-		root: {
-			padding: 5,
-			textAlign: 'center'
-		},
-		title: {
-			fontFamily: `${values.tertiary.font}`,
-			fontSize: 45,
-			color: `${values.primary.color}`,
-			textShadow: `2px 2px 0 ${values.tertiary.color}`,
-			lineHeight: 0.9
-		},
-		subheader: {
-			fontFamily: `${values.tertiary.font}`,
-			fontSize: 20,
-			color: `${values.primary.color}`
-		}
-	};
-}
 
 class TrailTitleCard extends Component {
 
-	static muiName = 'TrailTitleCard';
-
-	static propTypes = {
-		title: PropTypes.node,
-		subheader: PropTypes.node
-	};
-
-	static contextTypes = {
-		muiTheme: PropTypes.object.isRequired,
-	};
-
 	render () {
-		const { title, subheader, style } = this.props;
-		const {prepareStyles} = this.context.muiTheme;
-		const styles = getStyles(this.props, this.context);
+		const { title, subheader, style, values } = this.props;
+		const styles = {
+			root: {
+				padding: 5,
+				textAlign: 'center'
+			},
+			title: {
+				fontFamily: `${values.tertiary.font}`,
+				fontSize: 45,
+				color: `${values.primary.color}`,
+				textShadow: `2px 2px 0 ${values.tertiary.color}`,
+				lineHeight: 0.9
+			},
+			subheader: {
+				fontFamily: `${values.tertiary.font}`,
+				fontSize: 20,
+				color: `${values.primary.color}`
+			}
+		};
 
 		return (
-				<div style={prepareStyles(Object.assign(styles.root, style))}>
-					<div style={prepareStyles(Object.assign(styles.title, style))}>
+				<div style={styles.root}>
+					<div style={styles.title}>
 						{title}
 					</div>
-					<div style={prepareStyles(Object.assign(styles.subheader, style))}>
+					<div style={styles.subheader}>
 						{subheader}
 					</div>
 				</div>

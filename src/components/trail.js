@@ -44,14 +44,30 @@ class Trail extends Component {
 	}
 
 	renderPosts () {
+		const postStyles = {
+			postCard: {
+				backgroundColor: '#fff',
+				borderRadius: 2,
+				marginTop: 8
+			},
+			closeTicketDiv: {
+				display: 'flex',
+				justifyContent: 'flex-end',
+				paddingLeft: 10,
+				paddingBottom: 10
+			}
+		};
 
 		return _.map(this.props.posts, post => {
-			const postStyle = `post-card post-style-${post.postTypeString}`;
+			const postStyle = `post-style-${post.postTypeString}`;
 			if (post.hasPhoto) {
 
 				if (post.ticketopen) {
 					return (
-						<div className={postStyle} key={post._id}>
+						<div
+							style={postStyles.postCard}
+							className={postStyle}
+							key={post._id}>
 							<TrailOpenTicketPostTop />
 							<TrailPostCardPhoto
 								userImgUrl={post.userImgUrl}
@@ -59,7 +75,7 @@ class Trail extends Component {
 								date={post.postFormatDate}
 								message={post.description}
 								photoUrl={post.photoUrl} />
-							<div id={post._id} className="closeTicketDiv">
+							<div id={post._id} style={postStyles.closeTicketDiv}>
 								<div onClick={() => this.setClosingTicket(post._id)}>
 									<TrailCloseTicketDialog />
 								</div>
@@ -68,7 +84,10 @@ class Trail extends Component {
 					)
 				} else {
 					return (
-						<div className={postStyle} key={post._id}>
+						<div
+							style={postStyles.postCard}
+							className={postStyle}
+							key={post._id}>
 							<TrailPostCardPhoto
 								userImgUrl={post.userImgUrl}
 								postUserName={post.userName}
@@ -81,7 +100,10 @@ class Trail extends Component {
 			} else {
 				if (post.ticketopen) {
 					return (
-						<div className={postStyle} key={post._id}>
+						<div
+						style={postStyles.postCard}
+						className={postStyle}
+						key={post._id}>
 							<TrailOpenTicketPostTop />
 							<TrailPostCard
 								userImgUrl={post.userImgUrl}
@@ -97,7 +119,10 @@ class Trail extends Component {
 					)
 				} else {
 					return (
-						<div className={postStyle} key={post._id}>
+						<div
+						style={postStyles.postCard}
+						className={postStyle}
+						key={post._id}>
 							<TrailPostCard
 								userImgUrl={post.userImgUrl}
 								postUserName={post.userName}
@@ -114,7 +139,7 @@ class Trail extends Component {
 		return this.props.weatherForecast.map(forecast => {
 			const newIconUrl = forecast.icon_url.replace('/k/', '/f/');
 			return (
-				<div className="weatherForecastDay" key={forecast.date.weekday}>
+				<div style={{width: '100%'}} key={forecast.date.weekday}>
 					<WeatherForecast
 						weekday={forecast.date.weekday}
 						conditions={forecast.conditions}
@@ -130,7 +155,24 @@ class Trail extends Component {
 
 	render() {
 		const { trail, currentWeather, weatherRadarUrl } = this.props;
+		const styles = {
+			mapDiv: {
+				marginTop: 10
+			},
+			addPostDiv: {
+				display: 'flex',
+				justifyContent: 'flex-start',
+				padding: 10,
+				borderRadius: 2,
+				backgroundColor: 'white',
+				borderLeft: '4px solid #ddd',
+				margin: '10px 0 15px 0'
+			},
+			postsDiv: {
+				paddingBottom: 10
+			},
 
+		}
 		if (!trail) {
 			return <div>Loading trail...</div>;
 		}
@@ -145,7 +187,7 @@ class Trail extends Component {
 								<div className="row justify-content-center">
 									<TrailTitleCard title={trail.name} />
 								</div>
-								<div className="mapDiv row">
+								<div className="row" style={styles.mapDiv}>
 									<GoogleMap lon={trail.longitude} lat={trail.latitude} zoom={trail.mapZoom} />
 								</div>
 								<div className="row">
@@ -181,10 +223,10 @@ class Trail extends Component {
 								<div className="hidden-md-up">
 									<TrailTitleCard title={trail.name} />
 								</div>
-								<div className="addPostDiv">
+								<div style={styles.addPostDiv}>
 									<AddPostDialog />
 								</div>
-								<div className="postsDiv">
+								<div style={styles.postsDiv}>
 									{this.renderPosts()}
 								</div>
 							</div>
